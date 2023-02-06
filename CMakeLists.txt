@@ -17,7 +17,7 @@ set(SOURCE_FILES
         src/components/And.hpp
         src/parser.cpp
         src/parser.hpp
-        )
+        src/components/Input.hpp src/components/Output.hpp src/components/Rom.hpp)
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)
 include_directories(src)

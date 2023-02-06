@@ -6,19 +6,12 @@
 */
 
 #include "parser.hpp"
+#include "Factory.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <unordered_map>
 #include <vector>
-
-void parser::open_file(std::string argument)
-{
-    _file.open(argument.c_str());
-    if (!_file.is_open()) {
-        std::cout << "File failed to open" << std::endl;
-        exit(84);
-    }
-}
 
 parser::parser(int ac, char **av)
 {
@@ -28,18 +21,23 @@ parser::parser(int ac, char **av)
     }
     std::string argument = av[1];
     if (argument.find(".nts") != std::string::npos)
-        open_file(argument);
+        _file.open(argument.c_str());
     else {
         std::cout << "Invalid file" << std::endl;
+        exit(84);
+    }
+    if (!_file.is_open()) {
+        std::cout << "File failed to open" << std::endl;
         exit(84);
     }
 }
 
 parser::~parser()
 {
+    _file.close();
 }
 
-std::vector<std::string> parser::parseChipsets() {
+std::vector<std::string> parser::getChipsets() {
     std::string line;
     std::vector<std::string> chipset;
     bool links = false;
@@ -60,7 +58,7 @@ std::vector<std::string> parser::parseChipsets() {
     return chipset;
 }
 
-std::vector<std::string> parser::parseLinks() {
+std::vector<std::string> parser::getLinks() {
     std::string line;
     std::vector<std::string> links;
     bool chipset = true;
@@ -80,3 +78,37 @@ std::vector<std::string> parser::parseLinks() {
     }
     return links;
 }
+
+void parser::parseChipsets()
+{
+    std::vector<std::string> chipset = getChipsets();
+    std::string split = {};
+    std::unordered_map<std::string, nts::CompType> chipsets = {
+            {"and", nts::CompType::AND},
+            {"or", nts::CompType::OR},
+            {"xor", nts::CompType::XOR},
+            {"nand", nts::CompType::NAND},
+            {"nor", nts::CompType::NOR},
+            {"not", nts::CompType::NOT},
+            {"input", nts::CompType::INPUT},
+            {"output", nts::CompType::OUTPUT},
+            {"clock", nts::CompType::CLOCK},
+            {"true", nts::CompType::TRUE},
+            {"false", nts::CompType::FALSE},
+            {"2716", nts::CompType::ROM}
+    };
+
+    for (const auto & i : chipset) {
+        if (i == ".chipsets:" || i == ".links:")
+            continue;
+        split = i.substr(0, i.find(' '));
+        if (chipsets.find(split) != chipsets.end())
+            nts::Factory::createComponent(chipsets[split]);
+        else {
+            std::cout << "Invalid chipset" << std::endl;
+            exit(84);
+        }
+    }
+}
+
+

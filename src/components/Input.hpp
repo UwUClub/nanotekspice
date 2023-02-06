@@ -1,20 +1,17 @@
-/*
-** EPITECH PROJECT, 2023
-** uwunano
-** File description:
-** And
-*/
+//
+// Created by Beafowl on 2/6/23.
+//
 
-#ifndef AND_HPP_
-#define AND_HPP_
+#ifndef NANOTEKSPICE_INPUT_HPP
+#define NANOTEKSPICE_INPUT_HPP
 
 #include "AComponent.hpp"
 
 namespace component
 {
-    class And : public nts::AComponent {
+    class Input : public nts::AComponent {
         public:
-            And() : nts::AComponent("And", {0, 1}, {2}) { std::cout << "/* create and */" << std::endl;}
+            Input() : nts::AComponent("Input", {}, {0}) { std::cout << "/* create input */" << std::endl;}
 
             nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
             void simulate(std::size_t tick) override {}
@@ -24,6 +21,4 @@ namespace component
     };
 } // namespace component
 
-
-
-#endif /* !AND_HPP_ */
+#endif //NANOTEKSPICE_INPUT_HPP

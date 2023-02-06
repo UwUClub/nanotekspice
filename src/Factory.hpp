@@ -27,7 +27,8 @@ namespace nts {
         LINK,
         CHIPSET,
         CIRCUIT,
-        UNDEFINED
+        UNDEFINED,
+        ROM
     };
 
     class Factory {

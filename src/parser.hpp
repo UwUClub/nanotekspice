@@ -9,9 +9,9 @@ class parser {
 public:
     parser(int, char **);
     ~parser();
-    std::vector<std::string> parseChipsets();
-    std::vector<std::string> parseLinks();
-    void open_file(std::string argv);
+    std::vector<std::string> getChipsets();
+    std::vector<std::string> getLinks();
+    void parseChipsets();
 private:
     std::ifstream _file;
 };
