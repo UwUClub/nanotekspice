@@ -4,8 +4,21 @@ project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
 # Add main.cpp file of project root directory as source file
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES
+        src/main.cpp
+        src/IComponent.hpp
+        src/Error.hpp
+        src/Graph.cpp
+        src/Graph.hpp
+        src/AComponent.cpp
+        src/AComponent.hpp
+        src/Factory.cpp
+        src/Factory.hpp
+        src/components/And.hpp
+        )
 set(EXECUTABLE ${PROJECT_NAME})
+include_directories(src/components)
+include_directories(src)
 
 # Add the SFML library to the project, uncomment the 2 line under
 # if you want to use SFML:

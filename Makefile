@@ -129,6 +129,78 @@ nanotekspice/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/build
 .PHONY : nanotekspice/fast
 
+src/AComponent.o: src/AComponent.cpp.o
+.PHONY : src/AComponent.o
+
+# target to build an object file
+src/AComponent.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/AComponent.cpp.o
+.PHONY : src/AComponent.cpp.o
+
+src/AComponent.i: src/AComponent.cpp.i
+.PHONY : src/AComponent.i
+
+# target to preprocess a source file
+src/AComponent.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/AComponent.cpp.i
+.PHONY : src/AComponent.cpp.i
+
+src/AComponent.s: src/AComponent.cpp.s
+.PHONY : src/AComponent.s
+
+# target to generate assembly for a file
+src/AComponent.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/AComponent.cpp.s
+.PHONY : src/AComponent.cpp.s
+
+src/Factory.o: src/Factory.cpp.o
+.PHONY : src/Factory.o
+
+# target to build an object file
+src/Factory.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Factory.cpp.o
+.PHONY : src/Factory.cpp.o
+
+src/Factory.i: src/Factory.cpp.i
+.PHONY : src/Factory.i
+
+# target to preprocess a source file
+src/Factory.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Factory.cpp.i
+.PHONY : src/Factory.cpp.i
+
+src/Factory.s: src/Factory.cpp.s
+.PHONY : src/Factory.s
+
+# target to generate assembly for a file
+src/Factory.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Factory.cpp.s
+.PHONY : src/Factory.cpp.s
+
+src/Graph.o: src/Graph.cpp.o
+.PHONY : src/Graph.o
+
+# target to build an object file
+src/Graph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Graph.cpp.o
+.PHONY : src/Graph.cpp.o
+
+src/Graph.i: src/Graph.cpp.i
+.PHONY : src/Graph.i
+
+# target to preprocess a source file
+src/Graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Graph.cpp.i
+.PHONY : src/Graph.cpp.i
+
+src/Graph.s: src/Graph.cpp.s
+.PHONY : src/Graph.s
+
+# target to generate assembly for a file
+src/Graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nanotekspice.dir/build.make CMakeFiles/nanotekspice.dir/src/Graph.cpp.s
+.PHONY : src/Graph.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +234,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... nanotekspice"
+	@echo "... src/AComponent.o"
+	@echo "... src/AComponent.i"
+	@echo "... src/AComponent.s"
+	@echo "... src/Factory.o"
+	@echo "... src/Factory.i"
+	@echo "... src/Factory.s"
+	@echo "... src/Graph.o"
+	@echo "... src/Graph.i"
+	@echo "... src/Graph.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
