@@ -5,3 +5,12 @@
 .gcov
 cmake-build-debug
 cmake-build-release
+build/
+.vscode/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Testing/
+Makefile
+.cmake/
+build.ninja
