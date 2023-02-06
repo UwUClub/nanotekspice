@@ -6,4 +6,3 @@ int main(int ac, char **av) {
      p.parseChipsets();
      p.parseLinks();
 }
-
