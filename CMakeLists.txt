@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.13)  # CMake version check
-project(nanotekspice)               # Create project "simple_example"
+set(PROJECT_NAME nanotekspice)
+project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
 # Add main.cpp file of project root directory as source file
 set(SOURCE_FILES src/main.cpp)
-set(EXECUTABLE nanotekspice)
+set(EXECUTABLE ${PROJECT_NAME})
 
 # Add the SFML library to the project, uncomment the 2 line under
 # if you want to use SFML:
