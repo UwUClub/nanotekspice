@@ -3,7 +3,7 @@ project(nanotekspice)               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
 # Add main.cpp file of project root directory as source file
-set(SOURCE_FILES src/main.cpp)
+set(SOURCE_FILES src/main.cpp src/parser.cpp src/parser.hpp)
 set(EXECUTABLE nanotekspice)
 
 # Add the SFML library to the project, uncomment the 2 line under
