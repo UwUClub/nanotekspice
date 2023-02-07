@@ -10,9 +10,7 @@
 
 #include "AComponent.hpp"
 
-namespace nts
-{
-    namespace component
+namespace nts::component
     {
         class And : public nts::AComponent {
             public:
@@ -24,7 +22,6 @@ namespace nts
             protected:
             private:
         };
-    } // namespace component
-}
+    }
 
 #endif /* !AND_HPP_ */

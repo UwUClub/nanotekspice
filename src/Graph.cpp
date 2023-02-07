@@ -72,3 +72,11 @@ size_t nts::Graph::getNbOccurencesType(nts::CompType type)
             nb++;
     return nb;
 }
+
+nts::IComponent *nts::Graph::getCompByName(std::string &name) {
+    for (auto &component : _components) {
+        if (component.first->getName() == name)
+            return component.first;
+    }
+    return nullptr;
+}
