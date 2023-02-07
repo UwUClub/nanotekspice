@@ -14,7 +14,7 @@ int main()
 {
     nts::IComponent *And = nts::Factory::createComponent(nts::CompType::AND, "and");
     nts::IComponent *True = nts::Factory::createComponent(nts::CompType::TRUE, "true");
-    nts::IComponent *False = nts::Factory::createComponent(nts::CompType::FALSE, "false");
+    nts::IComponent *False = nts::Factory::createComponent(nts::CompType::TRUE, "false");
 
     nts::Graph *graph = nts::Graph::getInstance();
 

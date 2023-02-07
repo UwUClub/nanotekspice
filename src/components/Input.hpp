@@ -1,24 +1,27 @@
-//
-// Created by Beafowl on 2/6/23.
-//
+/*
+** EPITECH PROJECT, 2023
+** uwunano
+** File description:
+** Input
+*/
 
-#ifndef NANOTEKSPICE_INPUT_HPP
-#define NANOTEKSPICE_INPUT_HPP
+#ifndef INPUT_HPP_
+#define INPUT_HPP_
 
 #include "AComponent.hpp"
 
 namespace nts::component
-{
-    class Input : public nts::AComponent {
-        public:
-            Input(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins) {}
+    {
+        class Input : public nts::AComponent {
+            public:
+                Input(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins);
+                ~Input() override;
 
-            nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
-            void simulate(std::size_t tick) override {}
+                nts::Tristate compute(std::size_t pin) override { return _outputs[pin]; }
+                void simulate(std::size_t tick) override {}
+            protected:
+            private:
+};
+    } // namespace nts
 
-        protected:
-        private:
-    };
-} // namespace component
-
-#endif //NANOTEKSPICE_INPUT_HPP
+#endif /* !INPUT_HPP_ */

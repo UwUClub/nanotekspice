@@ -27,13 +27,15 @@ namespace nts
             bool isInput(std::size_t pin) const override;
             bool isOutput(std::size_t pin) const override;
             const std::string &getName() const override;
+            nts::CompType getType() const override;
         protected:
             std::map<std::size_t, nts::Tristate> _outputs;
             std::map<std::size_t, nts::Tristate> _inputs;
             std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> _pins;
             const std::string _name;
+            nts::CompType _type;
 
-            void getInputs();
+            std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>::iterator computeInputs(std::size_t pin);
     };
 } // namespace nts
 

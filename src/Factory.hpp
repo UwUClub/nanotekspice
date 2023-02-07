@@ -11,26 +11,6 @@
 #include "IComponent.hpp"
 
 namespace nts {
-    enum class CompType {
-        INPUT,
-        OUTPUT,
-        CLOCK,
-        TRUE,
-        FALSE,
-        AND,
-        OR,
-        XOR,
-        NOR,
-        NAND,
-        NOT,
-        BUFFER,
-        LINK,
-        CHIPSET,
-        CIRCUIT,
-        UNDEFINED,
-        ROM
-    };
-
     class Factory {
         public:
             static IComponent *createComponent(const CompType &type, const std::string &name);
