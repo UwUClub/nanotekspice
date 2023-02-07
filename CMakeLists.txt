@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)  # CMake version check
+cmake_minimum_required(VERSION 3.17)  # CMake version check
 set(PROJECT_NAME nanotekspice)
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
@@ -17,7 +17,10 @@ set(SOURCE_FILES
         src/components/And.hpp
         src/parser.cpp
         src/parser.hpp
-        src/components/Input.hpp src/components/Output.hpp src/components/Rom.hpp)
+        src/components/Input.hpp
+        src/components/Output.hpp
+        src/components/Rom.hpp
+        )
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)
 include_directories(src)

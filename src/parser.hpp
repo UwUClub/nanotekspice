@@ -5,13 +5,14 @@
 #include <fstream>
 #include <vector>
 
-class parser {
+class Parser {
 public:
-    parser(int, char **);
-    ~parser();
+    Parser(int, char **);
+    ~Parser();
     std::vector<std::string> getChipsets();
     std::vector<std::string> getLinks();
     void parseChipsets();
+    void parseLinks();
 private:
     std::ifstream _file;
 };

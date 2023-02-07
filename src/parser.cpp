@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <vector>
 
-parser::parser(int ac, char **av)
+Parser::Parser(int ac, char **av)
 {
     if (ac != 2) {
         std::cout << "Usage: ./nanotekspice file.nts" << std::endl;
@@ -32,12 +32,12 @@ parser::parser(int ac, char **av)
     }
 }
 
-parser::~parser()
+Parser::~Parser()
 {
     _file.close();
 }
 
-std::vector<std::string> parser::getChipsets() {
+std::vector<std::string> Parser::getChipsets() {
     std::string line;
     std::vector<std::string> chipset;
     bool links = false;
@@ -58,7 +58,7 @@ std::vector<std::string> parser::getChipsets() {
     return chipset;
 }
 
-std::vector<std::string> parser::getLinks() {
+std::vector<std::string> Parser::getLinks() {
     std::string line;
     std::vector<std::string> links;
     bool chipset = true;
@@ -79,7 +79,7 @@ std::vector<std::string> parser::getLinks() {
     return links;
 }
 
-void parser::parseChipsets()
+void Parser::parseChipsets()
 {
     std::vector<std::string> chipset = getChipsets();
     std::string split = {};
@@ -111,4 +111,17 @@ void parser::parseChipsets()
     }
 }
 
+void Parser::parseLinks() {
+    std::string split_input = {};
+    std::string split_output = {};
+    std::vector<std::string> links = getLinks();
 
+    for (const auto & i : links) {
+        if (i == ".chipsets:" || i == ".links:")
+            continue;
+        split_input = i.substr(0, i.find(' '));
+        split_output = i.substr(i.find(' ') + 1, i.find('\n'));
+        std::cout << split_input << std::endl;
+        std::cout << split_output << std::endl;
+    }
+}
