@@ -20,6 +20,10 @@ set(SOURCE_FILES
         src/components/False.cpp
         src/components/True.hpp
         src/components/True.cpp
+        src/components/Clock.hpp
+        src/components/Clock.cpp
+        src/components/Input.hpp
+        src/components/Input.cpp
         )
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)

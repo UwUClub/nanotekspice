@@ -11,6 +11,25 @@
 #include <iostream>
 namespace nts
 {
+    enum class CompType {
+        INPUT,
+        OUTPUT,
+        CLOCK,
+        TRUE,
+        FALSE,
+        AND,
+        OR,
+        XOR,
+        NOR,
+        NAND,
+        NOT,
+        BUFFER,
+        LINK,
+        CHIPSET,
+        CIRCUIT,
+        UNDEFINED
+    };
+
     enum Tristate {
         UNDEFINED = (-true),
         TRUE = true,
@@ -29,6 +48,7 @@ namespace nts
             virtual bool isInput(std::size_t pin) const = 0;
             virtual bool isOutput(std::size_t pin) const = 0;
             virtual const std::string &getName() const = 0;
+            virtual nts::CompType getType() const = 0;
     };
 }
 

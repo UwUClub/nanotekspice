@@ -11,34 +11,41 @@
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
+#include "Graph.hpp"
 
 static nts::IComponent *createAnd(const std::string &name)
 {
+    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::AND) + 1;
+
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}}
+        {{1 * occ, 2 * occ}, {3 * occ}}
     };
     return new nts::component::And(name, pins);
 }
 
 static nts::IComponent *createTrue(const std::string &name)
 {
+    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::TRUE) + 1;
+
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
+        {{}, {1 * occ}}
     };
     return new nts::component::True(name, pins);
 }
 
 static nts::IComponent *createFalse(const std::string &name)
 {
+    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::FALSE) + 1;
+
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
+        {{}, {1 * occ}}
     };
     return new nts::component::False(name, pins);
 }
 
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
-    static std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
+    std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
         {CompType::AND, std::bind(createAnd, name)},
         {CompType::TRUE, std::bind(createTrue, name)},
         {CompType::FALSE, std::bind(createFalse, name)}

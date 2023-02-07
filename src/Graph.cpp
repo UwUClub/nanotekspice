@@ -27,6 +27,9 @@ void nts::Graph::addComponent(nts::IComponent &component)
 {
     if (_components.find(&component) != _components.end())
         throw Error("Component already exists");
+    for (auto &comp : _components)
+        if (comp.first->getName() == component.getName())
+            throw Error("Component name already taken");
     _components[&component] = std::map<Type, std::vector<std::pair<size_t, nts::IComponent *>>>();
     _components[&component][Type::INPUT] = std::vector<std::pair<size_t, nts::IComponent *>>();
     _components[&component][Type::OUTPUT] = std::vector<std::pair<size_t, nts::IComponent *>>();
@@ -58,4 +61,14 @@ nts::Tristate nts::Graph::compute(nts::IComponent &component, std::size_t pin)
         if (link.first == pin)
             return link.second->compute(link.first);
     throw Error(std::to_string(pin) + " is not an input");
+}
+
+size_t nts::Graph::getNbOccurencesType(nts::CompType type)
+{
+    size_t nb = 0;
+
+    for (auto &component : _components)
+        if (component.first->getType() == type)
+            nb++;
+    return nb;
 }

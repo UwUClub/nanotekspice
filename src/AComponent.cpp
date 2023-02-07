@@ -5,11 +5,13 @@
 ** AComponent
 */
 
+#include <algorithm>
+#include "Error.hpp"
 #include "AComponent.hpp"
 #include "Graph.hpp"
 
 nts::AComponent::AComponent(std::string const &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : _name(name), _pins(pins)
+    : _name(name), _pins(pins), _type(nts::CompType::UNDEFINED)
 {
     for (auto &pin : pins) {
         for (auto &input : pin.first)
@@ -55,4 +57,25 @@ bool nts::AComponent::isOutput(std::size_t pin) const
 const std::string &nts::AComponent::getName() const
 {
     return _name;
+}
+
+nts::CompType nts::AComponent::getType() const
+{
+    return _type;
+}
+
+std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>::iterator nts::AComponent::computeInputs(std::size_t pin)
+{
+    Graph *graph = Graph::getInstance();
+
+    auto it = std::find_if(_pins.begin(), _pins.end(), [pin](auto &pair) {
+        return std::find(pair.second.begin(), pair.second.end(), pin) != pair.second.end();
+    });
+
+    if (it == _pins.end())
+        throw Error("Pin " + std::to_string(pin) + " is not an output");
+    for (auto &input : it->first) {
+        _inputs[input] = graph->compute(*this, input);
+    }
+    return it;
 }

@@ -23,6 +23,8 @@ namespace nts
             void addComponent(nts::IComponent &component);
             nts::Tristate compute(nts::IComponent &component, std::size_t pin);
 
+            size_t getNbOccurencesType(CompType type);
+
         private:
             Graph() = default;
             Graph(const Graph &) = delete;
