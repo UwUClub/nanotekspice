@@ -5,39 +5,32 @@
 ** parser.cpp
 */
 
-#include "parser.hpp"
-#include "Factory.hpp"
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <unordered_map>
 #include <vector>
+#include "Parser.hpp"
+#include "Factory.hpp"
+#include "Graph.hpp"
+#include "Error.hpp"
 
-Parser::Parser(int ac, char **av)
+nts::Parser::Parser(int ac, char **av)
 {
-    if (ac != 2) {
-        std::cout << "Usage: ./nanotekspice file.nts" << std::endl;
-        exit(84);
-    }
     std::string argument = av[1];
     if (argument.find(".nts") != std::string::npos)
         _file.open(argument.c_str());
-    else {
-        std::cout << "Invalid file" << std::endl;
-        exit(84);
-    }
-    if (!_file.is_open()) {
-        std::cout << "File failed to open" << std::endl;
-        exit(84);
-    }
+    else
+        throw (nts::Error("Invalid file extension (Parser.cpp line 24)"));
+    if (!_file.is_open())
+        throw (nts::Error("Invalid file (Parser.cpp line 26)"));
 }
 
-Parser::~Parser()
+nts::Parser::~Parser()
 {
     _file.close();
 }
 
-std::vector<std::string> Parser::getChipsets() {
+std::vector<std::string> nts::Parser::getChipsets() {
     std::string line;
     std::vector<std::string> chipset;
     bool links = false;
@@ -58,7 +51,7 @@ std::vector<std::string> Parser::getChipsets() {
     return chipset;
 }
 
-std::vector<std::string> Parser::getLinks() {
+std::vector<std::string> nts::Parser::getLinks() {
     std::string line;
     std::vector<std::string> links;
     bool chipset = true;
@@ -79,10 +72,13 @@ std::vector<std::string> Parser::getLinks() {
     return links;
 }
 
-void Parser::parseChipsets()
+void nts::Parser::parseChipsets()
 {
     std::vector<std::string> chipset = getChipsets();
     std::string split = {};
+    std::string name = {};
+    Graph *graph = Graph::getInstance();
+    IComponent *component = nullptr;
     std::unordered_map<std::string, nts::CompType> chipsets = {
             {"and", nts::CompType::AND},
             {"or", nts::CompType::OR},
@@ -102,26 +98,50 @@ void Parser::parseChipsets()
         if (i == ".chipsets:" || i == ".links:")
             continue;
         split = i.substr(0, i.find(' '));
-        if (chipsets.find(split) != chipsets.end())
-            nts::Factory::createComponent(chipsets[split]);
-        else {
-            std::cout << "Invalid chipset" << std::endl;
-            exit(84);
+        name = i.substr(i.find(' ') + 1, i.find('\n'));
+        if (chipsets.find(split) != chipsets.end()) {
+            component = nts::Factory::createComponent(chipsets[split], name);
+            graph->addComponent(*component);
         }
+        else
+            throw (nts::Error("Invalid chipset (Parser.cpp, line 108)"));
     }
 }
 
-void Parser::parseLinks() {
+void nts::Parser::parseLinks() {
     std::string split_input = {};
     std::string split_output = {};
+    std::string split_pin_input = {};
+    std::string split_pin_output = {};
+    std::string name_input = {};
+    std::string name_output = {};
     std::vector<std::string> links = getLinks();
+    unsigned int pin_in= 0;
+    unsigned int pin_out = 0;
+    nts::IComponent *component = nullptr;
+    nts::IComponent *component2 = nullptr;
+    Graph *graph = Graph::getInstance();
 
     for (const auto & i : links) {
         if (i == ".chipsets:" || i == ".links:")
             continue;
         split_input = i.substr(0, i.find(' '));
         split_output = i.substr(i.find(' ') + 1, i.find('\n'));
-        std::cout << split_input << std::endl;
-        std::cout << split_output << std::endl;
+        split_pin_input = split_input.substr(split_input.find(':') + 1, split_input.find('\n'));
+        split_pin_output = split_output.substr(split_output.find(':') + 1, split_output.find('\n'));
+        name_input = split_input.substr(0, split_input.find(':'));
+        name_output = split_output.substr(0, split_output.find(':'));
+        pin_in = std::stoi(split_pin_input);
+        pin_out = std::stoi(split_pin_output);
+        component = graph->getCompByName(name_input);
+        component2 = graph->getCompByName(name_output);
+        if (component == nullptr || component2 == nullptr)
+            throw (nts::Error("Invalid link (Parser.cpp, line 140)"));
+        try {
+            component->setLink(pin_in, *component2, pin_out);
+        }
+        catch (Error &e) {
+            throw (nts::Error("Invalid link (Parser.cpp, line 143)"));
+        }
     }
 }

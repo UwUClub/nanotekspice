@@ -59,3 +59,11 @@ nts::Tristate nts::Graph::compute(nts::IComponent &component, std::size_t pin)
             return link.second->compute(link.first);
     throw Error(std::to_string(pin) + " is not an input");
 }
+
+nts::IComponent *nts::Graph::getCompByName(std::string &name) {
+    for (auto &component : _components) {
+        if (component.first->getName() == name)
+            return component.first;
+    }
+    return nullptr;
+}

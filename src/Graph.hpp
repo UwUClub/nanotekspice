@@ -22,6 +22,7 @@ namespace nts
             void setLink(nts::IComponent &component, std::size_t pin, nts::IComponent &other, std::size_t otherPin);
             void addComponent(nts::IComponent &component);
             nts::Tristate compute(nts::IComponent &component, std::size_t pin);
+            IComponent *getCompByName(std::string &name);
 
         private:
             Graph() = default;
