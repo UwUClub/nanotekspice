@@ -73,8 +73,8 @@ static nts::IComponent *createRom(const std::string &name)
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
-        {CompType::AND, std::bind(createAnd, name)},
-        {CompType::INPUT, std::bind(createInput, name)},
+        {CompType::AND, [name] { return createAnd(name); }},
+        {CompType::INPUT, [name] { return createInput(name); }},
         {CompType::OUTPUT, [name] { return createOutput(name); }},
         {CompType::ROM, [name] { return createRom(name); }},
         {CompType::AND, [name] { return createAnd(name); }},

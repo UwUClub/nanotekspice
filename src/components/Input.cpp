@@ -7,7 +7,7 @@
 
 #include "Input.hpp"
 
-nts::component::Input::Input(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins)
+nts::component::Input::Input(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins) : nts::AComponent(name, pins)
 {
     _type = nts::CompType::INPUT;
     for (auto &pin : pins)
@@ -16,5 +16,4 @@ nts::component::Input::Input(const std::string &name, std::vector<std::pair<std:
 }
 
 nts::component::Input::~Input()
-{
-}
+= default;
