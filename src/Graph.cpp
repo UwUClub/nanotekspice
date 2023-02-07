@@ -49,3 +49,13 @@ void nts::Graph::setLink(nts::IComponent &component, std::size_t pin, nts::IComp
     _components[&component][Type::OUTPUT].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
     _components[&other][Type::INPUT].push_back(std::pair<size_t, nts::IComponent *>(otherPin, &component));
 }
+
+nts::Tristate nts::Graph::compute(nts::IComponent &component, std::size_t pin)
+{
+    if (_components.find(&component) == _components.end())
+        throw Error(component.getName() + " doesn't exist");
+    for (auto &link : _components[&component][Type::INPUT])
+        if (link.first == pin)
+            return link.second->compute(link.first);
+    throw Error(std::to_string(pin) + " is not an input");
+}

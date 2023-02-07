@@ -17,7 +17,7 @@ namespace nts
     class AComponent : public IComponent
     {
         public:
-            AComponent(std::string const &name, std::vector<std::size_t> nbPinsIn, std::vector<std::size_t> nbPinsOut);
+            AComponent(std::string const &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
             ~AComponent();
 
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
@@ -30,7 +30,10 @@ namespace nts
         protected:
             std::map<std::size_t, nts::Tristate> _outputs;
             std::map<std::size_t, nts::Tristate> _inputs;
+            std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> _pins;
             const std::string _name;
+
+            void getInputs();
     };
 } // namespace nts
 

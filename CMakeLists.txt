@@ -15,6 +15,11 @@ set(SOURCE_FILES
         src/Factory.cpp
         src/Factory.hpp
         src/components/And.hpp
+        src/components/And.cpp
+        src/components/False.hpp
+        src/components/False.cpp
+        src/components/True.hpp
+        src/components/True.cpp
         )
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)
