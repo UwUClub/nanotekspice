@@ -20,6 +20,11 @@ set(SOURCE_FILES
         src/components/Input.hpp
         src/components/Output.hpp
         src/components/Rom.hpp
+        src/components/And.cpp
+        src/components/False.hpp
+        src/components/False.cpp
+        src/components/True.hpp
+        src/components/True.cpp
         )
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)

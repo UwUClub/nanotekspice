@@ -8,13 +8,15 @@
 #include "AComponent.hpp"
 #include "Graph.hpp"
 
-nts::AComponent::AComponent(std::string const &name, std::vector<std::size_t> nbPinsIn, std::vector<std::size_t> nbPinsOut)
-    : _name(name)
+nts::AComponent::AComponent(std::string const &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
+    : _name(name), _pins(pins)
 {
-    for (auto &pin : nbPinsIn)
-        _inputs[pin] = nts::UNDEFINED;
-    for (auto &pin : nbPinsOut)
-        _outputs[pin] = nts::UNDEFINED;
+    for (auto &pin : pins) {
+        for (auto &input : pin.first)
+            _inputs[input] = nts::UNDEFINED;
+        for (auto &output : pin.second)
+            _outputs[output] = nts::UNDEFINED;
+    }
 }
 
 nts::AComponent::~AComponent()

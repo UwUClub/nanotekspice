@@ -7,11 +7,12 @@
 
 #include "AComponent.hpp"
 
-namespace component
+namespace nts::component
 {
     class Rom : public nts::AComponent {
         public:
-            Rom() : nts::AComponent("Rom", {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {16}) { std::cout << "/* create rom */" << std::endl;}
+            Rom(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins) {}
+
             nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
             void simulate(std::size_t tick) override {}
         protected:

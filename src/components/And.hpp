@@ -10,20 +10,18 @@
 
 #include "AComponent.hpp"
 
-namespace component
-{
-    class And : public nts::AComponent {
-        public:
-            And() : nts::AComponent("And", {0, 1}, {2}) { std::cout << "/* create and */" << std::endl;}
+namespace nts::component
+    {
+        class And : public nts::AComponent {
+            public:
+            And(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
 
-            nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
+            nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override {}
 
-        protected:
-        private:
-    };
-} // namespace component
-
-
+            protected:
+            private:
+        };
+    }
 
 #endif /* !AND_HPP_ */

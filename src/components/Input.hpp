@@ -7,11 +7,11 @@
 
 #include "AComponent.hpp"
 
-namespace component
+namespace nts::component
 {
     class Input : public nts::AComponent {
         public:
-            Input() : nts::AComponent("Input", {}, {0}) { std::cout << "/* create input */" << std::endl;}
+            Input(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins) {}
 
             nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
             void simulate(std::size_t tick) override {}

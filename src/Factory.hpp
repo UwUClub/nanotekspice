@@ -33,7 +33,7 @@ namespace nts {
 
     class Factory {
         public:
-            static IComponent *createComponent(const CompType &type);
+            static IComponent *createComponent(const CompType &type, const std::string &name);
     };
 }
 
