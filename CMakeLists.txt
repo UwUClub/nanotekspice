@@ -13,6 +13,7 @@ set(SOURCE_FILES
         src/AComponent.cpp
         src/AComponent.hpp
         src/AShell.hpp
+        src/AShell.cpp
         src/Factory.cpp
         src/Factory.hpp
         src/components/And.hpp
@@ -30,6 +31,8 @@ set(SOURCE_FILES
         src/components/Clock.cpp
         src/components/Input.hpp
         src/components/Input.cpp
+        src/components/Output.cpp
+        src/components/Output.hpp
         )
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)
