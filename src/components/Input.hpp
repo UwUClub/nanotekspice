@@ -8,17 +8,16 @@
 #ifndef INPUT_HPP_
 #define INPUT_HPP_
 
-#include "AComponent.hpp"
+#include "AShell.hpp"
 
 namespace nts::component
     {
-        class Input : public nts::AComponent {
+        class Input : public nts::AShell {
             public:
                 Input(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins);
-                ~Input() override;
 
-                nts::Tristate compute(std::size_t pin) override { return _outputs[pin]; }
-                void simulate(std::size_t tick) override {}
+                nts::Tristate compute(std::size_t pin) override;
+                void simulate(std::size_t tick) override;
             protected:
             private:
 };

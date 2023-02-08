@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2023
 ** uwunano
 ** File description:
-** Graph
+** Circuit
 */
 
-#ifndef GRAPH_HPP_
-#define GRAPH_HPP_
+#ifndef Circuit_HPP_
+#define Circuit_HPP_
 
 #include <map>
 #include <vector>
@@ -15,20 +15,21 @@
 
 namespace nts
 {
-    class Graph final {
+    class Circuit final {
         public:
-            static Graph *getInstance();
-            ~Graph();
+            static Circuit *getInstance();
+            ~Circuit();
             void setLink(nts::IComponent &component, std::size_t pin, nts::IComponent &other, std::size_t otherPin);
             void addComponent(nts::IComponent &component);
             nts::Tristate compute(nts::IComponent &component, std::size_t pin);
+            void simulate(std::size_t tick);
             IComponent *getCompByName(std::string &name);
 
             size_t getNbOccurencesType(CompType type);
 
         private:
-            Graph() = default;
-            Graph(const Graph &) = delete;
+            Circuit() = default;
+            Circuit(const Circuit &) = delete;
 
             enum class Type {
                 INPUT,
@@ -38,4 +39,4 @@ namespace nts
             std::map<nts::IComponent *, std::map<Type, std::vector<std::pair<size_t, nts::IComponent *>>>> _components;
     };
 } // namespace nts
-#endif /* !GRAPH_HPP_ */
+#endif /* !Circuit_HPP_ */
