@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25.2)  # CMake version check
+cmake_minimum_required(VERSION 3.22.2)  # CMake version check
 set(PROJECT_NAME nanotekspice)
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
