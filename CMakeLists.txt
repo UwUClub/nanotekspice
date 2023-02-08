@@ -7,10 +7,12 @@ set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 set(SOURCE_FILES
         src/IComponent.hpp
         src/Error.hpp
-        src/Graph.cpp
-        src/Graph.hpp
+        src/Circuit.cpp
+        src/Circuit.hpp
         src/AComponent.cpp
         src/AComponent.hpp
+        src/AShell.hpp
+        src/AShell.cpp
         src/Factory.cpp
         src/Factory.hpp
         src/components/And.hpp
@@ -28,7 +30,8 @@ set(SOURCE_FILES
         src/components/Clock.cpp
         src/components/Input.hpp
         src/components/Input.cpp
-        tests/TestAnd.cpp
+        src/components/Output.cpp
+        src/components/Output.hpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})
@@ -39,7 +42,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion -g3")
 
 # Add the SFML library to the project, uncomment the 2 line under
 # if you want to use SFML:
-#find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
+#find_package(SFML 2.5 COMPONENTS Circuitics audio REQUIRED)
 #add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # Add executable target with source files listed in SOURCE_FILES variable

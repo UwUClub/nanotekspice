@@ -7,7 +7,7 @@
 
 #include <algorithm>
 #include "And.hpp"
-#include "Graph.hpp"
+#include "Circuit.hpp"
 #include "Error.hpp"
 
 nts::component::And::And(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)

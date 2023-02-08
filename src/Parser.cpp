@@ -11,7 +11,7 @@
 #include <vector>
 #include "Parser.hpp"
 #include "Factory.hpp"
-#include "Graph.hpp"
+#include "Circuit.hpp"
 #include "Error.hpp"
 
 nts::Parser::Parser(int ac, char **av)
@@ -77,7 +77,7 @@ void nts::Parser::parseChipsets()
     std::vector<std::string> chipset = getChipsets();
     std::string split = {};
     std::string name = {};
-    Graph *graph = Graph::getInstance();
+    Circuit *Circuit = Circuit::getInstance();
     IComponent *component = nullptr;
     std::unordered_map<std::string, nts::CompType> chipsets = {
             {"and", nts::CompType::AND},
@@ -101,7 +101,7 @@ void nts::Parser::parseChipsets()
         name = i.substr(i.find(' ') + 1, i.find('\n'));
         if (chipsets.find(split) != chipsets.end()) {
             component = nts::Factory::createComponent(chipsets[split], name);
-            graph->addComponent(*component);
+            Circuit->addComponent(*component);
         }
         else
             throw (nts::Error("Invalid chipset (Parser.cpp, line 108)"));
@@ -120,7 +120,7 @@ void nts::Parser::parseLinks() {
     unsigned int pin_out = 0;
     nts::IComponent *component = nullptr;
     nts::IComponent *component2 = nullptr;
-    Graph *graph = Graph::getInstance();
+    Circuit *Circuit = Circuit::getInstance();
 
     for (const auto & i : links) {
         if (i == ".chipsets:" || i == ".links:")
@@ -133,8 +133,8 @@ void nts::Parser::parseLinks() {
         name_output = split_output.substr(0, split_output.find(':'));
         pin_in = std::stoi(split_pin_input);
         pin_out = std::stoi(split_pin_output);
-        component = graph->getCompByName(name_input);
-        component2 = graph->getCompByName(name_output);
+        component = Circuit->getCompByName(name_input);
+        component2 = Circuit->getCompByName(name_output);
         if (component == nullptr || component2 == nullptr)
             throw (nts::Error("Invalid link (Parser.cpp, line 140)"));
         try {

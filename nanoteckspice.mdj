@@ -623,7 +623,7 @@
 											"top": 367,
 											"width": 390,
 											"height": 13,
-											"text": "Graph"
+											"text": "Circuit"
 										},
 										{
 											"_type": "LabelView",
@@ -695,7 +695,7 @@
 											"top": 390,
 											"width": 390,
 											"height": 13,
-											"text": "+map with of map of two vectors  input output _graph",
+											"text": "+map with of map of two vectors  input output _Circuit",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3047,7 +3047,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Graph",
+					"name": "Circuit",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -3085,7 +3085,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGGF/bbs+mHdEI="
 							},
-							"name": "map with of map of two vectors  input output _graph"
+							"name": "map with of map of two vectors  input output _Circuit"
 						}
 					],
 					"operations": [

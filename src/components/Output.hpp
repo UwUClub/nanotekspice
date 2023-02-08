@@ -11,10 +11,10 @@ namespace nts::component
 {
     class Output : public nts::AComponent {
         public:
-            Output(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins) {}
+            Output(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
 
-            nts::Tristate compute(std::size_t pin = 1) override { return nts::UNDEFINED; }
-            void simulate(std::size_t tick) override {}
+            nts::Tristate compute(std::size_t pin = 1) override;
+            void simulate(std::size_t tick) override;
 
         protected:
         private:
