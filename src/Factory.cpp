@@ -14,34 +14,28 @@
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
-#include "Graph.hpp"
+#include "Circuit.hpp"
 
 static nts::IComponent *createAnd(const std::string &name)
 {
-    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::AND) + 1;
-
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1 * occ, 2 * occ}, {3 * occ}}
+        {{1, 2}, {3}}
     };
     return new nts::component::And(name, pins);
 }
 
 static nts::IComponent *createTrue(const std::string &name)
 {
-    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::TRUE) + 1;
-
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1 * occ}}
+        {{}, {1}}
     };
     return new nts::component::True(name, pins);
 }
 
 static nts::IComponent *createFalse(const std::string &name)
 {
-    size_t occ = nts::Graph::getInstance()->getNbOccurencesType(nts::CompType::FALSE) + 1;
-
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1 * occ}}
+        {{}, {1}}
     };
     return new nts::component::False(name, pins);
 }
