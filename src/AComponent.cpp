@@ -75,8 +75,9 @@ std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>::iter
             return std::find(pair.first.begin(), pair.first.end(), pin) != pair.first.end();
         });
     }
-    if (it == _pins.end())
-        throw Error("Pin not found" + std::to_string(pin));
+    if (it == _pins.end()) {
+        throw Error("Pin not found " + std::to_string(pin));
+    }
     for (auto &input : it->first) {
         _inputs[input] = Circuit->compute(*this, input);
     }

@@ -12,6 +12,7 @@ set(SOURCE_FILES
         src/AComponent.cpp
         src/AComponent.hpp
         src/AShell.hpp
+        src/AShell.cpp
         src/Factory.cpp
         src/Factory.hpp
         src/components/And.hpp
@@ -31,6 +32,8 @@ set(SOURCE_FILES
         src/components/Input.cpp
         #tests/TestAnd.cpp
         src/main.cpp
+        src/components/Output.cpp
+        src/components/Output.hpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})

@@ -14,13 +14,15 @@ namespace nts
 {
     class AShell : public nts::AComponent {
         public:
-            AShell(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins) : nts::AComponent(name, pins)
-            {
-                for (auto &pin : pins)
-                    for (auto &output : pin.second)
-                        _outputs[output] = nts::UNDEFINED;
-            }
-            void setOutput(nts::Tristate state) { for (auto &output : _outputs) output.second = state; }
+            AShell(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins);
+            void setOutput(nts::Tristate state);
+
+        protected:
+            enum class State { UPTODATE, TOUPDATE };
+            nts::Tristate _temp;
+            State _state;
+
+        private:
     };
 
 } // namespace nts

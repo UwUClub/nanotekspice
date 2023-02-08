@@ -43,10 +43,16 @@ void nts::Circuit::setLink(nts::IComponent &component, std::size_t pin, nts::ICo
         throw Error(other.getName() + " doesn't exist");
     if (!component.isOutput(pin) && !component.isInput(pin))
         throw Error(std::to_string(pin) + " is not a valid pin");
+    if (!other.isOutput(otherPin) && !other.isInput(otherPin))
+        throw Error(std::to_string(otherPin) + " is not a valid pin");
+    if (component.isOutput(pin) && other.isOutput(otherPin))
+        throw Error("Cannot link two outputs");
+    if (component.isInput(pin) && other.isInput(otherPin))
+        throw Error("Cannot link two inputs");
+    for (auto &link : _components[&component][Type::INPUT])
+        if (link.first == pin)
+            throw Error(std::to_string(pin) + " input is already linked");
 
-    for (auto &link : _components[&component][Type::OUTPUT])
-        if (link.first == pin && link.second == &other)
-            throw Error("Link already exists");
     if (component.isOutput(pin))
         _components[&component][Type::OUTPUT].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
     else
@@ -67,14 +73,10 @@ nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
     throw Error(std::to_string(pin) + " is not an input");
 }
 
-size_t nts::Circuit::getNbOccurencesType(nts::CompType type)
+void nts::Circuit::simulate(size_t tick)
 {
-    size_t nb = 0;
-
     for (auto &component : _components)
-        if (component.first->getType() == type)
-            nb++;
-    return nb;
+        component.first->simulate(tick);
 }
 
 nts::IComponent *nts::Circuit::getCompByName(std::string &name) {

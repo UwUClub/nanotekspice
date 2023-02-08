@@ -14,6 +14,7 @@
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
+#include "Clock.hpp"
 #include "Circuit.hpp"
 
 static nts::IComponent *createAnd(const std::string &name)
@@ -64,6 +65,14 @@ static nts::IComponent *createRom(const std::string &name)
     return new nts::component::Rom(name, pins);
 }
 
+static nts::IComponent *createClock(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{}, {1}}
+    };
+    return new nts::component::Clock(name, pins);
+}
+
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
@@ -73,7 +82,8 @@ nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::
         {CompType::ROM, [name] { return createRom(name); }},
         {CompType::AND, [name] { return createAnd(name); }},
         {CompType::TRUE, [name] { return createTrue(name); }},
-        {CompType::FALSE, [name] { return createFalse(name); }}
+        {CompType::FALSE, [name] { return createFalse(name); }},
+        {CompType::CLOCK, [name] { return createClock(name); }}
     };
     return components[type]();
 }
