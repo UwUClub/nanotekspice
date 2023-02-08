@@ -30,55 +30,69 @@ nts::Parser::~Parser()
     _file.close();
 }
 
-std::vector<std::string> nts::Parser::getChipsets() {
+void nts::Parser::getComponents() {
     std::string line;
-    std::vector<std::string> chipset;
-    bool links = false;
+    bool bool_chipset = false;
+    bool bool_links = false;
+    int i = 1;
+    std::string tmp;
 
-    _file.clear();
-    _file.seekg(0, std::ios::beg);
-    while (std::getline(_file, line)) {
-        if (line.find(".links:") != std::string::npos)
-            links = true;
-        if (line.find('#') != std::string::npos)
+    while (_file >> line) {
+        if (line.find("#") != std::string::npos) {
+            std::getline(_file, tmp);
             continue;
-        if (links)
+        }
+        if (line == ".chipsets:")
+            bool_chipset = true;
+        if (line == ".links:") {
+            bool_chipset = false;
+            bool_links = true;
             continue;
-        if (line == "\n" || line.empty())
-            continue;
-        chipset.push_back(line.substr(0, line.find('\n')));
+        }
+        if (bool_chipset && i % 2 == 0)
+            _chipsets_type.push_back(line);
+        else if (bool_chipset && i % 1 == 0)
+            _chipsets_name.push_back(line);
+        if (bool_links && i % 2 == 0) {
+            try {
+                parseLinks(line, true);
+            }
+            catch (nts::Error &e) {
+                throw (nts::Error(e.what()));
+            }
+        }
+        else if (bool_links && i % 1 == 0) {
+            try {
+                parseLinks(line, false);
+            }
+            catch (nts::Error &e) {
+                throw (nts::Error(e.what()));
+            }
+        }
+        i++;
     }
-    return chipset;
+    if (_chipsets_type.size() == 0)
+        throw (nts::Error("No chipset (Parser.cpp, line 79)"));
+    if (_linksType1.size() == 0)
+        throw (nts::Error("No link (Parser.cpp, line 82)"));
 }
 
-std::vector<std::string> nts::Parser::getLinks() {
-    std::string line;
-    std::vector<std::string> links;
-    bool chipset = true;
-
-    _file.clear();
-    _file.seekg(0, std::ios::beg);
-    while (std::getline(_file, line)) {
-        if (line.find(".links:") != std::string::npos)
-            chipset = false;
-        if (line.find('#') != std::string::npos)
-            continue;
-        if (chipset)
-            continue;
-        if (line == "\n" || line.empty())
-            continue;
-        links.push_back(line.substr(0, line.find('\n')));
+void nts::Parser::parseLinks(std::string str, bool isInput) {
+    if (str.find(':') == std::string::npos)
+        throw (nts::Error("Invalid link (Parser.cpp, line 116)"));
+    if (isInput) {
+        _linksType1.push_back(str.substr(0, str.find(':')));
+        _linksPin1.push_back(str.substr(str.find(':') + 1, str.find('\n')));
     }
-    return links;
+    else {
+        _linksType2.push_back(str.substr(0, str.find(':')));
+        _linksPin2.push_back(str.substr(str.find(':') + 1, str.find('\n')));
+    }
 }
 
-void nts::Parser::parseChipsets()
-{
-    std::vector<std::string> chipset = getChipsets();
-    std::string split = {};
-    std::string name = {};
-    Circuit *Circuit = Circuit::getInstance();
-    IComponent *component = nullptr;
+void nts::Parser::createChipsets() {
+    Circuit *circuit = Circuit::getInstance();
+    IComponent *comp = nullptr;
     std::unordered_map<std::string, nts::CompType> chipsets = {
             {"and", nts::CompType::AND},
             {"or", nts::CompType::OR},
@@ -94,54 +108,32 @@ void nts::Parser::parseChipsets()
             {"2716", nts::CompType::ROM}
     };
 
-    for (const auto & i : chipset) {
-        if (i == ".chipsets:" || i == ".links:")
-            continue;
-        split = i.substr(0, i.find(' '));
-        name = i.substr(i.find(' ') + 1, i.find('\n'));
-        if (chipsets.find(split) != chipsets.end()) {
-            component = nts::Factory::createComponent(chipsets[split], name);
-            Circuit->addComponent(*component);
+    for (int i = 0; i < _chipsets_type.size();) {
+        if (chipsets.find(_chipsets_type.back()) == chipsets.end())
+            throw (nts::Error("Invalid chipset (Parser.cpp, line 113)"));
+        if (chipsets.find(_chipsets_type.back()) != chipsets.end()) {
+            comp = Factory::createComponent(chipsets[_chipsets_type.back()], _chipsets_name.back());
+            circuit->addComponent(*comp);
+            _chipsets_type.pop_back();
+            _chipsets_name.pop_back();
         }
-        else
-            throw (nts::Error("Invalid chipset (Parser.cpp, line 108)"));
     }
 }
 
-void nts::Parser::parseLinks() {
-    std::string split_input = {};
-    std::string split_output = {};
-    std::string split_pin_input = {};
-    std::string split_pin_output = {};
-    std::string name_input = {};
-    std::string name_output = {};
-    std::vector<std::string> links = getLinks();
-    unsigned int pin_in= 0;
-    unsigned int pin_out = 0;
-    nts::IComponent *component = nullptr;
-    nts::IComponent *component2 = nullptr;
-    Circuit *Circuit = Circuit::getInstance();
+void nts::Parser::createLinks() {
+    Circuit *circuit = Circuit::getInstance();
+    IComponent *comp1 = nullptr;
+    IComponent *comp2 = nullptr;
 
-    for (const auto & i : links) {
-        if (i == ".chipsets:" || i == ".links:")
-            continue;
-        split_input = i.substr(0, i.find(' '));
-        split_output = i.substr(i.find(' ') + 1, i.find('\n'));
-        split_pin_input = split_input.substr(split_input.find(':') + 1, split_input.find('\n'));
-        split_pin_output = split_output.substr(split_output.find(':') + 1, split_output.find('\n'));
-        name_input = split_input.substr(0, split_input.find(':'));
-        name_output = split_output.substr(0, split_output.find(':'));
-        pin_in = std::stoi(split_pin_input);
-        pin_out = std::stoi(split_pin_output);
-        component = Circuit->getCompByName(name_input);
-        component2 = Circuit->getCompByName(name_output);
-        if (component == nullptr || component2 == nullptr)
-            throw (nts::Error("Invalid link (Parser.cpp, line 140)"));
-        try {
-            component->setLink(pin_in, *component2, pin_out);
-        }
-        catch (Error &e) {
-            throw (nts::Error("Invalid link (Parser.cpp, line 143)"));
-        }
+    for (int i = 0; i < _linksType1.size();) {
+        comp1 = circuit->getCompByName(_linksType1.back());
+        comp2 = circuit->getCompByName(_linksType2.back());
+        if (comp1 == nullptr || comp2 == nullptr)
+            throw (nts::Error("Cannot link a not created component (Parser.cpp, line 133)"));
+        comp1->setLink(std::stoi(_linksPin1.back()), *comp2, std::stoi(_linksPin2.back()));
+        _linksType1.pop_back();
+        _linksType2.pop_back();
+        _linksPin1.pop_back();
+        _linksPin2.pop_back();
     }
 }

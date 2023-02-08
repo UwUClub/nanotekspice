@@ -29,7 +29,8 @@ set(SOURCE_FILES
         src/components/Clock.cpp
         src/components/Input.hpp
         src/components/Input.cpp
-        tests/TestAnd.cpp
+        #tests/TestAnd.cpp
+        src/main.cpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})
