@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.17)  # CMake version check
+cmake_minimum_required(VERSION 3.25.2)  # CMake version check
 set(PROJECT_NAME nanotekspice)
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
 # Add main.cpp file of project root directory as source file
 set(SOURCE_FILES
-        src/main.cpp
         src/IComponent.hpp
         src/Error.hpp
         src/Circuit.cpp
@@ -34,10 +33,12 @@ set(SOURCE_FILES
         src/components/Output.cpp
         src/components/Output.hpp
         )
+
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src/components)
 include_directories(src)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -g3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion -g3")
+
 
 # Add the SFML library to the project, uncomment the 2 line under
 # if you want to use SFML:
