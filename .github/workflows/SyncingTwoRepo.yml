@@ -31,6 +31,7 @@ jobs:
       - uses: actions/checkout@v3
       - id: buildandtest
         run: |
+          apt-get install libcriterion-dev
           cmake .
           make
           rm -rf CMakeFiles CMakeCache.txt cmake_install.cmake Makefile cmake-build-debug
