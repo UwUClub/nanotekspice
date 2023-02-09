@@ -26,6 +26,8 @@ set(SOURCE_FILES
         src/components/Or.cpp
         src/components/Xor.hpp
         src/components/Xor.cpp
+        src/components/Not.hpp
+        src/components/Not.cpp
         src/components/False.hpp
         src/components/False.cpp
         src/components/True.hpp
