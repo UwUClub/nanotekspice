@@ -21,6 +21,6 @@ Test(And, ErrorHandling, .init = cr_redirect_stdout)
     }
     catch (nts::Error &e) {
         std::cout << e.what() << std::endl;
-        cr_assert_eq(e.what(), "Invalid file extension (Parser.cpp line 24)");
+        cr_assert_str_eq(e.what(), "Invalid file extension (Parser.cpp line 24)");
     }
 }
