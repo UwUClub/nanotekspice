@@ -1,10 +1,6 @@
 name: Syncing two repo
 on: pull_request
 
-env:
-  SOURCE_REPO: "git@github.com:UwUClub/nanoteckspice.git" #Insert source url of the git source repo
-  DEST_REPO: "git@github.com:EpitechPromo2026/B-OOP-400-TLS-4-1-tekspice-maxence.labourel.git" #Insert Destination url of the git dest repo
-
 jobs:
   check_repo:
     name: "Check if the repo is clean"
@@ -21,7 +17,7 @@ jobs:
             exit 1
           fi
   
-  testing:
+  build:
     name: "Build"
     runs-on: ubuntu-latest
     container:
@@ -36,6 +32,7 @@ jobs:
 
   test:
     name: "Test"
+    needs: build
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
@@ -43,7 +40,7 @@ jobs:
         - uses: actions/checkout@v3
         - id: run_tests
           run: |
-            mv ./test/CMakeTest ./CMakeLists.txt
+            mv ./tests/CMakeTest ./CMakeLists.txt
             cmake .
             make
             ./unit_tests
