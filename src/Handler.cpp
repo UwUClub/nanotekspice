@@ -24,8 +24,10 @@ void nts::Handler::runLoop()
     while (std::cin >> line) {
         if (line == "exit")
             break;
-        else if (line == "simulate")
+        else if (line == "simulate") {
+            i++;
             Circuit->simulate(i);
+        }
         else if (line == "display")
             Circuit->display();
         else if (line == "loop") {
@@ -38,7 +40,14 @@ void nts::Handler::runLoop()
         else if (line.find('=') != std::string::npos) {
             name = line.substr(0, line.find('='));
             state = line.substr(line.find('=') + 1, line.size());
-            Circuit->setOutput(name, state == "1" ? nts::TRUE : nts::FALSE);
+            if (state == "0")
+                Circuit->setOutput(name, nts::FALSE);
+            else if (state == "1")
+                Circuit->setOutput(name, nts::TRUE);
+            else if (state == "U")
+                Circuit->setOutput(name, nts::UNDEFINED);
+            else
+                std::cout << "Invalid State" << std::endl;
         } else {
             std::cout << "Invalid Command" << std::endl;
         }
