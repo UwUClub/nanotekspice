@@ -1,12 +1,5 @@
 name: Syncing two repo
-on:
-  push:
-    branches:
-      - main
-
-env:
-  SOURCE_REPO: "git@github.com:UwUClub/nanoteckspice.git" #Insert source url of the git source repo
-  DEST_REPO: "git@github.com:EpitechPromo2026/B-OOP-400-TLS-4-1-tekspice-maxence.labourel.git" #Insert Destination url of the git dest repo
+on: pull_request
 
 jobs:
   check_repo:
@@ -40,16 +33,3 @@ jobs:
           make
           ./unit_test
         timeout-minutes: 2
-            
-  git-sync:
-    needs: check_repo
-    runs-on: ubuntu-latest
-    steps:
-      - name: git-sync
-        uses: wei/git-sync@v3
-        with:
-          source_repo: ${{ env.SOURCE_REPO }}
-          source_branch: "main"
-          destination_repo: ${{ env.DEST_REPO }}
-          destination_branch: "main"
-          ssh_private_key: ${{ secrets.SSH_KEY }}
