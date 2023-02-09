@@ -1,11 +1,8 @@
 name: Syncing two repo
-on:
-  push:
-    branches:
-      - main
-    pull_request:
-      branches:
-        - *
+on: push pull_request
+push:
+  branches:
+    - main
 
 env:
   SOURCE_REPO: "git@github.com:UwUClub/nanoteckspice.git" #Insert source url of the git source repo
