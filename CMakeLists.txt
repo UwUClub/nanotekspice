@@ -34,7 +34,8 @@ set(SOURCE_FILES
         src/main.cpp
         src/components/Output.cpp
         src/components/Output.hpp
-        src/main.cpp
+        src/Handler.cpp
+        src/Handler.hpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})

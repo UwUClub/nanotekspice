@@ -7,6 +7,7 @@
 
 #include "Circuit.hpp"
 #include "Error.hpp"
+#include "AShell.hpp"
 
 nts::Circuit *nts::Circuit::getInstance()
 {
@@ -85,4 +86,17 @@ nts::IComponent *nts::Circuit::getCompByName(std::string &name) {
             return component.first;
     }
     return nullptr;
+}
+
+void nts::Circuit::setOutput(const std::string& name, nts::Tristate state) {
+    for (auto &component : _components) {
+        if (component.first->getName() == name) {
+            auto *shellComp = dynamic_cast<AShell *>(component.first);
+            if (shellComp == nullptr)
+                throw Error("Component " + name + " is not a shell");
+            shellComp->setOutput(state);
+            return;
+        }
+    }
+    throw Error("Component " + name + " doesn't exist");
 }
