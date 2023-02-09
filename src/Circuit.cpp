@@ -75,6 +75,7 @@ nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
 
 void nts::Circuit::simulate(size_t tick)
 {
+    _ticks += tick;
     for (auto &component : _components)
         component.first->simulate(tick);
 }

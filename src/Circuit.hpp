@@ -25,8 +25,6 @@ namespace nts
             void simulate(std::size_t tick);
             IComponent *getCompByName(std::string &name);
 
-            size_t getNbOccurencesType(CompType type);
-
         private:
             Circuit() = default;
             Circuit(const Circuit &) = delete;
@@ -35,7 +33,7 @@ namespace nts
                 INPUT,
                 OUTPUT
             };
-
+            std::size_t _ticks;
             std::map<nts::IComponent *, std::map<Type, std::vector<std::pair<size_t, nts::IComponent *>>>> _components;
     };
 } // namespace nts

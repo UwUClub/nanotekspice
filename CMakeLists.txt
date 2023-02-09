@@ -17,35 +17,38 @@ set(SOURCE_FILES
         src/Factory.hpp
         src/Parser.cpp
         src/Parser.hpp
-        src/components/Input.hpp
-        src/components/Output.hpp
         src/components/Rom.hpp
-        src/components/And.hpp
-        src/components/And.cpp
-        src/components/Or.hpp
-        src/components/Or.cpp
-        src/components/Xor.hpp
-        src/components/Xor.cpp
-        src/components/Not.hpp
-        src/components/Not.cpp
-        src/components/False.hpp
-        src/components/False.cpp
-        src/components/True.hpp
-        src/components/True.cpp
-        src/components/Clock.hpp
-        src/components/Clock.cpp
-        src/components/Input.hpp
-        src/components/Input.cpp
+        src/components/elementary/And.hpp
+        src/components/elementary/And.cpp
+        src/components/elementary/Or.hpp
+        src/components/elementary/Or.cpp
+        src/components/elementary/Xor.hpp
+        src/components/elementary/Xor.cpp
+        src/components/elementary/Not.hpp
+        src/components/elementary/Not.cpp
+        src/components/elementary/Nor.hpp
+        src/components/elementary/Nor.cpp
+        src/components/elementary/Nand.hpp
+        src/components/elementary/Nand.cpp
+        src/components/special/False.hpp
+        src/components/special/False.cpp
+        src/components/special/True.hpp
+        src/components/special/True.cpp
+        src/components/special/Clock.hpp
+        src/components/special/Clock.cpp
+        src/components/special/Input.hpp
+        src/components/special/Input.cpp
+        src/components/special/Output.cpp
+        src/components/special/Output.hpp
         #tests/TestAnd.cpp
-        src/main.cpp
-        src/components/Output.cpp
-        src/components/Output.hpp
         src/main.cpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})
-include_directories(src/components)
 include_directories(src)
+include_directories(src/components)
+include_directories(src/components/elementary)
+include_directories(src/components/special)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 
