@@ -38,7 +38,7 @@ jobs:
           mv ./tests/CMakeTest ./CMakeLists.txt
           cmake .
           make
-          ./unit_tests
+          ./unit_test
         timeout-minutes: 2
             
   git-sync:
