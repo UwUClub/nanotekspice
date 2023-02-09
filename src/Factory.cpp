@@ -16,6 +16,8 @@
 #include "Factory.hpp"
 #include "Clock.hpp"
 #include "Circuit.hpp"
+#include "Or.hpp"
+#include "Xor.hpp"
 
 static nts::IComponent *createAnd(const std::string &name)
 {
@@ -23,6 +25,22 @@ static nts::IComponent *createAnd(const std::string &name)
         {{1, 2}, {3}}
     };
     return new nts::component::And(name, pins);
+}
+
+static nts::IComponent *createOr(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2}, {3}}
+    };
+    return new nts::component::Or(name, pins);
+}
+
+static nts::IComponent *createXor(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2}, {3}}
+    };
+    return new nts::component::Xor(name, pins);
 }
 
 static nts::IComponent *createTrue(const std::string &name)
@@ -76,14 +94,15 @@ static nts::IComponent *createClock(const std::string &name)
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
-        {CompType::AND, [name] { return createAnd(name); }},
         {CompType::INPUT, [name] { return createInput(name); }},
         {CompType::OUTPUT, [name] { return createOutput(name); }},
-        {CompType::ROM, [name] { return createRom(name); }},
-        {CompType::AND, [name] { return createAnd(name); }},
         {CompType::TRUE, [name] { return createTrue(name); }},
         {CompType::FALSE, [name] { return createFalse(name); }},
-        {CompType::CLOCK, [name] { return createClock(name); }}
+        {CompType::CLOCK, [name] { return createClock(name); }},
+        {CompType::AND, [name] { return createAnd(name); }},
+        {CompType::OR, [name] { return createOr(name); }},
+        {CompType::XOR, [name] { return createXor(name); }},
+        {CompType::ROM, [name] { return createRom(name); }}
     };
     return components[type]();
 }
