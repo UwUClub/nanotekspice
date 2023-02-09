@@ -27,8 +27,6 @@ jobs:
   BuildAndTest:
     name: "Build"
     runs-on: ubuntu-latest
-    container:
-      image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v3
       - id: buildandtest

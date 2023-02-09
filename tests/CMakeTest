@@ -32,7 +32,7 @@ set(SOURCE_FILES
         src/components/Input.cpp
         src/components/Output.cpp
         src/components/Output.hpp
-        src/TestAnd.cpp
+        tests/TestAnd.cpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})
