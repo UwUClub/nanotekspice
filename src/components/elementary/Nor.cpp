@@ -40,9 +40,7 @@ nts::Tristate nts::component::Nor::compute(std::size_t pin)
             output = nts::TRUE;
             break;
     }
-    if (output == nts::UNDEFINED)
-        output = nts::UNDEFINED;
-    else
+    if (output != nts::UNDEFINED)
         output = output == nts::FALSE ? nts::TRUE : nts::FALSE;
     _outputs[pin] = output;
     return output;

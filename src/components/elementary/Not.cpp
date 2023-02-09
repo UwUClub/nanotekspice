@@ -20,9 +20,7 @@ nts::Tristate nts::component::Not::compute(std::size_t pin)
     auto it = computeInputs(pin);
     auto first = it->first[0];
 
-    if (_inputs[first] == nts::UNDEFINED)
-        output = nts::UNDEFINED;
-    else
+    if (_inputs[first] != nts::UNDEFINED)
         output = first == nts::FALSE ? nts::TRUE : nts::FALSE;
     _outputs[pin] = output;
     return output;

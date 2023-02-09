@@ -10,7 +10,8 @@
 #include "And.hpp"
 #include "Input.hpp"
 #include "Output.hpp"
-#include "Rom.hpp"
+#include "4001.hpp"
+#include "4011.hpp"
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
@@ -75,20 +76,34 @@ static nts::IComponent *createOutput(const std::string &name)
     return new nts::component::Output(name, pins);
 }
 
-static nts::IComponent *createRom(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2, 3, 4, 5, 6, 7, 8}, {9}}
-    };
-    return new nts::component::Rom(name, pins);
-}
-
 static nts::IComponent *createClock(const std::string &name)
 {
     std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
         {{}, {1}}
     };
     return new nts::component::Clock(name, pins);
+}
+
+static nts::IComponent *create4001(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2}, {3}},
+        {{5, 6}, {4}},
+        {{8, 9}, {10}},
+        {{12, 13}, {11}}
+    };
+    return new nts::component::Gate4001(name, pins);
+}
+
+static nts::IComponent *create4011(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2}, {3}},
+        {{5, 6}, {4}},
+        {{8, 9}, {10}},
+        {{12, 13}, {11}}
+    };
+    return new nts::component::Gate4011(name, pins);
 }
 
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
@@ -102,7 +117,8 @@ nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::
         {CompType::AND, [name] { return createAnd(name); }},
         {CompType::OR, [name] { return createOr(name); }},
         {CompType::XOR, [name] { return createXor(name); }},
-        {CompType::ROM, [name] { return createRom(name); }}
+        {CompType::GATE_4001, [name] { return create4001(name); }},
+        {CompType::GATE_4011, [name] { return create4011(name); }}
     };
     return components[type]();
 }
