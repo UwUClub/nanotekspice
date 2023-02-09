@@ -1,5 +1,5 @@
 name: Syncing two repo
-on: push pull_request
+on: [push, pull_request]
 push:
   branches:
     - main
