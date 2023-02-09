@@ -17,7 +17,6 @@ set(SOURCE_FILES
         src/Factory.hpp
         src/Parser.cpp
         src/Parser.hpp
-        src/components/Rom.hpp
         src/components/elementary/And.hpp
         src/components/elementary/And.cpp
         src/components/elementary/Or.hpp
