@@ -10,6 +10,7 @@ namespace nts {
     public:
         Handler();
         ~Handler();
+        static void runLoop();
     private:
     };
 }

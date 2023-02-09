@@ -17,7 +17,7 @@ int main(int ac, char **av) {
         parser.getComponents();
         parser.createChipsets();
         parser.createLinks();
-        nts::Handler();
+        nts::Handler::runLoop();
     } catch (nts::Error &e) {
         std::cerr << e.what() << std::endl;
         return 84;

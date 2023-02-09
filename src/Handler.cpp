@@ -8,7 +8,11 @@
 #include <iostream>
 
 
-nts::Handler::Handler()
+nts::Handler::Handler() = default;
+
+nts::Handler::~Handler() = default;
+
+void nts::Handler::runLoop()
 {
     Circuit *Circuit = Circuit::getInstance();
     std::string line;
@@ -40,8 +44,4 @@ nts::Handler::Handler()
         }
         std::cout << "> ";
     }
-}
-
-nts::Handler::~Handler()
-{
 }

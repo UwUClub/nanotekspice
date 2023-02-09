@@ -115,10 +115,10 @@ void nts::Circuit::display() const
 
 
     for (auto &component : _components) {
-        if (static_cast<Type>(component.first->getType()) == Type::INPUT) {
+        if (component.first->getType() == nts::CompType::INPUT) {
             input.push_back(component.first);
         }
-        else if (static_cast<Type>(component.first->getType()) == Type::OUTPUT) {
+        else if (component.first->getType() == nts::CompType::OUTPUT) {
             output.push_back(component.first);
         }
     }
