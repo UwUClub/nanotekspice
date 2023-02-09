@@ -7,6 +7,10 @@
 
 #include "Circuit.hpp"
 #include "Error.hpp"
+#include "IComponent.hpp"
+#include "AShell.hpp"
+#include <iostream>
+#include <algorithm>
 
 nts::Circuit *nts::Circuit::getInstance()
 {
@@ -86,4 +90,44 @@ nts::IComponent *nts::Circuit::getCompByName(std::string &name) {
             return component.first;
     }
     return nullptr;
+}
+
+void nts::Circuit::setOutput(const std::string& name, nts::Tristate state) {
+    for (auto &component : _components) {
+        if (component.first->getName() == name) {
+            auto *shellComp = dynamic_cast<AShell *>(component.first);
+            if (shellComp == nullptr)
+                throw Error("Component " + name + " is not a shell");
+            shellComp->setOutput(state);
+            return;
+        }
+    }
+    throw Error("Component " + name + " doesn't exist");
+}
+
+static bool compareFunction (nts::IComponent *i, nts::IComponent *j) { return (i->getName()<j->getName()); }
+
+void nts::Circuit::display() const
+{
+    std::cout << "Tick: " << _ticks << std::endl;
+    std::vector<IComponent *> input;
+    std::vector<IComponent *> output;
+
+
+    for (auto &component : _components) {
+        if (component.first->getType() == nts::CompType::INPUT) {
+            input.push_back(component.first);
+        }
+        else if (component.first->getType() == nts::CompType::OUTPUT) {
+            output.push_back(component.first);
+        }
+    }
+    std::sort(input.begin(), input.end(), compareFunction);
+    std::sort(output.begin(), output.end(), compareFunction);
+    std::cout << "Inputs:" << std::endl;
+    for (auto &component : input)
+        std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
+    std::cout << "Outputs:" << std::endl;
+    for (auto &component : output)
+        std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
 }

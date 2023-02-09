@@ -53,6 +53,10 @@ set(SOURCE_FILES
         src/components/gate/4081.cpp
         #tests/TestAnd.cpp
         src/main.cpp
+        src/components/special/Output.cpp
+        src/components/special/Output.hpp
+        src/Handler.cpp
+        src/Handler.hpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})

@@ -24,6 +24,8 @@ namespace nts
             nts::Tristate compute(nts::IComponent &component, std::size_t pin);
             void simulate(std::size_t tick);
             IComponent *getCompByName(std::string &name);
+            void setOutput(const std::string& name, nts::Tristate state);
+            void display() const;
 
         private:
             Circuit() = default;
