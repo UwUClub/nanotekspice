@@ -24,33 +24,23 @@ jobs:
             exit 1
           fi
   
-  testing:
+  BuildAndTest:
     name: "Build"
     runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker:latest
     steps:
       - uses: actions/checkout@v3
-      - id: build
+      - id: buildandtest
         run: |
           cmake .
           make
+          rm -rf CMakeFiles CMakeCache.txt cmake_install.cmake Makefile cmake-build-debug
+          mv ./tests/CMakeTest ./CMakeLists.txt
+          cmake .
+          make
+          ./unit_tests
         timeout-minutes: 2
-
-  test:
-    name: "Test"
-    runs-on: ubuntu-latest
-    container:
-      image: epitechcontent/epitest-docker:latest
-    steps:
-        - uses: actions/checkout@v3
-        - id: run_tests
-          run: |
-            mv ./test/CMakeTest ./CMakeLists.txt
-            cmake .
-            make
-            ./unit_tests
-            timeout-minutes: 2
             
   git-sync:
     needs: check_repo
