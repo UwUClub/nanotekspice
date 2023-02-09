@@ -7,14 +7,19 @@
 
 #include <algorithm>
 #include "Parser.hpp"
+#include "Error.hpp"
 #include "Handler.hpp"
 
-int main(int ac, char **av)
-{
+int main(int ac, char **av) {
     nts::Parser parser(ac, av);
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler();
+    try {
+        parser.getComponents();
+        parser.createChipsets();
+        parser.createLinks();
+        nts::Handler();
+    } catch (nts::Error &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    }
 }

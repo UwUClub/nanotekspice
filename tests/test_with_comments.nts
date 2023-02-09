@@ -1,6 +1,6 @@
 .chipsets:
+input in_2
 input in_1
-input in_2 # la con de ta mere
 output out
 and gate # la con de ta mere
 

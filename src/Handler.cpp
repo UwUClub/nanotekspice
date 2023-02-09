@@ -4,6 +4,7 @@
 
 #include "Circuit.hpp"
 #include "Handler.hpp"
+#include "Error.hpp"
 #include <iostream>
 
 
@@ -15,6 +16,7 @@ nts::Handler::Handler()
     std::string name;
     std::string state;
 
+    std::cout << "> ";
     while (std::cin >> line) {
         if (line == "exit")
             break;
@@ -29,11 +31,14 @@ nts::Handler::Handler()
                 i++;
             }
         }
-        if (line.find("=") != std::string::npos) {
+        else if (line.find('=') != std::string::npos) {
             name = line.substr(0, line.find('='));
             state = line.substr(line.find('=') + 1, line.size());
             Circuit->setOutput(name, state == "1" ? nts::TRUE : nts::FALSE);
+        } else {
+            std::cout << "Invalid Command" << std::endl;
         }
+        std::cout << "> ";
     }
 }
 

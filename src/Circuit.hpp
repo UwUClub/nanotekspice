@@ -25,6 +25,7 @@ namespace nts
             void simulate(std::size_t tick);
             IComponent *getCompByName(std::string &name);
             void setOutput(const std::string& name, nts::Tristate state);
+            void display() const;
 
         private:
             Circuit() = default;
