@@ -15,27 +15,27 @@
 
 int main(int ac, char **av)
 {
-    nts::IComponent *And = nts::Factory::createComponent(nts::CompType::AND, "and");
-    nts::IComponent *Andz = nts::Factory::createComponent(nts::CompType::AND, "and1");
+    nts::IComponent *Or = nts::Factory::createComponent(nts::CompType::OR, "or");
+    nts::IComponent *Or2 = nts::Factory::createComponent(nts::CompType::OR, "or2");
     nts::component::Clock *In = dynamic_cast<nts::component::Clock *>(nts::Factory::createComponent(nts::CompType::CLOCK, "input"));
-    nts::IComponent *Truez = nts::Factory::createComponent(nts::CompType::TRUE, "true1");
-    nts::IComponent *False = nts::Factory::createComponent(nts::CompType::TRUE, "false");
+    nts::IComponent *True = nts::Factory::createComponent(nts::CompType::FALSE, "true1");
+    nts::IComponent *False = nts::Factory::createComponent(nts::CompType::FALSE, "false");
     nts::IComponent *Out = nts::Factory::createComponent(nts::CompType::OUTPUT, "output");
 
     nts::Circuit *Circuit = nts::Circuit::getInstance();
 
     try {
-        Circuit->addComponent(*And);
-        Circuit->addComponent(*In);
+        Circuit->addComponent(*Or);
+        Circuit->addComponent(*Or2);
         Circuit->addComponent(*False);
-        Circuit->addComponent(*Andz);
-        Circuit->addComponent(*Truez);
         Circuit->addComponent(*Out);
-        In->setLink(1, *And, 1);
-        False->setLink(1, *And, 2);
-        Truez->setLink(1, *Andz, 1);
-        Andz->setLink(2, *And, 3);
-        Out->setLink(1, *Andz, 3);
+        Circuit->addComponent(*True);
+        Circuit->addComponent(*In);
+        True->setLink(1, *Or, 1);
+        False->setLink(1, *Or, 2);
+        Or->setLink(3, *Or2, 1);
+        In->setLink(1, *Or2, 2);
+        Out->setLink(1, *Or2, 3);
         std::cout << Out->compute() << std::endl;
         In->setOutput(nts::TRUE);
         std::cout << Out->compute() << std::endl;

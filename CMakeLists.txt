@@ -15,13 +15,17 @@ set(SOURCE_FILES
         src/AShell.cpp
         src/Factory.cpp
         src/Factory.hpp
-        src/components/And.hpp
         src/Parser.cpp
         src/Parser.hpp
         src/components/Input.hpp
         src/components/Output.hpp
         src/components/Rom.hpp
+        src/components/And.hpp
         src/components/And.cpp
+        src/components/Or.hpp
+        src/components/Or.cpp
+        src/components/Xor.hpp
+        src/components/Xor.cpp
         src/components/False.hpp
         src/components/False.cpp
         src/components/True.hpp
