@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** uwunano
 ** File description:
-** Nor
+** 4071
 */
 
-#include "Nor.hpp"
+#include "4071.hpp"
 
-nts::component::Nor::Nor(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
+nts::component::Gate4071::Gate4071(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
     : nts::AComponent(name, pins)
 {
-    _type = nts::CompType::NOR;
+    _type = nts::CompType::GATE_4071;
 }
 
-nts::Tristate nts::component::Nor::compute(std::size_t pin)
+nts::Tristate nts::component::Gate4071::compute(std::size_t pin)
 {
     nts::Tristate output = nts::FALSE;
     auto it = computeInputs(pin);
@@ -40,8 +40,6 @@ nts::Tristate nts::component::Nor::compute(std::size_t pin)
             output = nts::TRUE;
             break;
     }
-    if (output != nts::UNDEFINED)
-        output = output == nts::FALSE ? nts::TRUE : nts::FALSE;
     _outputs[pin] = output;
     return output;
 }

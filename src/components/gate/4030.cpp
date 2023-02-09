@@ -2,18 +2,18 @@
 ** EPITECH PROJECT, 2023
 ** uwunano
 ** File description:
-** Or
+** 4030
 */
 
-#include "Xor.hpp"
+#include "4030.hpp"
 
-nts::component::Xor::Xor(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
+nts::component::Gate4030::Gate4030(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
     : nts::AComponent(name, pins)
 {
-    _type = nts::CompType::XOR;
+    _type = nts::CompType::GATE_4030;
 }
 
-nts::Tristate nts::component::Xor::compute(std::size_t pin)
+nts::Tristate nts::component::Gate4030::compute(std::size_t pin)
 {
     nts::Tristate output = nts::FALSE;
     auto it = computeInputs(pin);

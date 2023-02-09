@@ -17,7 +17,6 @@ set(SOURCE_FILES
         src/Factory.hpp
         src/Parser.cpp
         src/Parser.hpp
-        src/components/Rom.hpp
         src/components/elementary/And.hpp
         src/components/elementary/And.cpp
         src/components/elementary/Or.hpp
@@ -40,6 +39,18 @@ set(SOURCE_FILES
         src/components/special/Input.cpp
         src/components/special/Output.cpp
         src/components/special/Output.hpp
+        src/components/gate/4001.hpp
+        src/components/gate/4001.cpp
+        src/components/gate/4011.hpp
+        src/components/gate/4011.cpp
+        src/components/gate/4030.hpp
+        src/components/gate/4030.cpp
+        src/components/gate/4069.hpp
+        src/components/gate/4069.cpp
+        src/components/gate/4071.hpp
+        src/components/gate/4071.cpp
+        src/components/gate/4081.hpp
+        src/components/gate/4081.cpp
         #tests/TestAnd.cpp
         src/main.cpp
         src/components/special/Output.cpp
@@ -53,6 +64,7 @@ include_directories(src)
 include_directories(src/components)
 include_directories(src/components/elementary)
 include_directories(src/components/special)
+include_directories(src/components/gate)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 

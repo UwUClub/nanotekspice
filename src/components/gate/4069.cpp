@@ -2,21 +2,20 @@
 ** EPITECH PROJECT, 2023
 ** uwunano
 ** File description:
-** And.cpp
+** 4069
 */
 
-#include <algorithm>
-#include "Not.hpp"
+#include "4069.hpp"
 
-nts::component::Not::Not(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
+nts::component::Gate4069::Gate4069(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
     : nts::AComponent(name, pins)
 {
-    _type = nts::CompType::NOT;
+    _type = nts::CompType::GATE_4069;
 }
 
-nts::Tristate nts::component::Not::compute(std::size_t pin)
+nts::Tristate nts::component::Gate4069::compute(std::size_t pin)
 {
-    nts::Tristate output = nts::TRUE;
+    nts::Tristate output = nts::FALSE;
     auto it = computeInputs(pin);
     auto first = it->first[0];
 
