@@ -9,19 +9,19 @@ namespace nts {
     class Parser {
     public:
         Parser(int, char **);
-
         ~Parser();
-
-        std::vector<std::string> getChipsets();
-
-        std::vector<std::string> getLinks();
-
-        void parseChipsets();
-
-        void parseLinks();
-
+        void getComponents();
+        void createChipsets();
+        void createLinks();
+        void parseLinks(std::string, bool);
     private:
         std::ifstream _file;
+        std::vector<std::string> _chipsets_type;
+        std::vector<std::string> _chipsets_name;
+        std::vector<std::string> _linksType1;
+        std::vector<std::string> _linksPin1;
+        std::vector<std::string> _linksType2;
+        std::vector<std::string> _linksPin2;
     };
 }
 

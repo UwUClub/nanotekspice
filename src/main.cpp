@@ -11,8 +11,9 @@
 #include "Error.hpp"
 #include "Clock.hpp"
 #include "Circuit.hpp"
+#include "Parser.hpp"
 
-int main()
+int main(int ac, char **av)
 {
     nts::IComponent *And = nts::Factory::createComponent(nts::CompType::AND, "and");
     nts::IComponent *Andz = nts::Factory::createComponent(nts::CompType::AND, "and1");

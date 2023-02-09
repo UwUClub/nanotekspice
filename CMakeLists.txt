@@ -30,6 +30,8 @@ set(SOURCE_FILES
         src/components/Clock.cpp
         src/components/Input.hpp
         src/components/Input.cpp
+        #tests/TestAnd.cpp
+        src/main.cpp
         src/components/Output.cpp
         src/components/Output.hpp
         src/main.cpp

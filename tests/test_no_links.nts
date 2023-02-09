@@ -1,0 +1,14 @@
+.chipsets:
+input in_01
+input in_02
+output out_03
+output out_04
+input in_05
+input in_06
+input in_08
+input in_09
+output out_10
+output out_11
+input in_12
+input in_13
+4081 gate
