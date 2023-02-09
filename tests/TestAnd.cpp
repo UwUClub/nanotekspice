@@ -7,7 +7,6 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "And.hpp"
 #include "Parser.hpp"
 #include "Error.hpp"
 
