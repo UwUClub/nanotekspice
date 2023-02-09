@@ -43,6 +43,14 @@ set(SOURCE_FILES
         src/components/gate/4001.cpp
         src/components/gate/4011.hpp
         src/components/gate/4011.cpp
+        src/components/gate/4030.hpp
+        src/components/gate/4030.cpp
+        src/components/gate/4069.hpp
+        src/components/gate/4069.cpp
+        src/components/gate/4071.hpp
+        src/components/gate/4071.cpp
+        src/components/gate/4081.hpp
+        src/components/gate/4081.cpp
         #tests/TestAnd.cpp
         src/main.cpp
         )

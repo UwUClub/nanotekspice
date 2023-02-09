@@ -12,6 +12,8 @@
 #include "Output.hpp"
 #include "4001.hpp"
 #include "4011.hpp"
+#include "4030.hpp"
+#include "4069.hpp"
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
@@ -106,6 +108,30 @@ static nts::IComponent *create4011(const std::string &name)
     return new nts::component::Gate4011(name, pins);
 }
 
+static nts::IComponent *create4030(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2}, {3}},
+        {{5, 6}, {4}},
+        {{8, 9}, {10}},
+        {{12, 13}, {11}}
+    };
+    return new nts::component::Gate4030(name, pins);
+}
+
+static nts::IComponent *create4069(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1}, {2}},
+        {{3}, {4}},
+        {{5}, {6}},
+        {{9}, {8}},
+        {{11}, {10}},
+        {{13}, {12}}
+    };
+    return new nts::component::Gate4069(name, pins);
+}
+
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
@@ -118,7 +144,9 @@ nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::
         {CompType::OR, [name] { return createOr(name); }},
         {CompType::XOR, [name] { return createXor(name); }},
         {CompType::GATE_4001, [name] { return create4001(name); }},
-        {CompType::GATE_4011, [name] { return create4011(name); }}
+        {CompType::GATE_4011, [name] { return create4011(name); }},
+        {CompType::GATE_4030, [name] { return create4030(name); }},
+        {CompType::GATE_4069, [name] { return create4069(name); }},
     };
     return components[type]();
 }
