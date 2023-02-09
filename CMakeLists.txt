@@ -52,6 +52,7 @@ set(SOURCE_FILES
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
         #tests/TestAnd.cpp
+        #tests/TestFile.cpp
         src/main.cpp
         src/components/special/Output.cpp
         src/components/special/Output.hpp
