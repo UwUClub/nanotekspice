@@ -18,7 +18,6 @@
 #include "False.hpp"
 #include "Factory.hpp"
 #include "Clock.hpp"
-#include "Circuit.hpp"
 #include "Or.hpp"
 #include "Xor.hpp"
 
