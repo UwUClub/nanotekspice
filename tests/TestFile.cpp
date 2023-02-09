@@ -57,8 +57,4 @@ Test(And, ErrorHandling4)
         cr_assert_str_eq(e.what(), "No links in file (Parser.cpp line 65)");
         std::cout << "Test passed" << std::endl;
     }
-    catch (nts::Error &e) {
-        std::cout << e.what() << std::endl;
-        cr_assert_str_eq(e.what(), "Invalid file extension (Parser.cpp line 24)");
-    }
 }

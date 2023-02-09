@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22.2)  # CMake version check
-set(PROJECT_NAME unit_test)
+set(PROJECT_NAME nanotekspice)               # Create project "simple_example"
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
@@ -51,10 +51,11 @@ set(SOURCE_FILES
         src/components/gate/4071.cpp
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
-        tests/TestAnd.cpp
-        tests/TestFile.cpp
-        tests/TestOr.cpp
-        #src/main.cpp
+        #tests/TestAnd.cpp
+        #tests/TestFile.cpp
+        #tests/TestOr.cpp
+        #tests/TestInputOutput.cpp
+        src/main.cpp
         src/components/special/Output.cpp
         src/components/special/Output.hpp
         src/Handler.cpp
@@ -67,7 +68,7 @@ include_directories(src/components)
 include_directories(src/components/elementary)
 include_directories(src/components/special)
 include_directories(src/components/gate)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion -g3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 
 # Add the SFML library to the project, uncomment the 2 line under
