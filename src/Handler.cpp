@@ -43,11 +43,12 @@ void nts::Handler::runLoop()
     std::string line;
     std::string name;
     std::string state;
+    bool getting_input = true;
     std::unordered_map<std::string, std::function<void()>> map = {
             {"simulate", [&] { Circuit->simulate(1); }},
             {"display", [&] { Circuit->display(); }},
             {"loop", [&] { loop(Circuit); }},
-            {"exit", [&] { return(0); }},
+            {"exit", [&getting_input] { getting_input = false; }},
     };
 
     std::cout << "> ";
@@ -58,6 +59,8 @@ void nts::Handler::runLoop()
             handle_output(name, state, line, Circuit);
         else
             std::cout << "Invalid Command" << std::endl;
+        if (!getting_input)
+            break;
         std::cout << "> ";
     }
 }
