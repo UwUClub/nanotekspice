@@ -110,32 +110,13 @@ static bool compareFunction (nts::IComponent *i, nts::IComponent *j) { return (i
 
 void nts::Circuit::display() const
 {
-    std::unordered_map<std::string, nts::CompType> chipsets = {
-            {"and", nts::CompType::AND},
-            {"or", nts::CompType::OR},
-            {"xor", nts::CompType::XOR},
-            {"nand", nts::CompType::NAND},
-            {"nor", nts::CompType::NOR},
-            {"not", nts::CompType::NOT},
-            {"input", nts::CompType::INPUT},
-            {"clock", nts::CompType::CLOCK},
-            {"true", nts::CompType::TRUE},
-            {"false", nts::CompType::FALSE},
-            {"2716", nts::CompType::ROM},
-            {"4071", nts::CompType::GATE_4071},
-            {"4001", nts::CompType::GATE_4001},
-            {"4011", nts::CompType::GATE_4011},
-            {"4030", nts::CompType::GATE_4030},
-            {"4069", nts::CompType::GATE_4069},
-            {"4081", nts::CompType::GATE_4081}
-    };
     std::cout << "tick: " << _ticks << std::endl;
     std::vector<IComponent *> input;
     std::vector<IComponent *> output;
 
 
     for (auto &component : _components) {
-        if (component.first->getType() != nts::CompType::OUTPUT) {
+        if (component.first->getType() == nts::CompType::INPUT || component.first->getType() == nts::CompType::CLOCK) {
             input.push_back(component.first);
         }
         else if (component.first->getType() == nts::CompType::OUTPUT) {
