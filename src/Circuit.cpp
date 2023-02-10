@@ -11,6 +11,7 @@
 #include "AShell.hpp"
 #include <iostream>
 #include <algorithm>
+#include <unordered_map>
 
 nts::Circuit *nts::Circuit::getInstance()
 {
@@ -109,13 +110,32 @@ static bool compareFunction (nts::IComponent *i, nts::IComponent *j) { return (i
 
 void nts::Circuit::display() const
 {
-    std::cout << "Tick: " << _ticks << std::endl;
+    std::unordered_map<std::string, nts::CompType> chipsets = {
+            {"and", nts::CompType::AND},
+            {"or", nts::CompType::OR},
+            {"xor", nts::CompType::XOR},
+            {"nand", nts::CompType::NAND},
+            {"nor", nts::CompType::NOR},
+            {"not", nts::CompType::NOT},
+            {"input", nts::CompType::INPUT},
+            {"clock", nts::CompType::CLOCK},
+            {"true", nts::CompType::TRUE},
+            {"false", nts::CompType::FALSE},
+            {"2716", nts::CompType::ROM},
+            {"4071", nts::CompType::GATE_4071},
+            {"4001", nts::CompType::GATE_4001},
+            {"4011", nts::CompType::GATE_4011},
+            {"4030", nts::CompType::GATE_4030},
+            {"4069", nts::CompType::GATE_4069},
+            {"4081", nts::CompType::GATE_4081}
+    };
+    std::cout << "tick: " << _ticks << std::endl;
     std::vector<IComponent *> input;
     std::vector<IComponent *> output;
 
 
     for (auto &component : _components) {
-        if (component.first->getType() == nts::CompType::INPUT) {
+        if (component.first->getType() != nts::CompType::OUTPUT) {
             input.push_back(component.first);
         }
         else if (component.first->getType() == nts::CompType::OUTPUT) {
@@ -124,10 +144,16 @@ void nts::Circuit::display() const
     }
     std::sort(input.begin(), input.end(), compareFunction);
     std::sort(output.begin(), output.end(), compareFunction);
-    std::cout << "Inputs:" << std::endl;
+    std::cout << "input(s):" << std::endl;
     for (auto &component : input)
-        std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
-    std::cout << "Outputs:" << std::endl;
+        if (component->compute() == -1)
+            std::cout << "\t" << component->getName() << ": U" << std::endl;
+        else
+            std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
+    std::cout << "output(s):" << std::endl;
     for (auto &component : output)
-        std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
+        if (component->compute() == -1)
+            std::cout << "\t" << component->getName() << ": U" << std::endl;
+        else
+            std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
 }

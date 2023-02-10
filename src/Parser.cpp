@@ -20,9 +20,9 @@ nts::Parser::Parser(int ac, char **av)
     if (argument.find(".nts") != std::string::npos)
         _file.open(argument.c_str());
     else
-        throw (nts::Error("Invalid file extension (Parser.cpp line 24)"));
+        throw (nts::Error("Invalid file extension (Parser.cpp line 23)"));
     if (!_file.is_open())
-        throw (nts::Error("Invalid file (Parser.cpp line 26)"));
+        throw (nts::Error("Invalid file (Parser.cpp line 25)"));
 }
 
 nts::Parser::~Parser()
@@ -38,7 +38,7 @@ void nts::Parser::getComponents() {
     std::string tmp;
 
     while (_file >> line) {
-        if (line.find("#") != std::string::npos) {
+        if (line.find('#') != std::string::npos) {
             std::getline(_file, tmp);
             continue;
         }
@@ -71,15 +71,15 @@ void nts::Parser::getComponents() {
         }
         i++;
     }
-    if (_chipsets_type.size() == 0)
-        throw (nts::Error("No chipset (Parser.cpp, line 79)"));
-    if (_linksType1.size() == 0)
-        throw (nts::Error("No link (Parser.cpp, line 82)"));
+    if (_chipsets_type.empty())
+        throw (nts::Error("No chipset (Parser.cpp, line 75)"));
+    if (_linksType1.empty())
+        throw (nts::Error("No link (Parser.cpp, line 77)"));
 }
 
-void nts::Parser::parseLinks(std::string str, bool isInput) {
+void nts::Parser::parseLinks(const std::string& str, bool isInput) {
     if (str.find(':') == std::string::npos)
-        throw (nts::Error("Invalid link (Parser.cpp, line 116)"));
+        throw (nts::Error("Invalid link (Parser.cpp, line 82)"));
     if (isInput) {
         _linksType1.push_back(str.substr(0, str.find(':')));
         _linksPin1.push_back(str.substr(str.find(':') + 1, str.find('\n')));
@@ -105,12 +105,18 @@ void nts::Parser::createChipsets() {
             {"clock", nts::CompType::CLOCK},
             {"true", nts::CompType::TRUE},
             {"false", nts::CompType::FALSE},
-            {"2716", nts::CompType::ROM}
+            {"2716", nts::CompType::ROM},
+            {"4071", nts::CompType::GATE_4071},
+            {"4001", nts::CompType::GATE_4001},
+            {"4011", nts::CompType::GATE_4011},
+            {"4030", nts::CompType::GATE_4030},
+            {"4069", nts::CompType::GATE_4069},
+            {"4081", nts::CompType::GATE_4081}
     };
 
     for (int i = 0; i < _chipsets_type.size();) {
         if (chipsets.find(_chipsets_type.back()) == chipsets.end())
-            throw (nts::Error("Invalid chipset (Parser.cpp, line 113)"));
+            throw (nts::Error("Invalid chipset (Parser.cpp, line 119)"));
         if (chipsets.find(_chipsets_type.back()) != chipsets.end()) {
             comp = Factory::createComponent(chipsets[_chipsets_type.back()], _chipsets_name.back());
             circuit->addComponent(*comp);
@@ -129,7 +135,7 @@ void nts::Parser::createLinks() {
         comp1 = circuit->getCompByName(_linksType1.back());
         comp2 = circuit->getCompByName(_linksType2.back());
         if (comp1 == nullptr || comp2 == nullptr)
-            throw (nts::Error("Cannot link a not created component (Parser.cpp, line 133)"));
+            throw (nts::Error("Cannot link a not created component (Parser.cpp, line 138)"));
         comp1->setLink(std::stoi(_linksPin1.back()), *comp2, std::stoi(_linksPin2.back()));
         _linksType1.pop_back();
         _linksType2.pop_back();

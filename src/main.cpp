@@ -11,9 +11,8 @@
 #include "Handler.hpp"
 
 int main(int ac, char **av) {
-    nts::Parser parser(ac, av);
-
     try {
+        nts::Parser parser(ac, av);
         parser.getComponents();
         parser.createChipsets();
         parser.createLinks();

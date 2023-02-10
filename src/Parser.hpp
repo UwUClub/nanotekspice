@@ -13,7 +13,7 @@ namespace nts {
         void getComponents();
         void createChipsets();
         void createLinks();
-        void parseLinks(std::string, bool);
+        void parseLinks(const std::string&, bool);
     private:
         std::ifstream _file;
         std::vector<std::string> _chipsets_type;

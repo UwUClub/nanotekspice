@@ -18,7 +18,7 @@ Test(And, ErrorHandling, .init = cr_redirect_stdout)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "Invalid file extension (Parser.cpp line 24)");
+        cr_assert_str_eq(e.what(), "Invalid file extension (Parser.cpp line 23)");
     }
 }
 
@@ -30,7 +30,7 @@ Test(And, ErrorHandling2)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "Invalid file (Parser.cpp line 26)");
+        cr_assert_str_eq(e.what(), "Invalid file (Parser.cpp line 25)");
     }
 }
 
@@ -42,7 +42,7 @@ Test(And, ErrorHandling3)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "No chipsets in file (Parser.cpp line 42)");
+        cr_assert_str_eq(e.what(), "No chipset (Parser.cpp, line 75)");
     }
 }
 
@@ -54,7 +54,7 @@ Test(And, ErrorHandling4)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "No links in file (Parser.cpp line 65)");
+        cr_assert_str_eq(e.what(), "No link (Parser.cpp, line 77)");
         std::cout << "Test passed" << std::endl;
     }
 }

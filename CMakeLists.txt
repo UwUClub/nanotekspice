@@ -51,11 +51,11 @@ set(SOURCE_FILES
         src/components/gate/4071.cpp
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
-        #tests/TestAnd.cpp
-        #tests/TestFile.cpp
-        #tests/TestOr.cpp
-        #tests/TestInputOutput.cpp
-        src/main.cpp
+        tests/TestAnd.cpp
+        tests/TestFile.cpp
+        tests/TestOr.cpp
+        tests/TestInputOutput.cpp
+        #src/main.cpp
         src/components/special/Output.cpp
         src/components/special/Output.hpp
         src/Handler.cpp
@@ -68,7 +68,7 @@ include_directories(src/components)
 include_directories(src/components/elementary)
 include_directories(src/components/special)
 include_directories(src/components/gate)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion -g3")
 
 
 # Add the SFML library to the project, uncomment the 2 line under
