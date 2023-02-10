@@ -111,7 +111,8 @@ void nts::Parser::createChipsets() {
             {"4011", nts::CompType::GATE_4011},
             {"4030", nts::CompType::GATE_4030},
             {"4069", nts::CompType::GATE_4069},
-            {"4081", nts::CompType::GATE_4081}
+            {"4081", nts::CompType::GATE_4081},
+            {"4008", nts::CompType::GATE_4008}
     };
 
     for (int i = 0; i < _chipsets_type.size();) {

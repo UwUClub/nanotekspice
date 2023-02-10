@@ -30,6 +30,7 @@ namespace nts
         GATE_4069,
         GATE_4071,
         GATE_4081,
+        GATE_4008,
         CHIPSET,
         CIRCUIT,
         UNDEFINED,

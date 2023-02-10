@@ -72,7 +72,9 @@ nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
         throw Error(component.getName() + " doesn't exist");
     for (auto &link : _components[&component][Type::INPUT])
         if (link.first == pin)
-            return link.second->compute(link.first);
+            for (auto &link2 : _components[link.second][Type::OUTPUT])
+                if (link2.second == &component)
+                    return link.second->compute(link2.first);
     throw Error(std::to_string(pin) + " is not an input");
 }
 

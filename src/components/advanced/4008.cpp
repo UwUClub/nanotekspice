@@ -12,7 +12,6 @@ nts::component::Gate4008::Gate4008(const std::string &name, std::vector<std::pai
     : nts::AComponent(name, pins)
 {
     _type = nts::CompType::GATE_4008;
-    _index = 0;
 }
 
 static std::pair<nts::Tristate, nts::Tristate> calc(nts::Tristate first, nts::Tristate second, nts::Tristate third)
@@ -40,24 +39,23 @@ static std::pair<nts::Tristate, nts::Tristate> calc(nts::Tristate first, nts::Tr
 
 nts::Tristate nts::component::Gate4008::compute(std::size_t pin)
 {
-    // _index++;
+    std::pair<nts::Tristate, nts::Tristate>  res;
     nts::Tristate output = nts::UNDEFINED;
-    auto it = computeInput(13);
-    auto it2 = computeInput(12);
-    auto it3 = computeInput(11);
-    auto it4 = computeInput(10);
+    nts::Tristate third = nts::FALSE;
 
-    // auto first = _inputs[it->first[0]];
-    // auto second = _inputs[it->first[1]];
-    // auto third = it->first.size() != 3 ? compute(pin - 1) : _inputs[it->first[2]];
-    // auto res = calc(_inputs[first], _inputs[second], _inputs[third]);
-
-    // output = res.first;
-    // _outputs[pin] = output;
-    // if (_index != 1) {
-    //     _index--;
-    //     return res.second;
-    // }
-    // _index = 0;
-    return _outputs[pin];
+    for (auto it = _pins.rbegin(); it != _pins.rend(); it++) {
+        auto inputs = computeInputs(it->second[0]);
+        auto first = _inputs[inputs->first[0]];
+        auto second = _inputs[inputs->first[1]];
+        if (it == _pins.rbegin())
+            third = _inputs[inputs->first[2]];
+        auto res = calc(first, second, third);
+        output = res.first;
+        third = res.second;
+        _outputs[it->second[0]] = output;
+        _outputs[14] = third;
+        if (it->second[0] == pin)
+            return output;
+    }
+    return output;
 }

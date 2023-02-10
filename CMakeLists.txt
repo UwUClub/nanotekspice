@@ -52,6 +52,8 @@ set(SOURCE_FILES
         src/components/gate/4071.cpp
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
+        src/components/advanced/4008.hpp
+        src/components/advanced/4008.cpp
         tests/TestAnd.cpp
         tests/TestFile.cpp
         tests/TestOr.cpp
@@ -69,6 +71,7 @@ include_directories(src/components)
 include_directories(src/components/elementary)
 include_directories(src/components/special)
 include_directories(src/components/gate)
+include_directories(src/components/advanced)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion")
 
 

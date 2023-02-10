@@ -17,9 +17,6 @@ namespace nts::component
             Gate4008(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
             nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override {};
-
-        private:
-            std::size_t _index;
     };
 } // namespace nts
 
