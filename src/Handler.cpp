@@ -16,7 +16,6 @@ void nts::Handler::runLoop()
 {
     Circuit *Circuit = Circuit::getInstance();
     std::string line;
-    int i = 0;
     std::string name;
     std::string state;
 
@@ -25,16 +24,14 @@ void nts::Handler::runLoop()
         if (line == "exit")
             break;
         else if (line == "simulate") {
-            i++;
-            Circuit->simulate(i);
+            Circuit->simulate(1);
         }
         else if (line == "display")
             Circuit->display();
         else if (line == "loop") {
             while (1) {
-                Circuit->simulate(i);
+                Circuit->simulate(1);
                 Circuit->display();
-                i++;
             }
         }
         else if (line.find('=') != std::string::npos) {
