@@ -127,14 +127,14 @@ void nts::Circuit::display() const
     std::sort(output.begin(), output.end(), compareFunction);
     std::cout << "input(s):" << std::endl;
     for (auto &component : input)
-        if (component->compute() == -1)
-            std::cout << "\t" << component->getName() << ": U" << std::endl;
+        if (component->compute() == nts::Tristate::UNDEFINED)
+            std::cout << "  " << component->getName() << ": U" << std::endl;
         else
-            std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
+            std::cout << "  " << component->getName() << ": " << component->compute() << std::endl;
     std::cout << "output(s):" << std::endl;
     for (auto &component : output)
-        if (component->compute() == -1)
-            std::cout << "\t" << component->getName() << ": U" << std::endl;
+        if (component->compute() == nts::Tristate::UNDEFINED)
+            std::cout << "  " << component->getName() << ": U" << std::endl;
         else
-            std::cout << "\t" << component->getName() << ": " << component->compute() << std::endl;
+            std::cout << "  " << component->getName() << ": " << component->compute() << std::endl;
 }

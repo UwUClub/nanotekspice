@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.22.2)  # CMake version check
 set(PROJECT_NAME nanotekspice)               # Create project "simple_example"
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
+set(CMAKE_CXX_FLAGS_DEBUG -lcriterion)
 
 # Add main.cpp file of project root directory as source file
 set(SOURCE_FILES
