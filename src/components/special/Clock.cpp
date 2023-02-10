@@ -22,11 +22,13 @@ void nts::component::Clock::simulate(std::size_t tick)
 {
     std::size_t i = 0;
 
+    if (_outputs[0] == nts::UNDEFINED && _state != State::TOUPDATE)
+        return;
     if (_state == State::TOUPDATE) {
         _outputs[0] = _temp;
         _state = State::UPTODATE;
         if (tick >= 1)
-            i++;
+            i = 1;
     }
     for (; i < tick; i++) {
         _outputs[0] = _outputs[0] == nts::TRUE ? nts::FALSE : nts::TRUE;

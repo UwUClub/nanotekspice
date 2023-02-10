@@ -42,6 +42,8 @@ void nts::Circuit::addComponent(nts::IComponent &component)
 
 void nts::Circuit::setLink(nts::IComponent &component, std::size_t pin, nts::IComponent &other, std::size_t otherPin)
 {
+    nts::Circuit::Type type = nts::Circuit::Type::INPUT;
+
     if (_components.find(&component) == _components.end())
         throw Error(component.getName() + " doesn't exist");
     if (_components.find(&other) == _components.end())
@@ -58,14 +60,10 @@ void nts::Circuit::setLink(nts::IComponent &component, std::size_t pin, nts::ICo
         if (link.first == pin)
             throw Error(std::to_string(pin) + " input is already linked");
 
-    if (component.isOutput(pin))
-        _components[&component][Type::OUTPUT].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
-    else
-        _components[&component][Type::INPUT].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
-    if (other.isOutput(otherPin))
-        _components[&other][Type::OUTPUT].push_back(std::pair<size_t, nts::IComponent *>(otherPin, &component));
-    else
-        _components[&other][Type::INPUT].push_back(std::pair<size_t, nts::IComponent *>(otherPin, &component));
+    type = component.isOutput(pin) ? Type::OUTPUT : Type::INPUT;
+    _components[&component][type].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
+    type = other.isOutput(otherPin) ? Type::OUTPUT : Type::INPUT;
+    _components[&other][type].push_back(std::pair<size_t, nts::IComponent *>(otherPin, &component));
 }
 
 nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
@@ -80,12 +78,13 @@ nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
 
 void nts::Circuit::simulate(size_t tick)
 {
-    _ticks = tick;
+    _ticks += tick;
     for (auto &component : _components)
         component.first->simulate(tick);
 }
 
-nts::IComponent *nts::Circuit::getCompByName(std::string &name) {
+nts::IComponent *nts::Circuit::getCompByName(std::string &name)
+{
     for (auto &component : _components) {
         if (component.first->getName() == name)
             return component.first;
@@ -93,7 +92,8 @@ nts::IComponent *nts::Circuit::getCompByName(std::string &name) {
     return nullptr;
 }
 
-void nts::Circuit::setOutput(const std::string& name, nts::Tristate state) {
+void nts::Circuit::setOutput(const std::string& name, nts::Tristate state)
+{
     for (auto &component : _components) {
         if (component.first->getName() == name) {
             auto *shellComp = dynamic_cast<AShell *>(component.first);
@@ -106,35 +106,38 @@ void nts::Circuit::setOutput(const std::string& name, nts::Tristate state) {
     throw Error("Component " + name + " doesn't exist");
 }
 
-static bool compareFunction (nts::IComponent *i, nts::IComponent *j) { return (i->getName()<j->getName()); }
+static bool compareFunction (nts::IComponent *i, nts::IComponent *j)
+{
+    return (i->getName()<j->getName());
+}
 
 void nts::Circuit::display() const
 {
     std::cout << "tick: " << _ticks << std::endl;
     std::vector<IComponent *> input;
     std::vector<IComponent *> output;
-
+    nts::Tristate state;
+    std::string state_str;
 
     for (auto &component : _components) {
-        if (component.first->getType() == nts::CompType::INPUT || component.first->getType() == nts::CompType::CLOCK) {
+        if (component.first->getType() == nts::CompType::INPUT
+            || component.first->getType() == nts::CompType::CLOCK)
             input.push_back(component.first);
-        }
-        else if (component.first->getType() == nts::CompType::OUTPUT) {
+        if (component.first->getType() == nts::CompType::OUTPUT)
             output.push_back(component.first);
-        }
     }
     std::sort(input.begin(), input.end(), compareFunction);
     std::sort(output.begin(), output.end(), compareFunction);
     std::cout << "input(s):" << std::endl;
-    for (auto &component : input)
-        if (component->compute() == nts::Tristate::UNDEFINED)
-            std::cout << "  " << component->getName() << ": U" << std::endl;
-        else
-            std::cout << "  " << component->getName() << ": " << component->compute() << std::endl;
+    for (auto &component : input) {
+        state = component->compute();
+        state_str = state == nts::Tristate::UNDEFINED ? "U" : std::to_string(state);
+        std::cout << "  " << component->getName() << ": " << state_str << std::endl;
+    }
     std::cout << "output(s):" << std::endl;
-    for (auto &component : output)
-        if (component->compute() == nts::Tristate::UNDEFINED)
-            std::cout << "  " << component->getName() << ": U" << std::endl;
-        else
-            std::cout << "  " << component->getName() << ": " << component->compute() << std::endl;
+    for (auto &component : output) {
+        state = component->compute();
+        state_str = state == nts::Tristate::UNDEFINED ? "U" : std::to_string(state);
+        std::cout << "  " << component->getName() << ": " << state_str << std::endl;
+    }
 }
