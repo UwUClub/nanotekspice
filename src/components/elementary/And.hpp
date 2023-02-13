@@ -19,6 +19,8 @@ namespace nts::component
             nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override {};
 
+            static nts::Tristate compute(nts::Tristate a, nts::Tristate b);
+
             protected:
             private:
         };

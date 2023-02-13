@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22.2)  # CMake version check
 set(PROJECT_NAME nanotekspice)               # Create project "simple_example"
 project(${PROJECT_NAME})               # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
-set(CMAKE_CXX_FLAGS_DEBUG -lcriterion)
+set(CMAKE_CXX_FLAGS_DEBUG)
 
 # Add main.cpp file of project root directory as source file
 set(SOURCE_FILES
@@ -54,11 +54,11 @@ set(SOURCE_FILES
         src/components/gate/4081.cpp
         src/components/advanced/4008.hpp
         src/components/advanced/4008.cpp
-        tests/TestAnd.cpp
-        tests/TestFile.cpp
-        tests/TestOr.cpp
-        tests/TestInputOutput.cpp
-        #src/main.cpp
+        #tests/TestAnd.cpp
+        #tests/TestFile.cpp
+        #tests/TestOr.cpp
+        #tests/TestInputOutput.cpp
+        src/main.cpp
         src/components/special/Output.cpp
         src/components/special/Output.hpp
         src/Handler.cpp
@@ -72,7 +72,7 @@ include_directories(src/components/elementary)
 include_directories(src/components/special)
 include_directories(src/components/gate)
 include_directories(src/components/advanced)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 
 # Add the SFML library to the project, uncomment the 2 line under

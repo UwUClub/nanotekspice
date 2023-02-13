@@ -5,6 +5,8 @@
 ** Nor
 */
 
+#include "Or.hpp"
+#include "Not.hpp"
 #include "Nor.hpp"
 
 nts::component::Nor::Nor(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
@@ -20,28 +22,15 @@ nts::Tristate nts::component::Nor::compute(std::size_t pin)
     auto first = it->first[0];
     auto second = it->first[1];
 
-    switch (_inputs[first])
-    {
-        case nts::UNDEFINED:
-            switch (_inputs[second])
-            {
-                case nts::TRUE:
-                    output = nts::TRUE;
-                    break;
-                default:
-                    output = nts::UNDEFINED;
-                    break;
-            }
-            break;
-        case nts::FALSE:
-            output = _inputs[second];
-            break;
-        default:
-            output = nts::TRUE;
-            break;
-    }
-    if (output != nts::UNDEFINED)
-        output = output == nts::FALSE ? nts::TRUE : nts::FALSE;
+    output = nts::component::Nor::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
     return output;
+}
+
+nts::Tristate nts::component::Nor::compute(nts::Tristate a, nts::Tristate b)
+{
+    nts::Tristate output = nts::FALSE;
+
+    output = nts::component::Or::compute(a, b);
+    return nts::component::Not::compute(output);
 }

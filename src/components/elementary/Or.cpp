@@ -20,26 +20,16 @@ nts::Tristate nts::component::Or::compute(std::size_t pin)
     auto first = it->first[0];
     auto second = it->first[1];
 
-    switch (_inputs[first])
-    {
-        case nts::UNDEFINED:
-            switch (_inputs[second])
-            {
-                case nts::TRUE:
-                    output = nts::TRUE;
-                    break;
-                default:
-                    output = nts::UNDEFINED;
-                    break;
-            }
-            break;
-        case nts::FALSE:
-            output = _inputs[second];
-            break;
-        default:
-            output = nts::TRUE;
-            break;
-    }
+    output = nts::component::Or::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
     return output;
+}
+
+nts::Tristate nts::component::Or::compute(nts::Tristate a, nts::Tristate b)
+{
+    if (a == nts::TRUE || b == nts::TRUE)
+        return nts::TRUE;
+    if (a == nts::UNDEFINED || b == nts::UNDEFINED)
+        return nts::UNDEFINED;
+    return nts::FALSE;
 }
