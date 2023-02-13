@@ -12,6 +12,8 @@
 #include "Circuit.hpp"
 
 int main(int ac, char **av) {
+    if (ac == 1)
+        return 84;
     try {
         nts::Parser parser(ac, av);
         parser.getComponents();
