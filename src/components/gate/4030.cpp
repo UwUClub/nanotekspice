@@ -5,6 +5,7 @@
 ** 4030
 */
 
+#include "Xor.hpp"
 #include "4030.hpp"
 
 nts::component::Gate4030::Gate4030(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
@@ -20,28 +21,15 @@ nts::Tristate nts::component::Gate4030::compute(std::size_t pin)
     auto first = it->first[0];
     auto second = it->first[1];
 
-    switch (_inputs[first])
-    {
-        case nts::UNDEFINED:
-            output = nts::UNDEFINED;
-            break;
-        case nts::FALSE:
-            output = _inputs[second];
-            break;
-        default:
-            switch (_inputs[second])
-            {
-            case nts::UNDEFINED:
-                output = nts::UNDEFINED;
-                break;
-            case nts::FALSE:
-                output = nts::TRUE;
-                break;
-            default:
-                output = nts::FALSE;
-                break;
-            }
-    }
+    output = nts::component::Gate4030::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
+    return output;
+}
+
+nts::Tristate nts::component::Gate4030::compute(nts::Tristate a, nts::Tristate b)
+{
+    nts::Tristate output = nts::FALSE;
+
+    output = nts::component::Xor::compute(a, b);
     return output;
 }

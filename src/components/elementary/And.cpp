@@ -21,13 +21,21 @@ nts::Tristate nts::component::And::compute(std::size_t pin)
     nts::Tristate output = nts::TRUE;
     auto it = computeInputs(pin);
 
-    for (auto &input : it->first) {
-        if (_inputs[input] == nts::FALSE) {
-            output = nts::FALSE;
-            break;
-        } else if (_inputs[input] == nts::UNDEFINED)
-            output = nts::UNDEFINED;
-    }
+    auto &inputs = it->first;
+
+    auto first = inputs[0];
+    auto second = inputs[1];
+
+    output = nts::component::And::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
     return output;
+}
+
+nts::Tristate nts::component::And::compute(nts::Tristate a, nts::Tristate b)
+{
+    if (a == nts::FALSE || b == nts::FALSE)
+        return nts::FALSE;
+    if (a == nts::UNDEFINED || b == nts::UNDEFINED)
+        return nts::UNDEFINED;
+    return nts::TRUE;
 }

@@ -20,28 +20,16 @@ nts::Tristate nts::component::Xor::compute(std::size_t pin)
     auto first = it->first[0];
     auto second = it->first[1];
 
-    switch (_inputs[first])
-    {
-        case nts::UNDEFINED:
-            output = nts::UNDEFINED;
-            break;
-        case nts::FALSE:
-            output = _inputs[second];
-            break;
-        default:
-            switch (_inputs[second])
-            {
-            case nts::UNDEFINED:
-                output = nts::UNDEFINED;
-                break;
-            case nts::FALSE:
-                output = nts::TRUE;
-                break;
-            default:
-                output = nts::FALSE;
-                break;
-            }
-    }
+    output = nts::component::Xor::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
     return output;
+}
+
+nts::Tristate nts::component::Xor::compute(nts::Tristate a, nts::Tristate b)
+{
+    if (a == nts::UNDEFINED || b == nts::UNDEFINED)
+        return nts::UNDEFINED;
+    if (a == b)
+        return nts::FALSE;
+    return nts::TRUE;
 }

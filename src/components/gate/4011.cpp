@@ -5,6 +5,7 @@
 ** 4011
 */
 
+#include "Nand.hpp"
 #include "4011.hpp"
 
 nts::component::Gate4011::Gate4011(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
@@ -18,15 +19,18 @@ nts::Tristate nts::component::Gate4011::compute(std::size_t pin)
     nts::Tristate output = nts::FALSE;
     auto it = computeInputs(pin);
 
-    for (auto &input : it->first) {
-        if (_inputs[input] == nts::TRUE) {
-            output = nts::TRUE;
-            break;
-        } else if (_inputs[input] == nts::UNDEFINED)
-            output = nts::UNDEFINED;
-    }
-    if (output != nts::UNDEFINED)
-        output = output == nts::FALSE ? nts::TRUE : nts::FALSE;
+    auto first = it->first[0];
+    auto second = it->first[1];
+
+    output = nts::component::Gate4011::compute(_inputs[first], _inputs[second]);
     _outputs[pin] = output;
+    return output;
+}
+
+nts::Tristate nts::component::Gate4011::compute(nts::Tristate a, nts::Tristate b)
+{
+    nts::Tristate output = nts::FALSE;
+
+    output = nts::component::Nand::compute(a, b);
     return output;
 }

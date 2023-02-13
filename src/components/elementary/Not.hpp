@@ -5,8 +5,8 @@
 ** Or
 */
 
-#ifndef OR_HPP_
-#define OR_HPP_
+#ifndef NOT_HPP_
+#define NOT_HPP_
 
 #include "AComponent.hpp"
 
@@ -18,9 +18,11 @@ namespace nts::component
 
             nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override {};
+
+            static nts::Tristate compute(nts::Tristate a);
         protected:
         private:
     };
 } // namespace nts
 
-#endif /* !OR_HPP_ */
+#endif /* !NOT_HPP_ */
