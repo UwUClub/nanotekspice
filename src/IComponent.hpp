@@ -9,6 +9,7 @@
 #define ICOMPONENT_HPP_
 
 #include <iostream>
+#include <map>
 namespace nts
 {
     enum class CompType {
@@ -58,6 +59,8 @@ namespace nts
             virtual bool isOutput(std::size_t pin) const = 0;
             virtual const std::string &getName() const = 0;
             virtual nts::CompType getType() const = 0;
+            virtual void addCorresponding(std::size_t pin, std::size_t corresponding) = 0;
+            virtual std::map<std::size_t, std::size_t> &getCorresponding() = 0;
     };
 }
 

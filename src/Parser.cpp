@@ -112,7 +112,6 @@ void nts::Parser::createChipsets() {
             {"4069", nts::CompType::GATE_4069},
             {"4081", nts::CompType::GATE_4081},
             {"4008", nts::CompType::GATE_4008},
-            {"4013", nts::CompType::GATE_4013},
             {"4512", nts::CompType::GATE_4512}
     };
 

@@ -62,19 +62,35 @@ void nts::Circuit::setLink(nts::IComponent &component, std::size_t pin, nts::ICo
 
     type = component.isOutput(pin) ? Type::OUTPUT : Type::INPUT;
     _components[&component][type].push_back(std::pair<size_t, nts::IComponent *>(pin, &other));
+    component.addCorresponding(pin, otherPin);
     type = other.isOutput(otherPin) ? Type::OUTPUT : Type::INPUT;
     _components[&other][type].push_back(std::pair<size_t, nts::IComponent *>(otherPin, &component));
+    other.addCorresponding(otherPin, pin);
 }
 
 nts::Tristate nts::Circuit::compute(nts::IComponent &component, std::size_t pin)
 {
+    std::pair<size_t, nts::IComponent *> link;
+
     if (_components.find(&component) == _components.end())
         throw Error(component.getName() + " doesn't exist");
-    for (auto &link : _components[&component][Type::INPUT])
-        if (link.first == pin)
-            for (auto &link2 : _components[link.second][Type::OUTPUT])
-                if (link2.second == &component)
-                    return link.second->compute(link2.first);
+    for (auto &links : _components[&component][Type::INPUT]) {
+        if (links.first == pin) {
+            link = std::pair<size_t, nts::IComponent *>(pin, links.second);
+            break;
+        }
+    }
+    if (link.second == nullptr)
+        throw Error(std::to_string(pin) + " is not an input");
+    if (&component == link.second) {
+        auto corresponding = component.getCorresponding();
+        if (corresponding.find(pin) == corresponding.end())
+            throw Error("A problem occured while computing");
+        return component.compute(corresponding[pin]);
+    }
+    for (auto &link2 : _components[link.second][Type::OUTPUT])
+        if (link2.second == &component)
+            return link.second->compute(link2.first);
     throw Error(std::to_string(pin) + " is not an input");
 }
 

@@ -62,6 +62,16 @@ nts::CompType nts::AComponent::getType() const
     return _type;
 }
 
+void nts::AComponent::addCorresponding(std::size_t pin, std::size_t corresponding)
+{
+    _corresponding[pin] = corresponding;
+}
+
+std::map<std::size_t, std::size_t> &nts::AComponent::getCorresponding()
+{
+    return _corresponding;
+}
+
 std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>::iterator nts::AComponent::computeInputs(std::size_t pin)
 {
     Circuit *Circuit = Circuit::getInstance();
