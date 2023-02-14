@@ -18,6 +18,7 @@
 #include "4081.hpp"
 #include "4008.hpp"
 #include "4013.hpp"
+#include "4512.hpp"
 #include "True.hpp"
 #include "False.hpp"
 #include "Factory.hpp"
@@ -177,6 +178,14 @@ static nts::IComponent *create4008(const std::string &name)
     return new nts::component::Gate4008(name, pins);
 }
 
+static nts::IComponent *create4512(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15}, {14}},
+    };
+    return new nts::component::Gate4512(name, pins);
+}
+
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
@@ -196,6 +205,7 @@ nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::
         {CompType::GATE_4081, [name] { return create4081(name); }},
         {CompType::GATE_4008, [name] { return create4008(name); }},
         {CompType::GATE_4013, [name] { return create4013(name); }},
+        {CompType::GATE_4512, [name] { return create4512(name); }},
     };
     return components[type]();
 }

@@ -56,13 +56,13 @@ set(SOURCE_FILES
         src/components/advanced/4008.cpp
         src/components/advanced/4013.cpp
         src/components/advanced/4013.hpp
+        src/components/advanced/4512.hpp
+        src/components/advanced/4512.cpp
         #tests/TestAnd.cpp
         #tests/TestFile.cpp
         #tests/TestOr.cpp
         #tests/TestInputOutput.cpp
         src/main.cpp
-        src/components/special/Output.cpp
-        src/components/special/Output.hpp
         src/Handler.cpp
         src/Handler.hpp
         )
