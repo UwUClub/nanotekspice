@@ -105,7 +105,6 @@ void nts::Parser::createChipsets() {
             {"clock", nts::CompType::CLOCK},
             {"true", nts::CompType::TRUE},
             {"false", nts::CompType::FALSE},
-            {"2716", nts::CompType::ROM},
             {"4071", nts::CompType::GATE_4071},
             {"4001", nts::CompType::GATE_4001},
             {"4011", nts::CompType::GATE_4011},

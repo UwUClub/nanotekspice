@@ -21,6 +21,7 @@ nts::Tristate nts::component::Gate4512::compute(std::size_t pin)
     auto a = _inputs[11];
     auto b = _inputs[12];
     auto c = _inputs[13];
+
     auto inhibit = _inputs[10];
     auto enable = _inputs[15];
 
@@ -28,21 +29,21 @@ nts::Tristate nts::component::Gate4512::compute(std::size_t pin)
         return nts::FALSE;
     if (enable == nts::TRUE)
         return nts::UNDEFINED; // might be to change
-    if (a == nts::FALSE && b == nts::FALSE && c == nts::FALSE)
+    if (c == nts::FALSE && b == nts::FALSE && a == nts::FALSE)
         return _inputs[1];
-    if (a == nts::FALSE && b == nts::FALSE && c == nts::TRUE)
+    if (c == nts::FALSE && b == nts::FALSE && a == nts::TRUE)
         return _inputs[2];
-    if (a == nts::FALSE && b == nts::TRUE && c == nts::FALSE)
+    if (c == nts::FALSE && b == nts::TRUE && a == nts::FALSE)
         return _inputs[3];
-    if (a == nts::FALSE && b == nts::TRUE && c == nts::TRUE)
+    if (c == nts::FALSE && b == nts::TRUE && a == nts::TRUE)
         return _inputs[4];
-    if (a == nts::TRUE && b == nts::FALSE && c == nts::FALSE)
+    if (c == nts::TRUE && b == nts::FALSE && a == nts::FALSE)
         return _inputs[5];
-    if (a == nts::TRUE && b == nts::FALSE && c == nts::TRUE)
+    if (c == nts::TRUE && b == nts::FALSE && a == nts::TRUE)
         return _inputs[6];
-    if (a == nts::TRUE && b == nts::TRUE && c == nts::FALSE)
+    if (c == nts::TRUE && b == nts::TRUE && a == nts::FALSE)
         return _inputs[7];
-    if (a == nts::TRUE && b == nts::TRUE && c == nts::TRUE)
+    if (c == nts::TRUE && b == nts::TRUE && a == nts::TRUE)
         return _inputs[9];
     return nts::UNDEFINED;
 }

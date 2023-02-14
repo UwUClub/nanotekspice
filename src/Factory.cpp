@@ -25,6 +25,7 @@
 #include "Clock.hpp"
 #include "Or.hpp"
 #include "Xor.hpp"
+#include "Not.hpp"
 
 static nts::IComponent *createAnd(const std::string &name)
 {
@@ -56,6 +57,14 @@ static nts::IComponent *createTrue(const std::string &name)
         {{}, {1}}
     };
     return new nts::component::True(name, pins);
+}
+
+static nts::IComponent *createNot(const std::string &name)
+{
+    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
+        {{1}, {2}}
+    };
+    return new nts::component::Not(name, pins);
 }
 
 static nts::IComponent *createFalse(const std::string &name)
@@ -197,6 +206,7 @@ nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::
         {CompType::AND, [name] { return createAnd(name); }},
         {CompType::OR, [name] { return createOr(name); }},
         {CompType::XOR, [name] { return createXor(name); }},
+        {CompType::NOT, [name] { return createNot(name); }},
         {CompType::GATE_4001, [name] { return create4001(name); }},
         {CompType::GATE_4011, [name] { return create4011(name); }},
         {CompType::GATE_4030, [name] { return create4030(name); }},

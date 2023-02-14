@@ -27,6 +27,7 @@ nts::Tristate nts::component::Gate4008::compute(std::size_t pin)
         auto inputs = computeInputs(it->second[0]);
         auto first = _inputs[inputs->first[0]];
         auto second = _inputs[inputs->first[1]];
+
         if (it == _pins.rbegin())
             third = _inputs[inputs->first[2]];
         auto res = nts::component::Gate4008::compute(first, second, third);
@@ -34,9 +35,13 @@ nts::Tristate nts::component::Gate4008::compute(std::size_t pin)
         output = res.first;
         third = res.second;
         _outputs[it->second[0]] = output;
-        _outputs[14] = third;
-        if (it->second[0] == pin)
+        if (it->second[0] == pin) {
             return output;
+        }
+    }
+    if (pin == 14) {
+        _outputs[pin] = third;
+        return third;
     }
     return output;
 }
@@ -47,11 +52,12 @@ std::pair<nts::Tristate, nts::Tristate> nts::component::Gate4008::compute(nts::T
     nts::Tristate carry = nts::FALSE;
     nts::Tristate tempXor = nts::UNDEFINED;
     nts::Tristate tempAnd = nts::UNDEFINED;
+    nts::Tristate tempAnd2 = nts::UNDEFINED;
 
     tempXor = nts::component::Xor::compute(a, b);
     output = nts::component::Xor::compute(tempXor, c);
-    tempXor = nts::component::And::compute(tempXor, c);
     tempAnd = nts::component::And::compute(a, b);
-    carry = nts::component::Or::compute(tempXor, tempAnd);
+    tempAnd2 = nts::component::And::compute(tempXor, c);
+    carry = nts::component::Or::compute(tempAnd, tempAnd2);
     return std::make_pair(output, carry);
 }
