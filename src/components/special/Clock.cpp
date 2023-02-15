@@ -7,30 +7,28 @@
 
 #include "Clock.hpp"
 
-nts::component::Clock::Clock(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AShell(name, pins)
+nts::component::Clock::Clock() : nts::AShell()
 {
-    _type = nts::CompType::CLOCK;
-    _outputs[0] = nts::UNDEFINED;
+    _outputs[1] = std::vector<nts::IComponent *>();
 }
 
 nts::Tristate nts::component::Clock::compute(std::size_t pin)
 {
-    return _outputs[0];
+    return _currVal;
 }
 
 void nts::component::Clock::simulate(std::size_t tick)
 {
     std::size_t i = 0;
 
-    if (_outputs[0] == nts::UNDEFINED && _state != State::TOUPDATE)
+    if (_currVal == nts::UNDEFINED && _state != State::TOUPDATE)
         return;
     if (_state == State::TOUPDATE) {
-        _outputs[0] = _temp;
+        _currVal = _nextVal;
         _state = State::UPTODATE;
-        if (tick >= 1)
-            i = 1;
+        i = 1;
     }
     for (; i < tick; i++) {
-        _outputs[0] = _outputs[0] == nts::TRUE ? nts::FALSE : nts::TRUE;
+        _currVal = _currVal == nts::TRUE ? nts::FALSE : nts::TRUE;
     }
 }

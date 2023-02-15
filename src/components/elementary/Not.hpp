@@ -12,18 +12,11 @@
 
 namespace nts::component
 {
-    class Not : public nts::AComponent {
+    class Not final : public nts::AComponent {
         public:
-            Not(const std::string &name,
-                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
-                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{1}, std::vector<std::size_t>{2})});
+            Not();
 
-            nts::Tristate compute(std::size_t pin = 1) override;
-            void simulate(std::size_t tick) override {};
-
-            static nts::Tristate compute(nts::Tristate a);
-        protected:
-        private:
+            nts::Tristate compute(std::size_t pin = 1) final;
     };
 } // namespace nts
 

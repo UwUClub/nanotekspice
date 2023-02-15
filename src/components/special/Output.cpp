@@ -6,22 +6,21 @@
 */
 
 #include "Output.hpp"
+#include "Error.hpp"
 
-nts::component::Output::Output(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins) : nts::AComponent(name, pins)
+nts::component::Output::Output() : nts::AComponent()
 {
-    _type = nts::CompType::OUTPUT;
 }
 
 nts::Tristate nts::component::Output::compute(std::size_t pin)
 {
     nts::Tristate output = nts::TRUE;
-    auto it = computeInputs(pin);
+    if (pin != 1)
+        return nts::UNDEFINED;
+    auto a = _inputs[1];
+    if (a.first == nullptr)
+        throw Error("Pin " + std::to_string(pin) + " is not linked");
 
-    for (auto &input : it->first) {
-        output = _inputs[input];
-    }
-    _outputs[pin] = output;
+    output = a.first->compute(a.second);
     return output;
 }
-
-void nts::component::Output::simulate(std::size_t tick) {}

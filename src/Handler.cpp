@@ -12,7 +12,11 @@
 
 nts::Handler::Handler() = default;
 
-nts::Handler::~Handler() = default;
+nts::Handler::~Handler()
+{
+    for (auto &it : _components)
+        delete it.second;
+}
 
 [[noreturn]] static void loop(nts::Circuit *Circuit)
 {
@@ -63,4 +67,18 @@ void nts::Handler::runLoop()
             break;
         std::cout << "> ";
     }
+}
+
+void nts::Handler::addComponent(std::string name, IComponent *component)
+{
+    if (_components.find(name) != _components.end())
+        throw Error("Component already exists");
+    _components[name] = component;
+}
+
+nts::IComponent *nts::Handler::getComponent(std::string name)
+{
+    if (_components.find(name) == _components.end())
+        throw Error("Component doesn't exist");
+    return _components[name];
 }

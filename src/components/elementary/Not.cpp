@@ -7,26 +7,24 @@
 
 #include <algorithm>
 #include "Not.hpp"
+#include "Error.hpp"
 
-nts::component::Not::Not(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : nts::AComponent(name, pins)
+nts::component::Not::Not() : nts::AComponent()
 {
-    _type = nts::CompType::NOT;
+    _inputs[1] = std::pair<nts::IComponent *, std::size_t>(nullptr, 0);
+    _outputs[2] = std::vector<nts::IComponent *>();
 }
 
 nts::Tristate nts::component::Not::compute(std::size_t pin)
 {
     nts::Tristate output = nts::TRUE;
-    auto it = computeInputs(pin);
-    auto first = it->first[0];
+    if (pin != 2)
+        throw Error("Pin " + std::to_string(pin) + " is not an output");
+    if (_inputs[1].first == nullptr)
+        throw Error("Pin " + std::to_string(pin) + " is not linked");
 
-    output = nts::component::Not::compute(_inputs[first]);
-    _outputs[pin] = output;
-    return output;
-}
+    nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
 
-nts::Tristate nts::component::Not::compute(nts::Tristate a)
-{
     if (a == nts::UNDEFINED)
         return nts::UNDEFINED;
     return a == nts::FALSE ? nts::TRUE : nts::FALSE;

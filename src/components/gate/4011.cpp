@@ -8,10 +8,16 @@
 #include "Nand.hpp"
 #include "4011.hpp"
 
-nts::component::Gate4011::Gate4011(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : nts::AComponent(name, pins)
+nts::component::Gate4011::Gate4011() : AComposedComponent()
 {
-    _type = nts::CompType::GATE_4011;
+    _inputs[1] = std::make_pair(nullptr, 0);
+    _inputs[2] = std::make_pair(nullptr, 0);
+    _inputs[5] = std::make_pair(nullptr, 0);
+    _inputs[6] = std::make_pair(nullptr, 0);
+    _inputs[8] = std::make_pair(nullptr, 0);
+    _inputs[9] = std::make_pair(nullptr, 0);
+    _inputs[12] = std::make_pair(nullptr, 0);
+    _inputs[13] = std::make_pair(nullptr, 0);
 }
 
 nts::Tristate nts::component::Gate4011::compute(std::size_t pin)

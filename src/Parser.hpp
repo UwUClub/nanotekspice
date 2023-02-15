@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "Handler.hpp"
 
 namespace nts {
     class Parser {
@@ -12,7 +13,7 @@ namespace nts {
         ~Parser();
         void getComponents();
         void createChipsets();
-        void createLinks();
+        void createLinks(nts::Handler handler);
         void parseLinks(const std::string&, bool);
     private:
         std::ifstream _file;

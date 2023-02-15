@@ -5,13 +5,21 @@
 #ifndef NANOTEKSPICE_HANDLER_HPP
 #define NANOTEKSPICE_HANDLER_HPP
 
+#include <iostream>
+#include <map>
+#include "IComponent.hpp"
+
 namespace nts {
     class Handler {
     public:
         Handler();
         ~Handler();
-        static void runLoop();
+        void runLoop();
+        void addComponent(std::string name, IComponent *component);
+        IComponent *getComponent(std::string name);
     private:
+        std::map<std::string, IComponent *> _components;
+        std::size_t _ticks;
     };
 }
 

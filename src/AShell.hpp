@@ -14,12 +14,13 @@ namespace nts
 {
     class AShell : public nts::AComponent {
         public:
-            AShell(const std::string &name, const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins);
+            AShell();
             void setOutput(nts::Tristate state);
 
         protected:
             enum class State { UPTODATE, TOUPDATE };
-            nts::Tristate _temp;
+            nts::Tristate _currVal;
+            nts::Tristate _nextVal;
             State _state;
 
         private:

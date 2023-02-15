@@ -10,23 +10,15 @@
 
 #include "AShell.hpp"
 
-namespace nts
+namespace nts::component
 {
-    namespace component
-    {
-        class Clock : public nts::AShell {
-            public:
-                Clock(const std::string &name,
-                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
-                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{}, std::vector<std::size_t>{1})});
+    class Clock final : public nts::AShell {
+        public:
+            Clock();
 
-                nts::Tristate compute(std::size_t pin) override;
-                void simulate(std::size_t tick) override;
-
-            protected:
-            private:
-        };
-    } // namespace component
+            nts::Tristate compute(std::size_t pin) final;
+            void simulate(std::size_t tick) final;
+    };
 } // namespace nts
 
 #endif /* !CLOCK_HPP_ */

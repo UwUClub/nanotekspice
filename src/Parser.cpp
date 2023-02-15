@@ -9,6 +9,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <vector>
+#include "Handler.hpp"
 #include "Parser.hpp"
 #include "Factory.hpp"
 #include "Circuit.hpp"
@@ -127,17 +128,19 @@ void nts::Parser::createChipsets() {
     }
 }
 
-void nts::Parser::createLinks() {
-    Circuit *circuit = Circuit::getInstance();
+void nts::Parser::createLinks(nts::Handler handler) {
     IComponent *comp1 = nullptr;
     IComponent *comp2 = nullptr;
 
     for (int i = 0; i < _linksType1.size();) {
-        comp1 = circuit->getCompByName(_linksType1.back());
-        comp2 = circuit->getCompByName(_linksType2.back());
+        comp1 = handler.getComponent(_linksType1.back());
+        comp2 = handler.getComponent(_linksType2.back());
         if (comp1 == nullptr || comp2 == nullptr)
             throw (nts::Error("Cannot link a not created component (Parser.cpp, line 138)"));
-        comp1->setLink(std::stoi(_linksPin1.back()), *comp2, std::stoi(_linksPin2.back()));
+        if (comp1->getOutputs().find(std::stoi(_linksPin1.back())) != comp1->getOutputs().end())
+            comp1->setLink(std::stoi(_linksPin1.back()), *comp2, std::stoi(_linksPin2.back()));
+        else
+            comp2->setLink(std::stoi(_linksPin2.back()), *comp1, std::stoi(_linksPin1.back()));
         _linksType1.pop_back();
         _linksType2.pop_back();
         _linksPin1.pop_back();
