@@ -14,7 +14,9 @@ namespace nts::component
 {
     class Or : public nts::AComponent {
         public:
-            Or(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
+            Or(const std::string &name,
+                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
+                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{1, 2}, std::vector<std::size_t>{3})});
 
             nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override {};

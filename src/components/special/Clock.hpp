@@ -16,7 +16,9 @@ namespace nts
     {
         class Clock : public nts::AShell {
             public:
-                Clock(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
+                Clock(const std::string &name,
+                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
+                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{}, std::vector<std::size_t>{1})});
 
                 nts::Tristate compute(std::size_t pin) override;
                 void simulate(std::size_t tick) override;

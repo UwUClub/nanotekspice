@@ -11,7 +11,9 @@ namespace nts::component
 {
     class Output : public nts::AComponent {
         public:
-            Output(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
+            Output(const std::string &name,
+                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
+                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{1}, std::vector<std::size_t>{})});
 
             nts::Tristate compute(std::size_t pin = 1) override;
             void simulate(std::size_t tick) override;

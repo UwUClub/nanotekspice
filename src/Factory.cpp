@@ -27,195 +27,27 @@
 #include "Xor.hpp"
 #include "Not.hpp"
 
-static nts::IComponent *createAnd(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}}
-    };
-    return new nts::component::And(name, pins);
-}
-
-static nts::IComponent *createOr(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}}
-    };
-    return new nts::component::Or(name, pins);
-}
-
-static nts::IComponent *createXor(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}}
-    };
-    return new nts::component::Xor(name, pins);
-}
-
-static nts::IComponent *createTrue(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
-    };
-    return new nts::component::True(name, pins);
-}
-
-static nts::IComponent *createNot(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1}, {2}}
-    };
-    return new nts::component::Not(name, pins);
-}
-
-static nts::IComponent *createFalse(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
-    };
-    return new nts::component::False(name, pins);
-}
-
-static nts::IComponent *createInput(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
-    };
-    return new nts::component::Input(name, pins);
-}
-
-static nts::IComponent *createOutput(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1}, {}}
-    };
-    return new nts::component::Output(name, pins);
-}
-
-static nts::IComponent *createClock(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{}, {1}}
-    };
-    return new nts::component::Clock(name, pins);
-}
-
-static nts::IComponent *create4001(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}},
-        {{5, 6}, {4}},
-        {{8, 9}, {10}},
-        {{12, 13}, {11}}
-    };
-    return new nts::component::Gate4001(name, pins);
-}
-
-static nts::IComponent *create4011(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}},
-        {{5, 6}, {4}},
-        {{8, 9}, {10}},
-        {{12, 13}, {11}}
-    };
-    return new nts::component::Gate4011(name, pins);
-}
-
-static nts::IComponent *create4030(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}},
-        {{5, 6}, {4}},
-        {{8, 9}, {10}},
-        {{12, 13}, {11}}
-    };
-    return new nts::component::Gate4030(name, pins);
-}
-
-static nts::IComponent *create4069(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1}, {2}},
-        {{3}, {4}},
-        {{5}, {6}},
-        {{9}, {8}},
-        {{11}, {10}},
-        {{13}, {12}}
-    };
-    return new nts::component::Gate4069(name, pins);
-}
-
-static nts::IComponent *create4071(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}},
-        {{5, 6}, {4}},
-        {{8, 9}, {10}},
-        {{12, 13}, {11}}
-    };
-    return new nts::component::Gate4071(name, pins);
-}
-
-static nts::IComponent *create4081(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2}, {3}},
-        {{5, 6}, {4}},
-        {{8, 9}, {10}},
-        {{12, 13}, {11}}
-    };
-    return new nts::component::Gate4081(name, pins);
-}
-
-static nts::IComponent *create4013(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{3, 4, 5, 6}, {1, 2}},
-        {{8, 9, 10, 11}, {12, 13}},
-    };
-    return new nts::component::Gate4013(name, pins);
-}
-
-static nts::IComponent *create4008(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{15, 1}, {13, 14}},
-        {{2, 3}, {12}},
-        {{4, 5}, {11}},
-        {{6, 7, 9}, {10}},
-    };
-    return new nts::component::Gate4008(name, pins);
-}
-
-static nts::IComponent *create4512(const std::string &name)
-{
-    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins = {
-        {{1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 15}, {14}},
-    };
-    return new nts::component::Gate4512(name, pins);
-}
-
 nts::IComponent *nts::Factory::createComponent(const CompType &type, const std::string &name)
 {
     std::unordered_map<CompType, std::function<nts::IComponent *()>> components = {
-        {CompType::INPUT, [name] { return createInput(name); }},
-        {CompType::OUTPUT, [name] { return createOutput(name); }},
-        {CompType::TRUE, [name] { return createTrue(name); }},
-        {CompType::FALSE, [name] { return createFalse(name); }},
-        {CompType::CLOCK, [name] { return createClock(name); }},
-        {CompType::AND, [name] { return createAnd(name); }},
-        {CompType::OR, [name] { return createOr(name); }},
-        {CompType::XOR, [name] { return createXor(name); }},
-        {CompType::NOT, [name] { return createNot(name); }},
-        {CompType::GATE_4001, [name] { return create4001(name); }},
-        {CompType::GATE_4011, [name] { return create4011(name); }},
-        {CompType::GATE_4030, [name] { return create4030(name); }},
-        {CompType::GATE_4069, [name] { return create4069(name); }},
-        {CompType::GATE_4071, [name] { return create4071(name); }},
-        {CompType::GATE_4081, [name] { return create4081(name); }},
-        {CompType::GATE_4008, [name] { return create4008(name); }},
-        {CompType::GATE_4013, [name] { return create4013(name); }},
-        {CompType::GATE_4512, [name] { return create4512(name); }},
+        {CompType::INPUT, [name] { return new nts::component::Input(name); }},
+        {CompType::OUTPUT, [name] { return new nts::component::Output(name); }},
+        {CompType::TRUE, [name] { return new nts::component::True(name); }},
+        {CompType::FALSE, [name] { return new nts::component::False(name); }},
+        {CompType::CLOCK, [name] { return new nts::component::Clock(name); }},
+        {CompType::AND, [name] { return new nts::component::And(name); }},
+        {CompType::OR, [name] { return new nts::component::Or(name); }},
+        {CompType::XOR, [name] { return new nts::component::Xor(name); }},
+        {CompType::NOT, [name] { return new nts::component::Not(name); }},
+        {CompType::GATE_4001, [name] { return new nts::component::Gate4001(name);}},
+        {CompType::GATE_4011, [name] { return new nts::component::Gate4011(name);}},
+        {CompType::GATE_4030, [name] { return new nts::component::Gate4030(name);}},
+        {CompType::GATE_4069, [name] { return new nts::component::Gate4069(name);}},
+        {CompType::GATE_4071, [name] { return new nts::component::Gate4071(name);}},
+        {CompType::GATE_4081, [name] { return new nts::component::Gate4081(name);}},
+        {CompType::GATE_4008, [name] { return new nts::component::Gate4008(name);}},
+        {CompType::GATE_4013, [name] { return new nts::component::Gate4013(name);}},
+        {CompType::GATE_4512, [name] { return new nts::component::Gate4512(name);}},
     };
     return components[type]();
 }
