@@ -26,6 +26,8 @@
 #include "Or.hpp"
 #include "Xor.hpp"
 #include "Not.hpp"
+#include "Nand.hpp"
+#include "Nor.hpp"
 #include "Error.hpp"
 
 nts::IComponent *nts::Factory::createComponent(const std::string &type)
@@ -40,15 +42,17 @@ nts::IComponent *nts::Factory::createComponent(const std::string &type)
         {"or", [] { return new nts::component::Or(); }},
         {"xor", [] { return new nts::component::Xor(); }},
         {"not", [] { return new nts::component::Not(); }},
-        // {"4001", [] { return new nts::component::Gate4001();}},
-        // {"4011", [] { return new nts::component::Gate4011();}},
-        // {"4030", [] { return new nts::component::Gate4030();}},
-        // {"4069", [] { return new nts::component::Gate4069();}},
-        // {"4071", [] { return new nts::component::Gate4071();}},
-        // {"4081", [] { return new nts::component::Gate4081();}},
-        // {"4008", [] { return new nts::component::Gate4008();}},
-        // {"4013", [] { return new nts::component::Gate4013();}},
-        // {"4512", [] { return new nts::component::Gate4512();}},
+        {"nand", [] { return new nts::component::Nand(); }},
+        {"nor", [] { return new nts::component::Nor(); }},
+         {"4001", [] { return new nts::component::Gate4001();}},
+         {"4011", [] { return new nts::component::Gate4011();}},
+         {"4030", [] { return new nts::component::Gate4030();}},
+         {"4069", [] { return new nts::component::Gate4069();}},
+         {"4071", [] { return new nts::component::Gate4071();}},
+         {"4081", [] { return new nts::component::Gate4081();}},
+//         {"4008", [] { return new nts::component::Gate4008();}},
+//         {"4013", [] { return new nts::component::Gate4013();}},
+//         {"4512", [] { return new nts::component::Gate4512();}},
     };
     if (components.find(type) == components.end())
         throw Error("Component " + type + " does not exist");

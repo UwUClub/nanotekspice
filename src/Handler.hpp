@@ -14,9 +14,9 @@ namespace nts {
     public:
         Handler();
         ~Handler();
-        void runLoop();
-        void addComponent(std::string name, IComponent *component);
-        IComponent *getComponent(std::string name);
+        void runLoop(nts::Handler handler);
+        void addComponent(const std::string &name, IComponent *component);
+        IComponent *getComponent(const std::string &name);
     private:
         std::map<std::string, IComponent *> _components;
         std::size_t _ticks;

@@ -9,7 +9,6 @@
 #include "Parser.hpp"
 #include "Error.hpp"
 #include "Handler.hpp"
-#include "Circuit.hpp"
 
 int main(int ac, char **av) {
     if (ac == 1)
@@ -20,12 +19,10 @@ int main(int ac, char **av) {
         parser.getComponents();
         parser.createChipsets();
         parser.createLinks(handler);
-        handler.runLoop();
+        handler.runLoop(handler);
     } catch (nts::Error &e) {
         std::cerr << e.what() << std::endl;
-        delete nts::Circuit::getInstance();
         return 84;
     }
-    delete nts::Circuit::getInstance();
     return 0;
 }

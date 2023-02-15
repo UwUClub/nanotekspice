@@ -12,7 +12,6 @@
 #include "Handler.hpp"
 #include "Parser.hpp"
 #include "Factory.hpp"
-#include "Circuit.hpp"
 #include "Error.hpp"
 
 nts::Parser::Parser(int ac, char **av)
@@ -92,7 +91,6 @@ void nts::Parser::parseLinks(const std::string& str, bool isInput) {
 }
 
 void nts::Parser::createChipsets() {
-    Circuit *circuit = Circuit::getInstance();
     IComponent *comp = nullptr;
     std::unordered_map<std::string, nts::CompType> chipsets = {
             {"and", nts::CompType::AND},
@@ -120,8 +118,7 @@ void nts::Parser::createChipsets() {
         if (chipsets.find(_chipsets_type.back()) == chipsets.end())
             throw (nts::Error("Invalid chipset (Parser.cpp, line 119)"));
         if (chipsets.find(_chipsets_type.back()) != chipsets.end()) {
-            comp = Factory::createComponent(chipsets[_chipsets_type.back()], _chipsets_name.back());
-            circuit->addComponent(*comp);
+            comp = Factory::createComponent(_chipsets_name.back());
             _chipsets_type.pop_back();
             _chipsets_name.pop_back();
         }

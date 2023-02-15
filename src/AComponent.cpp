@@ -8,7 +8,6 @@
 #include <algorithm>
 #include "Error.hpp"
 #include "AComponent.hpp"
-#include "Circuit.hpp"
 
 nts::AComponent::AComponent()
 {

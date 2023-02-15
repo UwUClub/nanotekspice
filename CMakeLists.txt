@@ -8,8 +8,6 @@ set(CMAKE_CXX_FLAGS_DEBUG)
 set(SOURCE_FILES
         src/IComponent.hpp
         src/Error.hpp
-        src/Circuit.cpp
-        src/Circuit.hpp
         src/AComponent.cpp
         src/AComponent.hpp
         src/AShell.hpp
@@ -52,12 +50,12 @@ set(SOURCE_FILES
         src/components/gate/4071.cpp
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
-        src/components/advanced/4008.hpp
-        src/components/advanced/4008.cpp
-        src/components/advanced/4013.cpp
-        src/components/advanced/4013.hpp
-        src/components/advanced/4512.hpp
-        src/components/advanced/4512.cpp
+#        src/components/advanced/4008.hpp
+#        src/components/advanced/4008.cpp
+#        src/components/advanced/4013.cpp
+#        src/components/advanced/4013.hpp
+#        src/components/advanced/4512.hpp
+#        src/components/advanced/4512.cpp
         #tests/TestAnd.cpp
         #tests/TestFile.cpp
         #tests/TestOr.cpp
@@ -65,7 +63,7 @@ set(SOURCE_FILES
         src/main.cpp
         src/Handler.cpp
         src/Handler.hpp
-        )
+        src/components/elementary/Add.hpp)
 
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src)

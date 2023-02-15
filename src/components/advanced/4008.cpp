@@ -11,10 +11,26 @@
 #include "Or.hpp"
 #include "4008.hpp"
 
-nts::component::Gate4008::Gate4008(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : nts::AComponent(name, pins)
+nts::component::Gate4008::Gate4008()
 {
-    _type = nts::CompType::GATE_4008;
+    _inputs[1] = std::make_pair(nullptr, 0);
+    _inputs[2] = std::make_pair(nullptr, 0);
+    _inputs[3] = std::make_pair(nullptr, 0);
+    _inputs[4] = std::make_pair(nullptr, 0);
+    _inputs[5] = std::make_pair(nullptr, 0);
+    _inputs[6] = std::make_pair(nullptr, 0);
+    _inputs[7] = std::make_pair(nullptr, 0);
+    _inputs[8] = std::make_pair(nullptr, 0);
+    _inputs[9] = std::make_pair(nullptr, 0);
+
+    _outputs[10] = std::vector<nts::IComponent *>();
+    _outputs[11] = std::vector<nts::IComponent *>();
+    _outputs[12] = std::vector<nts::IComponent *>();
+    _outputs[13] = std::vector<nts::IComponent *>();
+    _outputs[14] = std::vector<nts::IComponent *>();
+
+
+
 }
 
 nts::Tristate nts::component::Gate4008::compute(std::size_t pin)

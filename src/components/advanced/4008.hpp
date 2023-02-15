@@ -8,24 +8,23 @@
 #ifndef UWUNANO_4008_HPP_
 #define UWUNANO_4008_HPP_
 
-#include "AComponent.hpp"
+#include "AComposedComponent.hpp"
 
 namespace nts::component
 {
-    class Gate4008 : public nts::AComponent {
+    class Gate4008 : public nts::AComposedComponent {
         public:
-            Gate4008(const std::string &name,
-                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
-                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{
-                        std::make_pair(std::vector<std::size_t>{15, 1}, std::vector<std::size_t>{13, 14}),
-                        std::make_pair(std::vector<std::size_t>{2, 3}, std::vector<std::size_t>{12}),
-                        std::make_pair(std::vector<std::size_t>{4, 5}, std::vector<std::size_t>{11}),
-                        std::make_pair(std::vector<std::size_t>{6, 7, 9}, std::vector<std::size_t>{10}),
-                    });
-            nts::Tristate compute(std::size_t pin = 1) override;
-            void simulate(std::size_t tick) override {};
+//            Gate4008(const std::string &name,
+//                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
+//                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{
+//                        std::make_pair(std::vector<std::size_t>{15, 1}, std::vector<std::size_t>{13, 14}),
+//                        std::make_pair(std::vector<std::size_t>{2, 3}, std::vector<std::size_t>{12}),
+//                        std::make_pair(std::vector<std::size_t>{4, 5}, std::vector<std::size_t>{11}),
+//                        std::make_pair(std::vector<std::size_t>{6, 7, 9}, std::vector<std::size_t>{10}),
+//                    });
+            Gate4008();
 
-            static std::pair<nts::Tristate, nts::Tristate> compute(nts::Tristate a, nts::Tristate b, nts::Tristate c);
+            nts::Tristate compute(std::size_t pin = 1) override;
     };
 } // namespace nts
 

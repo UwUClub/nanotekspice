@@ -7,7 +7,6 @@
 
 #include <algorithm>
 #include "And.hpp"
-#include "Circuit.hpp"
 #include "Error.hpp"
 
 nts::component::And::And() : nts::AComponent()
