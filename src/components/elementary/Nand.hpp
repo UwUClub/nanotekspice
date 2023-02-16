@@ -9,19 +9,15 @@
 #define NAND_HPP_
 
 #include "AComponent.hpp"
+#include "AComposedComponent.hpp"
 
 namespace nts::component
 {
-    class Nand : public nts::AComponent {
+    class Nand final : public nts::AComposedComponent {
         public:
-            Nand(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
+            Nand();
 
-            nts::Tristate compute(std::size_t pin = 1) override;
-            void simulate(std::size_t tick) override {};
-
-            static nts::Tristate compute(nts::Tristate a, nts::Tristate b);
-        protected:
-        private:
+            nts::Tristate compute(std::size_t pin = 1) final;
     };
 } // namespace nts
 

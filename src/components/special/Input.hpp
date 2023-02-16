@@ -10,19 +10,16 @@
 
 #include "AShell.hpp"
 
-namespace nts::component
-    {
-        class Input : public nts::AShell {
+namespace nts::component {
+        class Input final : public nts::AShell {
             public:
-                Input(const std::string &name,
-                    const std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>& pins =
-                    std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{}, std::vector<std::size_t>{1})});
+                Input();
 
-                nts::Tristate compute(std::size_t pin) override;
-                void simulate(std::size_t tick) override;
+                nts::Tristate compute(std::size_t pin) final;
+                void simulate(std::size_t tick) final;
             protected:
             private:
-};
-    } // namespace nts
+    };
+} // namespace nts
 
 #endif /* !INPUT_HPP_ */

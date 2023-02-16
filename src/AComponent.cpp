@@ -8,88 +8,45 @@
 #include <algorithm>
 #include "Error.hpp"
 #include "AComponent.hpp"
-#include "Circuit.hpp"
 
-nts::AComponent::AComponent(std::string const &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : _name(name), _pins(pins), _type(nts::CompType::UNDEFINED)
+nts::AComponent::AComponent()
 {
-    for (auto &pin : pins) {
-        for (auto &input : pin.first)
-            _inputs[input] = nts::UNDEFINED;
-        for (auto &output : pin.second)
-            _outputs[output] = nts::UNDEFINED;
-    }
+    _inputs = std::map<std::size_t, std::pair<nts::IComponent *, std::size_t>>();
+    _outputs = std::map<std::size_t, std::vector<nts::IComponent *>>();
 }
 
 nts::AComponent::~AComponent()
 {
 }
 
-void nts::AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+void nts::AComponent::setInput(std::size_t inputPin, IComponent *outputComp, std::size_t outputPin)
 {
-    Circuit *Circuit = Circuit::getInstance();
-
-    Circuit->setLink(*this, pin, other, otherPin);
+    if (_inputs.find(inputPin) == _inputs.end()) {
+        throw Error("Pin " + std::to_string(inputPin) + " is not an input");
+    }
+    _inputs[inputPin] = std::pair<nts::IComponent *, std::size_t>(outputComp, outputPin);
 }
 
-int nts::AComponent::getNbPinsIn() const
+void nts::AComponent::setLink(std::size_t outputPin, nts::IComponent &other, std::size_t inputPinOther)
 {
-    return _inputs.size();
+    if (_outputs.find(outputPin) == _outputs.end()) {
+        throw Error("Pin " + std::to_string(outputPin) + " is not an output of " + _type);
+    }
+    _outputs[outputPin].push_back(&other);
+    other.setInput(inputPinOther, this, outputPin);
 }
 
-int nts::AComponent::getNbPinsOut() const
+inputs_t nts::AComponent::getInputs() const
 {
-    return _outputs.size();
+    return _inputs;
 }
 
-bool nts::AComponent::isInput(std::size_t pin) const
+outputs_t nts::AComponent::getOutputs() const
 {
-    return _inputs.find(pin) != _inputs.end();
+    return _outputs;
 }
 
-bool nts::AComponent::isOutput(std::size_t pin) const
-{
-    return _outputs.find(pin) != _outputs.end();
-}
-
-const std::string &nts::AComponent::getName() const
-{
-    return _name;
-}
-
-nts::CompType nts::AComponent::getType() const
+const std::string &nts::AComponent::getType() const
 {
     return _type;
-}
-
-void nts::AComponent::addCorresponding(std::size_t pin, std::size_t corresponding)
-{
-    _corresponding[pin] = corresponding;
-}
-
-std::map<std::size_t, std::size_t> &nts::AComponent::getCorresponding()
-{
-    return _corresponding;
-}
-
-std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>::iterator nts::AComponent::computeInputs(std::size_t pin)
-{
-    Circuit *Circuit = Circuit::getInstance();
-
-    auto it = std::find_if(_pins.begin(), _pins.end(), [pin](auto &pair) {
-        return std::find(pair.second.begin(), pair.second.end(), pin) != pair.second.end();
-    });
-
-    if (it == _pins.end()) {
-        it = std::find_if(_pins.begin(), _pins.end(), [pin](auto &pair) {
-            return std::find(pair.first.begin(), pair.first.end(), pin) != pair.first.end();
-        });
-    }
-    if (it == _pins.end()) {
-        throw Error("Pin not found " + std::to_string(pin));
-    }
-    for (auto &input : it->first) {
-        _inputs[input] = Circuit->compute(*this, input);
-    }
-    return it;
 }

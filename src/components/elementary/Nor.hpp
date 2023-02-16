@@ -8,20 +8,15 @@
 #ifndef NOR_HPP_
 #define NOR_HPP_
 
-#include "AComponent.hpp"
+#include "AComposedComponent.hpp"
 
 namespace nts::component
 {
-    class Nor : public nts::AComponent {
+    class Nor final : public nts::AComposedComponent {
         public:
-            Nor(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins);
+            Nor();
 
-            nts::Tristate compute(std::size_t pin = 1) override;
-            void simulate(std::size_t tick) override {};
-
-            static nts::Tristate compute(nts::Tristate a, nts::Tristate b);
-        protected:
-        private:
+            nts::Tristate compute(std::size_t pin = 1) final;
     };
 } // namespace nts
 

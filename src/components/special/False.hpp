@@ -9,14 +9,11 @@
 
 namespace nts {
     namespace component {
-        class False : public nts::AComponent {
+        class False final : public nts::AComponent {
             public:
-            False(const std::string &name,
-                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins =
-                std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>>{std::make_pair(std::vector<std::size_t>{}, std::vector<std::size_t>{1})});
+            False();
 
-            nts::Tristate compute(std::size_t pin) override;
-            void simulate(std::size_t tick) override {}
+            nts::Tristate compute(std::size_t pin) final;
         };
     } // namespace component
 }

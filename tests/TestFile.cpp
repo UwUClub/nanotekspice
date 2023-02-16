@@ -18,7 +18,7 @@ Test(And, ErrorHandling, .init = cr_redirect_stdout)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "Invalid file extension (Parser.cpp line 23)");
+        cr_assert_str_eq(e.what(), "Invalid file extension");
     }
 }
 
@@ -30,7 +30,7 @@ Test(And, ErrorHandling2)
         nts::Parser p(ac, av);
     }
     catch (nts::Error &e) {
-        cr_assert_str_eq(e.what(), "Invalid file (Parser.cpp line 25)");
+        cr_assert_str_eq(e.what(), "Invalid file");
     }
 }
 

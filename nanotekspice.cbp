@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="nanotekspice"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/Beafowl/Documents/oop/nanotekspice"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="nanotekspice">
+				<Option output="/home/Beafowl/Documents/oop/nanotekspice/nanotekspice" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/Beafowl/Documents/oop/nanotekspice"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/special"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 nanotekspice"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="nanotekspice/fast">
+				<Option output="/home/Beafowl/Documents/oop/nanotekspice/nanotekspice" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/Beafowl/Documents/oop/nanotekspice"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/special"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate"/>
+					<Add directory="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 nanotekspice/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/Beafowl/Documents/oop/nanotekspice"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/Beafowl/Documents/oop/nanotekspice"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/Beafowl/Documents/oop/nanotekspice/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AComponent.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AComponent.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AShell.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AShell.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Error.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Factory.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Factory.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Handler.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Handler.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/IComponent.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Parser.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Parser.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Add.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/And.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/And.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Nand.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Nand.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Nor.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Nor.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Not.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Not.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Or.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Or.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Xor.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Xor.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4001.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4001.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4011.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4011.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4030.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4030.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4069.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4069.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4071.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4071.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4081.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/gate/4081.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Clock.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Clock.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/False.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/False.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Input.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Input.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Output.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/Output.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/True.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/True.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/main.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

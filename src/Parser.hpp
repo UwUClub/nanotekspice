@@ -4,24 +4,23 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "Handler.hpp"
+
+typedef std::pair<std::pair<std::string, std::string>, std::pair<std::string, std::string>> link_t;
 
 namespace nts {
     class Parser {
     public:
         Parser(int, char **);
         ~Parser();
-        void getComponents();
-        void createChipsets();
-        void createLinks();
-        void parseLinks(const std::string&, bool);
+        void getComponents(nts::Handler &handler);
+        void createLink(nts::Handler &handler, const std::string &line);
     private:
+        std::pair<std::string, std::string> parseChipset(const std::string &str);
+        link_t parseLinks(const std::string&);
+
         std::ifstream _file;
-        std::vector<std::string> _chipsets_type;
-        std::vector<std::string> _chipsets_name;
-        std::vector<std::string> _linksType1;
-        std::vector<std::string> _linksPin1;
-        std::vector<std::string> _linksType2;
-        std::vector<std::string> _linksPin2;
+        std::map<std::string, std::string> _compLists;
     };
 }
 

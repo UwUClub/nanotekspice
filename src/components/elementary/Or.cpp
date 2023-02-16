@@ -6,26 +6,33 @@
 */
 
 #include "Or.hpp"
+#include "Error.hpp"
 
-nts::component::Or::Or(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : nts::AComponent(name, pins)
+nts::component::Or::Or() : nts::AComponent()
 {
-    _type = nts::CompType::OR;
+    _inputs[1] = std::make_pair(nullptr, 0);
+    _inputs[2] = std::make_pair(nullptr, 0);
+    _outputs[3] = std::vector<nts::IComponent *>();
+
+    _type = "or";
 }
 
 nts::Tristate nts::component::Or::compute(std::size_t pin)
 {
     nts::Tristate output = nts::FALSE;
-    auto it = computeInputs(pin);
-    auto first = it->first[0];
-    auto second = it->first[1];
+    if (pin != 3)
+        throw Error("Pin " + std::to_string(pin) + " is not an output");
+    if (_inputs[1].first == nullptr || _inputs[2].first == nullptr)
+        throw Error("Pin " + std::to_string(pin) + " is not linked for or");
 
-    output = nts::component::Or::compute(_inputs[first], _inputs[second]);
-    _outputs[pin] = output;
+    nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
+    nts::Tristate b = _inputs[2].first->compute(_inputs[2].second);
+
+    output = getTruthTableOutput(a, b);
     return output;
 }
 
-nts::Tristate nts::component::Or::compute(nts::Tristate a, nts::Tristate b)
+nts::Tristate nts::component::Or::getTruthTableOutput(nts::Tristate a, nts::Tristate b)
 {
     if (a == nts::TRUE || b == nts::TRUE)
         return nts::TRUE;

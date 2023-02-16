@@ -5,14 +5,14 @@
 #include "False.hpp"
 #include "Error.hpp"
 
-nts::component::False::False(const std::string &name, std::vector<std::pair<std::vector<std::size_t>, std::vector<std::size_t>>> pins)
-    : nts::AComponent(name, pins)
+nts::component::False::False() : nts::AComponent()
 {
-    _type = nts::CompType::FALSE;
+    _outputs[1] = std::vector<nts::IComponent *>();
+
+    _type = "false";
 }
 
 nts::Tristate nts::component::False::compute(std::size_t pin)
 {
-    _outputs[pin] = nts::FALSE;
     return nts::FALSE;
 }

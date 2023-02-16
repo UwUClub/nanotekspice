@@ -13,6 +13,7 @@
 
 Test(Or, ErrorHandling, .init = cr_redirect_stdout)
 {
+    nts::Handler handler;
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/or.nts"};
     nts::Parser parser(ac, av);
@@ -26,10 +27,8 @@ Test(Or, ErrorHandling, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -53,6 +52,7 @@ Test(Or, ErrorHandling, .init = cr_redirect_stdout)
 
 Test(Or, Or, .init = cr_redirect_stdout)
 {
+    nts::Handler handler;
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/or.nts"};
     nts::Parser parser(ac, av);
@@ -66,10 +66,8 @@ Test(Or, Or, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -93,6 +91,7 @@ Test(Or, Or, .init = cr_redirect_stdout)
 
 Test(Or, Or2, .init = cr_redirect_stdout)
 {
+    nts::Handler handler;
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/or.nts"};
     nts::Parser parser(ac, av);
@@ -106,10 +105,8 @@ Test(Or, Or2, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -133,6 +130,7 @@ Test(Or, Or2, .init = cr_redirect_stdout)
 
 Test(Or, Or3, .init = cr_redirect_stdout)
 {
+    nts::Handler handler;
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/or.nts"};
     nts::Parser parser(ac, av);
@@ -146,10 +144,8 @@ Test(Or, Or3, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
