@@ -86,6 +86,12 @@
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AComponent.hpp">
 			<Option target="nanotekspice"/>
 		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AComposedComponent.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AComposedComponent.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/AShell.cpp">
 			<Option target="nanotekspice"/>
 		</Unit>
@@ -114,6 +120,21 @@
 			<Option target="nanotekspice"/>
 		</Unit>
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/Parser.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced/4008.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced/4008.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced/4512.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/advanced/4512.hpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Add.cpp">
 			<Option target="nanotekspice"/>
 		</Unit>
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/elementary/Add.hpp">
@@ -221,7 +242,22 @@
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/components/special/True.hpp">
 			<Option target="nanotekspice"/>
 		</Unit>
-		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/src/main.cpp">
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestAnd.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestFile.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestInputOutput.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestOr.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestSingleAdd.cpp">
+			<Option target="nanotekspice"/>
+		</Unit>
+		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/tests/TestSingleXor.cpp">
 			<Option target="nanotekspice"/>
 		</Unit>
 		<Unit filename="/home/Beafowl/Documents/oop/nanotekspice/CMakeLists.txt">
