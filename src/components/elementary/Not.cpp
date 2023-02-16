@@ -12,7 +12,10 @@
 nts::component::Not::Not() : nts::AComponent()
 {
     _inputs[1] = std::pair<nts::IComponent *, std::size_t>(nullptr, 0);
+
     _outputs[2] = std::vector<nts::IComponent *>();
+
+    _type = "not";
 }
 
 nts::Tristate nts::component::Not::compute(std::size_t pin)

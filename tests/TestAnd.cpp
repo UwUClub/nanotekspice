@@ -16,6 +16,7 @@ Test(And, And, .init = cr_redirect_stdout)
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/and.nts"};
     nts::Parser parser(ac, av);
+    nts::Handler handler;
     auto &f_cin = criterion::get_redirected_cin();
     f_cin << "display" << std::endl;
     f_cin << "in_1=1" << std::endl;
@@ -26,10 +27,8 @@ Test(And, And, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -56,6 +55,7 @@ Test(And, And2, .init = cr_redirect_stdout)
     int ac = 2;
     char *av[2] = {(char *)"./naotekspice", (char *)"tests/nts_single/and.nts"};
     nts::Parser parser(ac, av);
+    nts::Handler handler;
     auto &f_cin = criterion::get_redirected_cin();
     f_cin << "display" << std::endl;
     f_cin << "in_1=1" << std::endl;
@@ -66,10 +66,8 @@ Test(And, And2, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -95,6 +93,7 @@ Test(And, And3, .init = cr_redirect_stdout)
 {
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/and.nts"};
+    nts::Handler handler;
     nts::Parser parser(ac, av);
     auto &f_cin = criterion::get_redirected_cin();
     f_cin << "display" << std::endl;
@@ -106,10 +105,8 @@ Test(And, And3, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"
@@ -136,6 +133,7 @@ Test(And, And4, .init = cr_redirect_stdout)
     int ac = 2;
     char *av[2] = {(char *)"./nanotekspice", (char *)"tests/nts_single/and.nts"};
     nts::Parser parser(ac, av);
+    nts::Handler handler;
     auto &f_cin = criterion::get_redirected_cin();
     f_cin << "display" << std::endl;
     f_cin << "in_1=0" << std::endl;
@@ -146,10 +144,8 @@ Test(And, And4, .init = cr_redirect_stdout)
     f_cin << "exit" << std::endl;
     f_cin.close();
 
-    parser.getComponents();
-    parser.createChipsets();
-    parser.createLinks();
-    nts::Handler::runLoop();
+    parser.getComponents(handler);
+    handler.runLoop();
     cr_assert_stdout_eq_str("> tick: 0\n"
                             "input(s):\n"
                             "  in_1: U\n"

@@ -16,64 +16,41 @@ nts::component::Add::Add() : AComposedComponent()
 
     _outputs[4] = std::vector<nts::IComponent *>();
     _outputs[5] = std::vector<nts::IComponent *>();
+
+    _type = "add";
+
+    _subComponents.push_back(nts::Factory::createComponent("xor")); // 0
+    _subComponents.push_back(nts::Factory::createComponent("xor")); // 1
+    _subComponents.push_back(nts::Factory::createComponent("and")); // 2
+    _subComponents.push_back(nts::Factory::createComponent("and")); // 3
+    _subComponents.push_back(nts::Factory::createComponent("or")); // 4
+
+    _subComponents[0]->setInput(1, this, 1);
+    _subComponents[0]->setInput(2, this, 2);
+    _subComponents[0]->setLink(3, *_subComponents[1], 1);
+    _subComponents[0]->setLink(3, *_subComponents[2], 2);
+
+    _subComponents[1]->setInput(2, this, 3);
+
+    _subComponents[2]->setInput(1, this, 3);
+    _subComponents[2]->setLink(3, *_subComponents[4], 1);
+
+    _subComponents[3]->setInput(1, this, 1);
+    _subComponents[3]->setInput(2, this, 2);
+    _subComponents[3]->setLink(3, *_subComponents[4], 2);
+
 }
 
 nts::Tristate nts::component::Add::compute(std::size_t pin)
 {
-       if (pin != 4 && pin != 5)
-            throw Error("Pin " + std::to_string(pin) + " is not an output");
-        if (_inputs[1].first == nullptr || _inputs[2].first == nullptr || _inputs[3].first == nullptr)
-            throw Error("Pin " + std::to_string(pin) + " is not linked");
+    if (_inputs[1].first == nullptr || _inputs[2].first == nullptr || _inputs[3].first == nullptr)
+        throw Error("Pin " + std::to_string(pin) + " is not linked for add");
 
-        nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
-        nts::Tristate b = _inputs[2].first->compute(_inputs[2].second);
-        nts::Tristate c = _inputs[3].first->compute(_inputs[3].second);
-
-        std::pair<nts::Tristate, nts::Tristate> output = getTruthTableOutput(a, b, c);
-}
-
-std::pair<nts::Tristate, nts::Tristate> nts::component::Add::getTruthTableOutput(nts::Tristate a, nts::Tristate b, nts::Tristate c)
-{
-    std::pair<nts::Tristate, nts::Tristate> output;
-    if (a == nts::UNDEFINED || b == nts::UNDEFINED || c == nts::UNDEFINED) {
-        output.first = nts::UNDEFINED;
-        output.second = nts::UNDEFINED;
-        return output;
-    }
-    if (a == nts::TRUE && b == nts::FALSE && c == nts::FALSE) {
-        output.first = nts::FALSE;
-        output.second = nts::TRUE;
-        return output;
-    }
-    if (a == nts::FALSE && b == nts::TRUE && c == nts::FALSE) {
-        output.first = nts::FALSE;
-        output.second = nts::TRUE;
-        return output;
-    }
-    if (a == nts::TRUE && b == nts::TRUE && c == nts::FALSE) {
-        output.first = nts::TRUE;
-        output.second = nts::FALSE;
-        return output;
-    }
-    if (a == nts::FALSE && b == nts::FALSE && c == nts::TRUE) {
-        output.first = nts::FALSE;
-        output.second = nts::TRUE;
-        return output;
-    }
-    if (a == nts::TRUE && b == nts::FALSE && c == nts::TRUE) {
-        output.first = nts::TRUE;
-        output.second = nts::FALSE;
-        return output;
-    }
-    if (a == nts::FALSE && b == nts::TRUE && c == nts::TRUE) {
-        output.first = nts::TRUE;
-        output.second = nts::FALSE;
-        return output;
-    }
-    if (a == nts::TRUE && b == nts::TRUE && c == nts::TRUE) {
-        output.first = nts::TRUE;
-        output.second = nts::TRUE;
-        return output;
-    }
-    return output;
+    if (pin == 4)
+        return _subComponents[1]->compute(3);
+    if (pin == 5)
+        return _subComponents[4]->compute(3);
+    if (_inputs.find(pin) != _inputs.end())
+        return _inputs[pin].first->compute(_inputs[pin].second);
+    throw Error("Invalid pin");
 }

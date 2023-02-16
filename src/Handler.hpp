@@ -10,14 +10,20 @@
 #include "IComponent.hpp"
 
 namespace nts {
-    class Handler {
+    class Handler final {
     public:
         Handler();
         ~Handler();
-        void runLoop(nts::Handler handler);
+        void runLoop();
         void addComponent(const std::string &name, IComponent *component);
         IComponent *getComponent(const std::string &name);
+        const std::string &getComponentName(IComponent *component);
     private:
+        void setOutput(const std::string &name, nts::Tristate state);
+        void handleOutput(std::string &name, std::string &state, const std::string &line);
+        void simulate(size_t tick);
+        void loop();
+        void display() const;
         std::map<std::string, IComponent *> _components;
         std::size_t _ticks;
     };

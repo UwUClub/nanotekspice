@@ -21,16 +21,19 @@ nts::component::Nor::Nor() : nts::AComposedComponent()
 
     _subComponents[0]->setInput(1, this, 1);
     _subComponents[0]->setInput(2, this, 2);
-    _subComponents[1]->setLink(1, *_subComponents[0], 3);
+    _subComponents[0]->setLink(3, *_subComponents[1], 1);
+
+    _type = "nor";
 }
 
 nts::Tristate nts::component::Nor::compute(std::size_t pin)
 {
     nts::Tristate output = nts::FALSE;
-    if (pin != 3)
-        throw Error("Pin " + std::to_string(pin) + " is not an output");
     if (_inputs[1].first == nullptr || _inputs[2].first == nullptr)
         throw Error("Pin " + std::to_string(pin) + " is not linked");
-    output = _subComponents[1]->compute(2);
-    return output;
+    if (pin == 3)
+        return _subComponents[1]->compute(2);
+    if (_inputs.find(pin) != _inputs.end())
+        return _inputs[pin].first->compute(_inputs[pin].second);
+    throw Error("Invalid pin");
 }

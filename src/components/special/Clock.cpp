@@ -10,6 +10,8 @@
 nts::component::Clock::Clock() : nts::AShell()
 {
     _outputs[1] = std::vector<nts::IComponent *>();
+
+    _type = "clock";
 }
 
 nts::Tristate nts::component::Clock::compute(std::size_t pin)

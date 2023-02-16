@@ -9,11 +9,12 @@
 
 namespace nts::component
 {
-    class Add : public nts::AComposedComponent {
+    class Add final : public nts::AComposedComponent {
         public:
             Add();
 
             nts::Tristate compute(std::size_t pin = 1) final;
+        private:
             std::pair<nts::Tristate, nts::Tristate> getTruthTableOutput(nts::Tristate a, nts::Tristate b, nts::Tristate c);
     };
 } // namespace nts

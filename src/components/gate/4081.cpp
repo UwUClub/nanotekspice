@@ -32,12 +32,17 @@ nts::component::Gate4081::Gate4081() : nts::AComposedComponent()
 
     _subComponents[0]->setInput(1, this, 1);
     _subComponents[0]->setInput(2, this, 2);
+
     _subComponents[1]->setInput(1, this, 5);
     _subComponents[1]->setInput(2, this, 6);
+
     _subComponents[2]->setInput(1, this, 8);
     _subComponents[2]->setInput(2, this, 9);
+
     _subComponents[3]->setInput(1, this, 12);
     _subComponents[3]->setInput(2, this, 13);
+
+    _type = "4081";
 }
 
 nts::Tristate nts::component::Gate4081::compute(std::size_t pin)
@@ -50,5 +55,7 @@ nts::Tristate nts::component::Gate4081::compute(std::size_t pin)
         return _subComponents[2]->compute(3);
     if (pin == 11)
         return _subComponents[3]->compute(3);
+    if (_inputs.find(pin) != _inputs.end())
+        return _inputs[pin].first->compute(_inputs[pin].second);
     throw Error("Invalid pin");
 }

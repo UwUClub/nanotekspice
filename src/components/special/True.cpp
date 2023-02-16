@@ -9,6 +9,8 @@
 nts::component::True::True() : nts::AComponent()
 {
     _outputs[1] = std::vector<nts::IComponent *>();
+
+    _type = "true";
 }
 
 nts::Tristate nts::component::True::compute(std::size_t pin)

@@ -38,6 +38,8 @@ nts::component::Gate4069::Gate4069() : nts::AComposedComponent()
     _subComponents[3]->setInput(1, this, 9);
     _subComponents[4]->setInput(1, this, 11);
     _subComponents[5]->setInput(1, this, 13);
+
+    _type = "4069";
 }
 
 nts::Tristate nts::component::Gate4069::compute(std::size_t pin)
@@ -54,5 +56,7 @@ nts::Tristate nts::component::Gate4069::compute(std::size_t pin)
         return _subComponents[4]->compute(2);
     if (pin == 12)
         return _subComponents[5]->compute(2);
+    if (_inputs.find(pin) != _inputs.end())
+        return _inputs[pin].first->compute(_inputs[pin].second);
     throw Error("Invalid pin");
 }

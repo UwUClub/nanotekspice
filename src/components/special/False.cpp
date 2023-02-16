@@ -8,6 +8,8 @@
 nts::component::False::False() : nts::AComponent()
 {
     _outputs[1] = std::vector<nts::IComponent *>();
+
+    _type = "false";
 }
 
 nts::Tristate nts::component::False::compute(std::size_t pin)

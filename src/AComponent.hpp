@@ -24,14 +24,15 @@ namespace nts
             ~AComponent();
 
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) final;
-            void simulate(std::size_t tick) override;
 
             void setInput(std::size_t pin, IComponent *other, std::size_t otherPin) override;
             inputs_t getInputs() const override;
             outputs_t getOutputs() const override;
+            const std::string &getType() const override;
         protected:
             outputs_t _outputs;
             inputs_t _inputs;
+            std::string _type;
     };
 } // namespace nts
 

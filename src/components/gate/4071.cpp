@@ -7,6 +7,7 @@
 
 #include "Or.hpp"
 #include "4071.hpp"
+#include "Error.hpp"
 
 nts::component::Gate4071::Gate4071() : nts::AComposedComponent()
 {
@@ -37,6 +38,8 @@ nts::component::Gate4071::Gate4071() : nts::AComposedComponent()
     _subComponents[2]->setInput(2, this, 9);
     _subComponents[3]->setInput(1, this, 12);
     _subComponents[3]->setInput(2, this, 13);
+
+    _type = "4071";
 }
 
 nts::Tristate nts::component::Gate4071::compute(std::size_t pin)
@@ -49,5 +52,7 @@ nts::Tristate nts::component::Gate4071::compute(std::size_t pin)
         return _subComponents[2]->compute(3);
     if (pin == 11)
         return _subComponents[3]->compute(3);
-    return nts::UNDEFINED;
+    if (_inputs.find(pin) != _inputs.end())
+        return _inputs[pin].first->compute(_inputs[pin].second);
+    throw Error("Invalid pin");
 }

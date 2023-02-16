@@ -6,6 +6,7 @@
 */
 
 #include <algorithm>
+#include <iostream>
 #include "And.hpp"
 #include "Error.hpp"
 
@@ -14,21 +15,22 @@ nts::component::And::And() : nts::AComponent()
     _inputs[1] = std::pair<nts::IComponent *, std::size_t>(nullptr, 0);
     _inputs[2] = std::pair<nts::IComponent *, std::size_t>(nullptr, 0);
     _outputs[3] = std::vector<nts::IComponent *>();
+
+    _type = "and";
 }
 
 nts::Tristate nts::component::And::compute(std::size_t pin)
 {
     nts::Tristate output = nts::UNDEFINED;
+
     if (pin != 3)
         throw Error("Pin " + std::to_string(pin) + " is not an output");
     if (_inputs[1].first == nullptr || _inputs[2].first == nullptr)
-        throw Error("Pin " + std::to_string(pin) + " is not linked");
-
+        throw Error("Pin " + std::to_string(pin) + " is not linked for and");
     nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
     nts::Tristate b = _inputs[2].first->compute(_inputs[2].second);
 
     output = getTruthTableOutput(a, b);
-
     return output;
 }
 

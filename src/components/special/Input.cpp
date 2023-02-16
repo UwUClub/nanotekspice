@@ -10,6 +10,9 @@
 nts::component::Input::Input() : nts::AShell()
 {
     _outputs[1] = std::vector<nts::IComponent *>();
+
+    _type = "input";
+    _currVal = nts::UNDEFINED;
 }
 
 nts::Tristate nts::component::Input::compute(std::size_t pin)

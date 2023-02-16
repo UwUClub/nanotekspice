@@ -16,6 +16,7 @@ namespace nts
         public:
             AShell();
             void setOutput(nts::Tristate state);
+            virtual void simulate(std::size_t tick) = 0;
 
         protected:
             enum class State { UPTODATE, TOUPDATE };

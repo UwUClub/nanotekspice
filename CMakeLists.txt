@@ -12,10 +12,14 @@ set(SOURCE_FILES
         src/AComponent.hpp
         src/AShell.hpp
         src/AShell.cpp
+        src/AComposedComponent.hpp
+        src/AComposedComponent.cpp
         src/Factory.cpp
         src/Factory.hpp
         src/Parser.cpp
         src/Parser.hpp
+        src/Handler.cpp
+        src/Handler.hpp
         src/components/elementary/And.hpp
         src/components/elementary/And.cpp
         src/components/elementary/Or.hpp
@@ -28,6 +32,8 @@ set(SOURCE_FILES
         src/components/elementary/Nor.cpp
         src/components/elementary/Nand.hpp
         src/components/elementary/Nand.cpp
+        src/components/elementary/Add.hpp
+        src/components/elementary/Add.cpp
         src/components/special/False.hpp
         src/components/special/False.cpp
         src/components/special/True.hpp
@@ -50,20 +56,16 @@ set(SOURCE_FILES
         src/components/gate/4071.cpp
         src/components/gate/4081.hpp
         src/components/gate/4081.cpp
-#        src/components/advanced/4008.hpp
-#        src/components/advanced/4008.cpp
-#        src/components/advanced/4013.cpp
-#        src/components/advanced/4013.hpp
-#        src/components/advanced/4512.hpp
-#        src/components/advanced/4512.cpp
+        src/components/advanced/4008.hpp
+        src/components/advanced/4008.cpp
+        src/components/advanced/4512.hpp
+        src/components/advanced/4512.cpp
         #tests/TestAnd.cpp
         #tests/TestFile.cpp
         #tests/TestOr.cpp
         #tests/TestInputOutput.cpp
         src/main.cpp
-        src/Handler.cpp
-        src/Handler.hpp
-        src/components/elementary/Add.hpp)
+)
 
 set(EXECUTABLE ${PROJECT_NAME})
 include_directories(src)
