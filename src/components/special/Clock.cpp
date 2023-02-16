@@ -10,7 +10,7 @@
 nts::component::Clock::Clock() : nts::AShell()
 {
     _outputs[1] = std::vector<nts::IComponent *>();
-
+    _currVal = nts::UNDEFINED;
     _type = "clock";
 }
 

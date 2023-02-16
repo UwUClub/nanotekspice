@@ -59,10 +59,16 @@ set(SOURCE_FILES
         src/components/advanced/4008.cpp
         src/components/advanced/4512.hpp
         src/components/advanced/4512.cpp
-        tests/TestAnd.cpp
-        tests/TestFile.cpp
-        tests/TestOr.cpp
-        tests/TestInputOutput.cpp
+        tests/File/TestFile.cpp
+        tests/Single/TestSingleAnd.cpp
+        tests/Single/TestSingleOr.cpp
+        tests/Single/TestSingleInputOutput.cpp
+        tests/Single/TestSingleAdd.cpp
+        tests/Single/TestSingleNot.cpp
+        tests/Single/TestSingleClock.cpp
+        tests/Composed/TestSingleXor.cpp
+        tests/Composed/TestComposedNor.cpp
+        tests/Composed/TestComposedNand.cpp
         )
 
 set(EXECUTABLE ${PROJECT_NAME})

@@ -60,13 +60,17 @@ set(SOURCE_FILES
         src/components/advanced/4008.cpp
         src/components/advanced/4512.hpp
         src/components/advanced/4512.cpp
-        tests/TestAnd.cpp
-        tests/TestFile.cpp
-        tests/TestOr.cpp
-        tests/TestInputOutput.cpp
-        tests/TestSingleXor.cpp
-        tests/TestSingleAdd.cpp
-        #src/main.cpp
+#        tests/File/TestFile.cpp
+#        tests/Single/TestSingleAnd.cpp
+#        tests/Single/TestSingleOr.cpp
+#        tests/Single/TestSingleInputOutput.cpp
+#        tests/Single/TestSingleAdd.cpp
+#        tests/Single/TestSingleNot.cpp
+#        tests/Single/TestSingleClock.cpp
+#        tests/Composed/TestSingleXor.cpp
+#        tests/Composed/TestComposedNor.cpp
+#        tests/Composed/TestComposedNand.cpp
+        src/main.cpp
 )
 
 set(EXECUTABLE ${PROJECT_NAME})
@@ -76,7 +80,7 @@ include_directories(src/components/elementary)
 include_directories(src/components/special)
 include_directories(src/components/gate)
 include_directories(src/components/advanced)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG} -lcriterion")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_DEBUG}")
 
 
 # Add the SFML library to the project, uncomment the 2 line under

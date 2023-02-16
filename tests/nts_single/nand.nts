@@ -1,18 +1,17 @@
-#   Basic NOR gate
+#   Basic nand logic gates
 #
 # in_1  -1-+---\
-#          |nor |-3- out
+#          |nand|-3- out
 # in_2  -2-+---/
 #
-
 
 .chipsets:
 input in_1
 input in_2
-output out_1
-nor gate
+output out
+nand gate
 
 .links:
 in_1:1 gate:1
 in_2:1 gate:2
-gate:3 out_1:1
+gate:3 out:1
