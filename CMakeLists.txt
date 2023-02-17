@@ -70,6 +70,12 @@ set(SOURCE_FILES
 #        tests/Composed/TestSingleXor.cpp
 #        tests/Composed/TestComposedNor.cpp
 #        tests/Composed/TestComposedNand.cpp
+#        tests/Gate/TestGate4001.cpp
+#        tests/Gate/TestGate4011.cpp
+#        tests/Gate/TestGate4030.cpp
+#        tests/Gate/TestGate4069.cpp
+#        tests/Gate/TestGate4071.cpp
+#        tests/Gate/TestGate4081.cpp
         src/main.cpp
 )
 

@@ -1,5 +1,5 @@
 //
-// Created by beafowl on 16/02/23.
+// Created by beafowl on 17/02/23.
 //
 
 #include <criterion/criterion.h>
@@ -7,9 +7,9 @@
 #include "Parser.hpp"
 #include "Error.hpp"
 
-Test(nor_gate, nor_gate, .init = cr_redirect_stdout) {
+Test(xor_gate, xor_gate, .init = cr_redirect_stdout) {
     int ac = 2;
-    char *av[2] = {(char *) "./nanotekspice", (char *) "tests/nts_single/4001_nor.nts"};
+    char *av[2] = {(char *) "./nanotekspice", (char *) "tests/nts_single/4030_xor.nts"};
     nts::Parser parser(ac, av);
     nts::Handler handler;
     auto &f_cin = criterion::get_redirected_cin();
@@ -72,8 +72,8 @@ Test(nor_gate, nor_gate, .init = cr_redirect_stdout) {
                             "  in_13: 0\n"
                             "output(s):\n"
                             "  out_03: 0\n"
-                            "  out_04: 0\n"
-                            "  out_10: 0\n"
-                            "  out_11: 1\n"
+                            "  out_04: 1\n"
+                            "  out_10: 1\n"
+                            "  out_11: 0\n"
                             "> ");
 }
