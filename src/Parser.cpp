@@ -85,15 +85,19 @@ link_t nts::Parser::parseLinks(const std::string& line)
     std::string firstComp;
     std::string secondComp;
     link_t link;
+    std::size_t posFirstComp = 0;
+    std::size_t posSecondComp = 0;
 
     iss >> firstComp;
     iss >> secondComp;
-    if (firstComp.find(":") == std::string::npos || secondComp.find(":") == std::string::npos)
+    posFirstComp = firstComp.find(":");
+    posSecondComp = secondComp.find(":");
+    if (posFirstComp == std::string::npos || posSecondComp == std::string::npos)
         throw (nts::Error("Invalid link"));
-    link.first.first = firstComp.substr(0, firstComp.find(":"));
-    link.first.second = firstComp.substr(firstComp.find(":") + 1, firstComp.size());
-    link.second.first = secondComp.substr(0, secondComp.find(":"));
-    link.second.second = secondComp.substr(secondComp.find(":") + 1, secondComp.size());
+    link.first.first = firstComp.substr(0, posFirstComp);
+    link.first.second = firstComp.substr(posFirstComp + 1, firstComp.size());
+    link.second.first = secondComp.substr(0, posSecondComp);
+    link.second.second = secondComp.substr(posSecondComp + 1, secondComp.size());
     return link;
 }
 
@@ -102,14 +106,16 @@ void nts::Parser::createLink(nts::Handler &handler, const std::string &line)
     link_t link = parseLinks(line);
     IComponent *firstComp = handler.getComponent(link.first.first);
     IComponent *secondComp = handler.getComponent(link.second.first);
+    std::size_t firstPin = stoi(link.first.second);
+    std::size_t secondPin = stoi(link.second.second);
     outputs_t output;
 
     if (firstComp == nullptr || secondComp == nullptr)
         throw (nts::Error("Invalid link"));
     output = firstComp->getOutputs();
-    if (output.find(stoi(link.first.second)) != output.cend()) {
-        firstComp->setLink(stoi(link.first.second), *secondComp, stoi(link.second.second));
+    if (output.find(firstPin) != output.cend()) {
+        firstComp->setLink(firstPin, *secondComp, secondPin);
         return;
     }
-    secondComp->setLink(stoi(link.second.second), *firstComp, stoi(link.first.second));
+    secondComp->setLink(secondPin, *firstComp, firstPin);
 }
