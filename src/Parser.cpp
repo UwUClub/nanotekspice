@@ -38,10 +38,14 @@ void nts::Parser::getComponents(nts::Handler &handler)
     bool bool_chipset = false;
     bool bool_links = false;
     std::pair<std::string, std::string> pair;
-    std::string tmp;
 
     while (std::getline(_file, line)) {
-        if (line.find("#") != std::string::npos)
+        if (size_t pos = line.find("#") != std::string::npos) {
+            if (pos == 0)
+                continue;
+            line = line.substr(0, line.find("#"));
+        }
+        if (line.empty())
             continue;
         pair = parseChipset(line);
         if (pair.first.empty())
@@ -56,7 +60,6 @@ void nts::Parser::getComponents(nts::Handler &handler)
             continue;
         }
         if (bool_chipset) {
-            _compLists[pair.second] = pair.first;
             handler.addComponent(pair.second, Factory::createComponent(pair.first));
         }
         if (bool_links)

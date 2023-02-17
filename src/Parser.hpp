@@ -20,7 +20,6 @@ namespace nts {
         link_t parseLinks(const std::string&);
 
         std::ifstream _file;
-        std::map<std::string, std::string> _compLists;
     };
 }
 
