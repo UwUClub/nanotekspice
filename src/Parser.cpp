@@ -55,6 +55,8 @@ void nts::Parser::getComponents(nts::Handler &handler)
             continue;
         }
         if (pair.first == ".links:") {
+            if (!bool_chipset)
+                throw (nts::Error("Invalid file"));
             bool_chipset = false;
             bool_links = true;
             continue;
