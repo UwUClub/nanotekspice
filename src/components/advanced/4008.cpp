@@ -38,15 +38,15 @@ nts::component::Gate4008::Gate4008()
     _subComponents[0]->setInput(1, this, 6);
     _subComponents[0]->setInput(2, this, 7);
     _subComponents[0]->setInput(3, this, 9);
-    _subComponents[0]->setLink(4, *_subComponents[1], 3);
+    _subComponents[0]->setLink(5, *_subComponents[1], 3);
 
     _subComponents[1]->setInput(1, this, 4);
     _subComponents[1]->setInput(2, this, 5);
-    _subComponents[1]->setLink(4, *_subComponents[2], 3);
+    _subComponents[1]->setLink(5, *_subComponents[2], 3);
 
     _subComponents[2]->setInput(1, this, 2);
     _subComponents[2]->setInput(2, this, 3);
-    _subComponents[2]->setLink(4, *_subComponents[3], 3);
+    _subComponents[2]->setLink(5, *_subComponents[3], 3);
 
     _subComponents[3]->setInput(1, this, 1);
     _subComponents[3]->setInput(2, this, 15);
