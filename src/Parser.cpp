@@ -40,11 +40,7 @@ void nts::Parser::getComponents(nts::Handler &handler)
     std::pair<std::string, std::string> pair;
 
     while (std::getline(_file, line)) {
-        if (size_t pos = line.find("#") != std::string::npos) {
-            if (pos == 0)
-                continue;
-            line = line.substr(0, line.find("#"));
-        }
+        line.find_first_of('#') != std::string::npos ? line = line.substr(0, line.find_first_of('#')) : line;
         if (line.empty())
             continue;
         pair = parseChipset(line);
@@ -61,9 +57,8 @@ void nts::Parser::getComponents(nts::Handler &handler)
             bool_links = true;
             continue;
         }
-        if (bool_chipset) {
+        if (bool_chipset)
             handler.addComponent(pair.second, Factory::createComponent(pair.first));
-        }
         if (bool_links)
             createLink(handler, line);
     }
@@ -90,8 +85,8 @@ link_t nts::Parser::parseLinks(const std::string& line)
 
     iss >> firstComp;
     iss >> secondComp;
-    posFirstComp = firstComp.find(":");
-    posSecondComp = secondComp.find(":");
+    posFirstComp = firstComp.find_first_of(':');
+    posSecondComp = secondComp.find_first_of(':');
     if (posFirstComp == std::string::npos || posSecondComp == std::string::npos)
         throw (nts::Error("Invalid link"));
     link.first.first = firstComp.substr(0, posFirstComp);
@@ -106,12 +101,16 @@ void nts::Parser::createLink(nts::Handler &handler, const std::string &line)
     link_t link = parseLinks(line);
     IComponent *firstComp = handler.getComponent(link.first.first);
     IComponent *secondComp = handler.getComponent(link.second.first);
-    std::size_t firstPin = stoi(link.first.second);
-    std::size_t secondPin = stoi(link.second.second);
+    std::size_t firstPin = 0;
+    std::size_t secondPin = 0;
     outputs_t output;
 
     if (firstComp == nullptr || secondComp == nullptr)
         throw (nts::Error("Invalid link"));
+    if (link.first.second.empty() || link.second.second.empty())
+        throw (nts::Error("Invalid link"));
+    firstPin = stoi(link.first.second);
+    secondPin = stoi(link.second.second);
     output = firstComp->getOutputs();
     if (output.find(firstPin) != output.cend()) {
         firstComp->setLink(firstPin, *secondComp, secondPin);
