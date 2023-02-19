@@ -76,6 +76,11 @@ void nts::Handler::runLoop()
             {"exit", [&getting_input] { getting_input = false; }},
     };
 
+    if (_components.empty()) {
+        throw Error("No components in the circuit.");
+        return;
+    }
+
     std::cout << "> ";
     while (std::cin >> line) {
         if (map.find(line) != map.end())
