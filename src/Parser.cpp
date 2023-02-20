@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <vector>
 #include <sstream>
+#include <string>
 #include "Handler.hpp"
 #include "Parser.hpp"
 #include "Factory.hpp"
@@ -107,7 +108,7 @@ void nts::Parser::createLink(nts::Handler &handler, const std::string &line)
 
     if (firstComp == nullptr || secondComp == nullptr)
         throw (nts::Error("Invalid link"));
-    if (link.first.second.empty() || link.second.second.empty())
+    if (link.first.second.empty() || link.second.second.empty() || std::isdigit(link.first.second[0]) == 0 || std::isdigit(link.second.second[0]) == 0)
         throw (nts::Error("Invalid link"));
     firstPin = stoi(link.first.second);
     secondPin = stoi(link.second.second);

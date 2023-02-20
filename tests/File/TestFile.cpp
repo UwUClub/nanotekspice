@@ -58,3 +58,17 @@ Test(And, ErrorHandling4)
         std::cout << "Test passed" << std::endl;
     }
 }
+
+Test(And, ErrorHandling5, .init = cr_redirect_stdout) {
+    int ac = 2;
+    char *av[2] = {(char *) "./nanotekspice", (char *) "tests/testCrashParser.nts"};
+    nts::Parser parser(ac, av);
+    nts::Handler handler;
+    auto &f_cin = criterion::get_redirected_cin();
+    f_cin << "exit" << std::endl;
+    f_cin.close();
+
+    parser.getComponents(handler);
+    handler.runLoop();
+    cr_assert_stdout_eq_str("> ");
+}
