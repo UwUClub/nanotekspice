@@ -12,8 +12,8 @@
 #include <vector>
 #include "IComponent.hpp"
 
-typedef std::map<std::size_t, std::pair<nts::IComponent *, std::size_t>> inputs_t;
-typedef std::map<std::size_t, std::vector<nts::IComponent *>> outputs_t;
+using inputs_t = std::map<std::size_t, std::pair<nts::IComponent *, std::size_t>>;
+using outputs_t = std::map<std::size_t, std::vector<nts::IComponent *>>;
 
 namespace nts
 {
