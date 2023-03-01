@@ -20,6 +20,7 @@ namespace nts::component
 
         private:
             nts::Tristate getTruthTableOutput(nts::Tristate a, nts::Tristate b);
+            size_t _counter;
     };
 } // namespace nts
 

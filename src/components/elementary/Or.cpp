@@ -8,7 +8,7 @@
 #include "Or.hpp"
 #include "Error.hpp"
 
-nts::component::Or::Or() : nts::AComponent()
+nts::component::Or::Or() : nts::AComponent(), _counter(0)
 {
     _inputs[1] = std::make_pair(nullptr, 0);
     _inputs[2] = std::make_pair(nullptr, 0);
@@ -24,14 +24,18 @@ nts::Tristate nts::component::Or::compute(std::size_t pin)
         throw Error("Pin " + std::to_string(pin) + " is not an output");
     if (_inputs[1].first == nullptr || _inputs[2].first == nullptr)
         throw Error("Pin " + std::to_string(pin) + " is not linked for or");
-    for (auto &output : _outputs)
-        for (auto &input : _inputs)
-            for (auto &component : output.second)
-                if (component == input.second.first)
-                    throw Error("Circular reference");
+    _counter += 1;
 
+    // should handle the sequential case
+    if (_counter > 1) {
+        if (_counter > 2)
+            return _inputs[2].first->compute(_inputs[2].second);
+        return _inputs[1].first->compute(_inputs[1].second);
+    }
     nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
     nts::Tristate b = _inputs[2].first->compute(_inputs[2].second);
+
+    _counter = 0;
 
     output = getTruthTableOutput(a, b);
     return output;
