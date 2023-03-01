@@ -29,8 +29,8 @@ nts::Tristate nts::component::Or::compute(std::size_t pin)
     // should handle the sequential case
     if (_counter > 1) {
         if (_counter > 2)
-            return _inputs[2].first->compute(_inputs[2].second);
-        return _inputs[1].first->compute(_inputs[1].second);
+            return getSeqState(_inputs[2].first->compute(_inputs[2].second));
+        return getSeqState(_inputs[1].first->compute(_inputs[1].second));
     }
     nts::Tristate a = _inputs[1].first->compute(_inputs[1].second);
     nts::Tristate b = _inputs[2].first->compute(_inputs[2].second);
@@ -48,4 +48,11 @@ nts::Tristate nts::component::Or::getTruthTableOutput(nts::Tristate a, nts::Tris
     if (a == nts::UNDEFINED || b == nts::UNDEFINED)
         return nts::UNDEFINED;
     return nts::FALSE;
+}
+
+nts::Tristate nts::component::Or::getSeqState(nts::Tristate a)
+{
+    if (a == nts::UNDEFINED)
+        return nts::UNDEFINED;
+    return a == nts::FALSE ? nts::TRUE : nts::FALSE;
 }
